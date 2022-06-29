@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.5.10</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> 
 	</parent>
 
 	<groupId>com.example</groupId>
@@ -49,39 +49,4 @@
             </plugin>
         </plugins>
     </build>
-<!--    <build>-->
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.mybatis.generator</groupId>-->
-<!--                <artifactId>mybatis-generator-maven-plugin</artifactId>-->
-
-<!--                <dependencies>-->
-<!--                    <dependency>-->
-<!--                        <groupId>mysql</groupId>-->
-<!--                        <artifactId>mysql-connector-java</artifactId>-->
-
-<!--                    </dependency>-->
-<!--                    <dependency>-->
-<!--                        <groupId>org.mybatis.generator</groupId>-->
-<!--                        <artifactId>mybatis-generator-core</artifactId>-->
-
-<!--                    </dependency>-->
-<!--                </dependencies>-->
-<!--                <configuration>-->
-<!--                    &lt;!&ndash;允许移动生成的文�?&ndash;&gt;-->
-<!--                    <verbose>true</verbose>-->
-<!--                    &lt;!&ndash; 是否覆盖 &ndash;&gt;-->
-<!--                    <overwrite>true</overwrite>-->
-<!--                    &lt;!&ndash; 自动生成的配�?&ndash;&gt;-->
-<!--                    <configurationFile>-->
-<!--                        src/main/resources/generatorConfig.xml-->
-<!--                    </configurationFile>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
-<!--    </build>-->
 </project>
