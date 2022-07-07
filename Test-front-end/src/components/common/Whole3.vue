@@ -4,9 +4,9 @@
     <div class="header">
         <div class="logo" style="margin-top:0px;margin-left:18px"><img src="../../assets/favicon.png" /></div>
         <!-- 水平一级菜单 -->
-        <div class="logo" style="margin-left:-78px">揽月考试系统</div>
+        <div class="logo" style="margin-left:-78px">踏星考试系统</div>
         
-        <div style="float:left;">
+        <div style="float:left;margin-left:20px">
             <el-menu :default-active="toIndex()" mode="horizontal" @select="handleSelect">
             <template v-for="item in items">
                 <el-menu-item :index="item.index" :key="item.index">
