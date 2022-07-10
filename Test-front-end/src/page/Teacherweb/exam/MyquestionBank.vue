@@ -251,8 +251,8 @@ export default {
       })
     },
     //跳转到试卷详情页
-    toExamMsg(coursename) {
-      this.$router.push({path: '/examMsg', query: {coursename: coursename}})
+    toQuestionBank(coursename) {
+      this.$router.push({path: '/QuestionBank', query: {coursename: coursename}})
       console.log(coursename)
     },
     toPathaddquestionbank(){

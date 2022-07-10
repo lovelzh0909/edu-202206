@@ -10,14 +10,22 @@ export default new Router({
     routes: [
         {
             path: '/',
-            component:()=>import('../page/Login1.vue'),
+            component:()=>import('../page/Login.vue'),
             
         },
-        // {
-        //     path: '/changepass',
-        //     component:()=>import('../components/changepass.vue'),
-            
-        // },
+        {
+            path: '/register',
+            component:()=>import('../page/Register.vue'),
+
+        },
+        {
+            path: '/exam-paper',
+            component:() => import('../components/exam/ExamPaper.vue'),
+            meta: {
+                title: '考试页面'
+            }
+        },
+        
         {
             path: '/grade',
             component:()=>import('../components/gradeManage/grade.vue'),
@@ -34,11 +42,7 @@ export default new Router({
             component:()=>import('../components/upload.vue'),
 
         },
-        {
-            path: '/register',
-            component:()=>import('../components/register.vue'),
-
-        },
+        
         {
             path: '/test22-2-2-1',
             component:()=>import('../components/invigilate.vue'),
@@ -46,13 +50,7 @@ export default new Router({
                 title:'监考页面'
             }
         },
-        {
-            path: '/exam-paper',
-            component:() => import('../components/examination-paper.vue'),
-            meta: {
-                title: '考试页面'
-            }
-        },
+        
         {
             path: '/yuejuan-paper',
             component:() => import('../components/yuejuan.vue'),
@@ -68,8 +66,8 @@ export default new Router({
             }
         },
         {
-            path: '/examMsg',
-            component:() => import('../components/examMsg.vue'),
+            path: '/QuestionBank',
+            component:() => import('../components/questionbank/QuestionBank.vue'),
             meta: {
                 title: '试卷详情页面'
             }
