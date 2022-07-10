@@ -124,11 +124,11 @@ public class QuestionController {
     public CommonReturnType getCoursename(@RequestParam String phone){
         log.info("获取题库名称");
         log.info("前端发送:"+phone);
-            // List<Question> data=questionService.list(new QueryWrapper<Question>().select("distinct coursename")
+            // List<Question> data=questionService.list(new QueryWrapper<Question>().select("distinct course_name")
             //         .eq("user_id", phone) 
             // );
             List<Map<String, Object>> m=
-             questionService.listMaps(new QueryWrapper<Question>().select("distinct coursename")
+             questionService.listMaps(new QueryWrapper<Question>().select("distinct course_name")
             .eq("user_id", phone) );
             //确定这些问题的coursename 集合
             if(m==null){
@@ -141,11 +141,11 @@ public class QuestionController {
     @PostMapping ("/getPointId")
     public CommonReturnType getPointId(@RequestParam String coursename){
 
-        // List<Question> data=questionService.list(new QueryWrapper<Question>().select("distinct coursename")
+        // List<Question> data=questionService.list(new QueryWrapper<Question>().select("distinct course_name")
         //         .eq("user_id", phone)
         // );
         List<Map<String, Object>> m=
-                questionService.listMaps(new QueryWrapper<Question>().select("distinct pointId")
+                questionService.listMaps(new QueryWrapper<Question>().select("distinct point_id")
                         .eq("course_name", coursename) );
         //确定这些问题的coursename 集合
         if(m==null){
@@ -231,7 +231,7 @@ public class QuestionController {
         log.info("前端发送:"+phone+":"+coursename);
         Question q=new Question();
         List<Question> m=
-                questionService.list(new QueryWrapper<Question>().select("distinct coursename")
+                questionService.list(new QueryWrapper<Question>().select("distinct course_name")
                         .eq("user_id", phone) );
         log.info(String.valueOf(m));
         log.info(coursename);
