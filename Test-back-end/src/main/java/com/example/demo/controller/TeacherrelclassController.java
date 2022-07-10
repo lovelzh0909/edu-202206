@@ -11,6 +11,7 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,8 +47,12 @@ public class TeacherrelclassController {
      * @return
      */
     @PostMapping("/getStudent/byclass")
-    public CommonReturnType getStudentbyclass(@RequestParam List<String> t) {
+    public CommonReturnType getStudentbyclass(@RequestParam List<Teacherrelclass> teacherrelclassList) {
 
+        List<String> t =new ArrayList<>();
+        for(var e:teacherrelclassList){
+            t.add(e.getClassroom());
+        }
         List<User> student = userService.list(new QueryWrapper<User>().in("classroom", t).ne("role", "teacher"));
         System.out.println(student);
 //        for (Teacherrelclass teacherrelclass : teacher) {
