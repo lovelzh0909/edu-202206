@@ -43,7 +43,7 @@ public class PapersController {
 
     @PostMapping("/save")
     public CommonReturnType saveQuestion(@RequestBody Papers p){
-        p.setCreateTime(String.valueOf(LocalDateTime.now()));
+        p.setCreateTime((LocalDateTime.now()));
 //        if(p.getPhone()==null||p.getPapercontext()==null)
 //        return CommonReturnType.create(null,"信息不全");
         // if(p.getSource()==null){
@@ -53,7 +53,7 @@ public class PapersController {
         if(p.getPapernum()==null){
             p.setPapernum(0);
         }
-        p.setCreateTime(String.valueOf(LocalDateTime.now()));
+        p.setCreateTime((LocalDateTime.now()));
         boolean b = papersService.save(p);
         if(!b)
         return CommonReturnType.create(null,"添加试卷失败");
@@ -191,7 +191,7 @@ public class PapersController {
             return CommonReturnType.create(null,"改试卷不存在或没有题目");
         }
         p.setPaperId(null);
-        p.setCreateTime(String.valueOf(LocalDateTime.now()));
+        p.setCreateTime((LocalDateTime.now()));
         papersService.save(p);
         return CommonReturnType.create(p);
     }
