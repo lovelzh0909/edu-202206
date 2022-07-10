@@ -30,49 +30,49 @@ public class Question implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @TableField("quesTypeId")
+    @TableField("quesType_id")
     private int quesTypeId;
 
-    @TableField("coursename")
+    @TableField("course_name")
     private String coursename;
 
     @TableField("stem")
     private String stem;
 
-    @TableField("choiceA")
+    @TableField("choice_a")
     private String choiceA;
 
-    @TableField("choiceB")
+    @TableField("choice_b")
     private String choiceB;
 
-    @TableField("choiceC")
+    @TableField("choice_c")
     private String choiceC;
 
-    @TableField("choiceD")
+    @TableField("choice_d")
     private String choiceD;
 
-    @TableField("choiceE")
+    @TableField("choice_e")
     private String choiceE;
 
-    @TableField("choiceF")
+    @TableField("choice_f")
     private String choiceF;
 
-    @TableField("choiceG")
+    @TableField("choice_g")
     private String choiceG;
 
     @TableField("answer")
     private String answer;
 
-    @TableField("userId")
+    @TableField("user_id")
     private String userId;
 
-    @TableField("createTime")
-    private LocalDateTime createTime;
+//    @TableField("create_time")
+//    private LocalDateTime createTime;
 
-    @TableField("userName")
+    @TableField("user_name")
     private String userName;
 
-    @TableField("knowledgeName")
+    @TableField("knowledge_name")
     private String knowledgeName;
 
     @TableField("score")
@@ -81,7 +81,7 @@ public class Question implements Serializable {
     @TableField("difficulty")
     private Double difficulty;
 
-    @TableField("pointId")
+    @TableField("point_id")
     private String pointId;
 
     @TableField("content")
@@ -95,5 +95,18 @@ public class Question implements Serializable {
 
     @Version
     private int version;
+
+    @ApiModelProperty("创建时间")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    @ApiModelProperty("更新时间")
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    @ApiModelProperty("是否删除")
+    @TableField("is_deleted")
+    @TableLogic
+    private Boolean isDeleted;
 
 }

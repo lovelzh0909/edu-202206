@@ -1,14 +1,13 @@
 package com.example.demo.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.annotation.*;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Data
 @TableName("user")
@@ -20,7 +19,7 @@ public class User implements Serializable {
     @TableField("phone")
     private String phone;
 
-    @TableField("studentId")
+    @TableField("student_id")
     private String studentId;
 
     @TableField("password")
@@ -40,5 +39,18 @@ public class User implements Serializable {
 
     @Version
     private int version;
+
+    @ApiModelProperty("创建时间")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    @ApiModelProperty("更新时间")
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    @ApiModelProperty("是否删除")
+    @TableField("is_deleted")
+    @TableLogic
+    private Boolean isDeleted;
 
 }

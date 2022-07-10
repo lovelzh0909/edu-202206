@@ -34,7 +34,7 @@ public class Rule implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private long id;
 
-    @TableField("testId")
+    @TableField("test_id")
     private long testId;
 
     @TableField("totalMark")
