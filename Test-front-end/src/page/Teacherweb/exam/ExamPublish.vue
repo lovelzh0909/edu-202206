@@ -209,7 +209,8 @@ import VXETable from 'vxe-table'
               
             })
             // t = JSON.stringify(t)
-            console.log(t)
+           
+            
             Axios({
               // dataq = qs.stringify(classname),
               url: 'http://localhost:8080/teacherrelclass/getStudent/byclass',
@@ -217,10 +218,7 @@ import VXETable from 'vxe-table'
               headers: {
                 'Content-Type': 'application/json'
               },
-              data:
-                
-                  t
-                
+               data: t  
             }).then(function(res1){
               console.log('fffff')
               console.log(res1)

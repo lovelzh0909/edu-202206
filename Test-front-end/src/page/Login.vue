@@ -48,9 +48,9 @@
    </div>
 </template>
 
-//写js的
-<script>
 
+<script>
+import  cryptoJSObj  from  '../utils/asc.js'
 import axios from "axios";
 export default {
   name: "Login",
@@ -70,7 +70,7 @@ export default {
             //.post("https://10.135.242.126:8080/user/logon", {
             //user: JSON.stringify({
             phone: this.phoneNumber,
-            password: this.passWord,
+            password: cryptoJSObj.encryptFunc(this.passWord, '123456789GFEDCBA')  //密码加密
             //}),
           }) //具体phoneNumber和passWord对象跟后端对接口时改
           .then(

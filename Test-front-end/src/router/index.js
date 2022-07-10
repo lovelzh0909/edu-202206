@@ -25,67 +25,32 @@ export default new Router({
                 title: '考试页面'
             }
         },
-        
-        {
-            path: '/grade',
-            component:()=>import('../components/gradeManage/grade.vue'),
-            
-        },
-
-        {
-            path: '/tuxing',
-            component:()=>import('../components/gradeManage/tuxing.vue'),
-            
-        },
-        {
-            path: '/upload',
-            component:()=>import('../components/upload.vue'),
-
-        },
-        
-        {
-            path: '/test22-2-2-1',
-            component:()=>import('../components/invigilate.vue'),
-            meta: {
-                title:'监考页面'
-            }
-        },
-        
-        {
-            path: '/yuejuan-paper',
-            component:() => import('../components/yuejuan.vue'),
-            meta: {
-                title: '阅卷页面'
-            }
-        },
-        {
-            path: '/look-paper',
-            component:() => import('../components/lookpaper.vue'),
-            meta: {
-                title: '查看试卷页面'
-            }
-        },
         {
             path: '/QuestionBank',
             component:() => import('../components/questionbank/QuestionBank.vue'),
             meta: {
-                title: '试卷详情页面'
+                title: '题库详情页面'
             }
         },
         {
-            path: '/addexam',
-            component:() => import('../components/addexam.vue'),
+            path: '/testpaper',
+            component:() => import('../components/testpaper/TestPaper.vue'),
             meta: {
                 title: '组卷页面'
             }
         },
         {
             path: '/addquestion',
-            component:() => import('../components/addquestion.vue'),
+            component:() => import('../components/addquestion/AddQuestion.vue'),
             meta: {
                 title: '添加题目到题库页面'
             }
         },
+
+
+        
+        
+        
         {
             //学生端整体界面Whole1路由表
             path: '/Whole1',                      
@@ -98,14 +63,14 @@ export default new Router({
             children: [
                 {
                     path: '/dashboard1',
-                    component: () => import('../page/Dashboard1.vue'),
+                    component: () => import('../page/dashboard/DashboardStu.vue'),
                     meta: {
                         title: '首页'
                     },
                     redirect:'/Home1',     // 该配置是若点击选择父目录时，默认选中该父目录下的子路径页面
                         children: [{
                             path: '/Home1',
-                            component: () => import('../page/Dashboard1.vue'),
+                            component: () => import('../page/dashboard/DashboardStu.vue'),
                             meta: {
                                 title: '首页'
                             },
@@ -115,7 +80,7 @@ export default new Router({
                 {
                     path: '/test11',
                     access:0,
-                    component: () => import('../page/test1/indexS.vue'),
+                    component: () => import('../page/studentweb/indexStudent.vue'),
                     meta: {
                         title: '一级菜单1',
                         permission1: true,
@@ -126,46 +91,12 @@ export default new Router({
                         children:[
                             {
                                 path: 'test11-1',
-                                component: () => import('../page/test1/test1-1.vue'),
+                                component: () => import('../page/studentweb/ExamList.vue'),
                                 meta: {
                                     title: '考试列表'
                                 },
                             },
-                            {
-                                path: 'test11-2',
-                                component: () => import('../page/test1/test1-2.vue'),
-                                meta: {
-                                    title: '考试通知'
-                                },
-                            },
-                            {
-                                path: 'test11-3',
-                                component: () => import('../page/test1/test1-3.vue'),
-                                meta: {
-                                    title: '个人信息'
-                                },
-                            },
-                            {
-                                path: 'test11-4',
-                                component: () => import('../page/test1/test1-4.vue'),
-                                meta: {
-                                    title: '错题集'
-                                },
-                            },
-                            {
-                                path: 'test11-5',
-                                component: () => import('../page/test1/test1-5.vue'),
-                                meta: {
-                                    title: '成绩查询'
-                                },
-                            },
-                            {
-                                path: 'test11-6',
-                                component: () => import('../page/test1/test1-6.vue'),
-                                meta: {
-                                    title: '修改密码'
-                                },
-                            },
+                            
                             
                         ]
                 },
@@ -181,14 +112,14 @@ export default new Router({
                
                 {
                     path: '/404',
-                    component: () => import('../page/404.vue'),
+                    component: () => import('../page/errorpage/404.vue'),
                     meta: {
                         title: '404'
                     }
                 },
                 {
                     path: '/403',
-                    component: () => import('../page/403.vue'),
+                    component: () => import('../page/errorpage/403.vue'),
                     meta: {
                         title: '403'
                     }
@@ -208,14 +139,14 @@ export default new Router({
             children: [
                 {
                     path: '/dashboard2',
-                    component: () => import('../page/Dashboard2.vue'),
+                    component: () => import('../page/dashboard/DashboardTea.vue'),
                     meta: {
                         title: '首页'
                     },
                     redirect:'/Home2',     // 该配置是若点击选择父目录时，默认选中该父目录下的子路径页面
                         children: [{
                             path: '/Home2',
-                            component: () => import('../page/Dashboard2.vue'),
+                            component: () => import('../page/dashboard/DashboardTea.vue'),
                             meta: {
                                 title: '首页'
                             },
@@ -226,7 +157,7 @@ export default new Router({
                 {
                     path: '/test22',
                     access:1,
-                    component: () => import('../page/test2/indexT.vue'),
+                    component: () => import('../page/teacherweb/indexTeacher.vue'),
                     meta: {
                         title: '一级菜单2',
                         permission2: true,
@@ -238,74 +169,43 @@ export default new Router({
                             
                             {
                                 path: 'test22-1-1',
-                                component: () => import('../page/test2/test2-1/test2-1-1.vue'),
+                                component: () => import('../page/teacherweb/exam/ExamList.vue'),
                                 meta: {
                                     title: '考试列表'
                                 }
                             },
                             {
                                 path: 'test22-1-2',
-                                component: () => import('../page/test2/test2-1/test2-1-2.vue'),
+                                component: () => import('../page/teacherweb/exam/ExamPublish.vue'),
                                 meta: {
                                     title: '发布考试'
                                 }
                              },
                              {
                                 path: 'test22-1-3',
-                                component: () => import('../page/test2/test2-1/test2-1-3.vue'),
+                                component: () => import('../page/teacherweb/exam/MyquestionBank.vue'),
                                 meta: {
                                     title: '题库'
                                 }
                              },
                             {
                                 path: 'test22-1-4',
-                                component: () => import('../page/test2/test2-1/test2-1-4.vue'),
+                                component: () => import('../page/teacherweb/exam/Paper.vue'),
                                 meta: {
                                     title: '试卷库'
                                 }
                             },
-                            {
-                                path: 'test22-1-5',
-                                component: () => import('../page/test2/test2-1/test2-1-5.vue'),
-                                meta: {
-                                    title: '成绩管理'
-                                }
-                            },
-                             {
-                                path: 'test22-2-1',
-                                component: () => import('../page/test2/test2-2/test2-2-1.vue'),
-                                meta: {
-                                    title: '通知'
-                                }
-                            },
+
+                             
                             {
                                 path: 'test22-2-2',
-                                component: () => import('../page/test2/test2-2/test2-2-2.vue'),
+                                component: () => import('../page/teacherweb/invigilate/InvigilateList.vue'),
                                 meta: {
                                     title: '监考场次'
                                 }
                              },
-                             {
-                                path: 'test22-2-3',
-                                component: () => import('../page/test2/test2-2/test2-2-3.vue'),
-                                meta: {
-                                    title: '结算'
-                                }
-                             },
-                             {
-                                path: 'test22-3-1',
-                                component: () => import('../page/test2/test2-3/test2-3-1.vue'),
-                                meta: {
-                                    title: '个人信息'
-                                }
-                             },
-                             {
-                                path: 'test22-3-2',
-                                component: () => import('../page/test2/test2-3/test2-3-2.vue'),
-                                meta: {
-                                    title: '修改密码'
-                                }
-                             },
+                             
+                             
                          ]
                 },
                 // {
@@ -319,14 +219,14 @@ export default new Router({
                
                 {
                     path: '/404',
-                    component: () => import('../page/404.vue'),
+                    component: () => import('../page/errorpage/404.vue'),
                     meta: {
                         title: '404'
                     }
                 },
                 {
                     path: '/403',
-                    component: () => import('../page/403.vue'),
+                    component: () => import('../page/errorpage/403.vue'),
                     meta: {
                         title: '403'
                     }
@@ -345,14 +245,14 @@ export default new Router({
             children: [
                 {
                     path: '/dashboard3',
-                    component: () => import('../page/Dashboard3.vue'),
+                    component: () => import('../page/dashboard/DashboardAdm.vue'),
                     meta: {
                         title: '首页'
                     },
                     redirect:'/Home3',     // 该配置是若点击选择父目录时，默认选中该父目录下的子路径页面
                         children: [{
                             path: '/Home3',
-                            component: () => import('../page/Dashboard3.vue'),
+                            component: () => import('../page/dashboard/DashboardAdm.vue'),
                             meta: {
                                 title: '首页'
                             },
@@ -363,7 +263,7 @@ export default new Router({
                     path: '/test1',
                     access:0,
                     
-                    component: () => import('../page/test1/indexA.vue'),
+                    component: () => import('../page/studentweb/indexAdmin.vue'),
                     meta: {
                         title: '一级菜单1',
                         permission1: true,
@@ -374,52 +274,18 @@ export default new Router({
                         children:[
                             {
                                 path: 'test1-1',
-                                component: () => import('../page/test1/test1-1.vue'),
+                                component: () => import('../page/studentweb/ExamList.vue'),
                                 meta: {
                                     title: '考试列表'
                                 },
                             },
-                            {
-                                path: 'test1-2',
-                                component: () => import('../page/test1/test1-2.vue'),
-                                meta: {
-                                    title: '考试通知'
-                                },
-                            },
-                            {
-                                path: 'test1-3',
-                                component: () => import('../page/test1/test1-3.vue'),
-                                meta: {
-                                    title: '个人信息'
-                                },
-                            },
-                            {
-                                path: 'test1-4',
-                                component: () => import('../page/test1/test1-4.vue'),
-                                meta: {
-                                    title: '错题集'
-                                },
-                            },
-                            {
-                                path: 'test1-5',
-                                component: () => import('../page/test1/test1-5.vue'),
-                                meta: {
-                                    title: '设置'
-                                },
-                            },
-                            {
-                                path: 'test1-6',
-                                component: () => import('../page/test1/test1-6.vue'),
-                                meta: {
-                                    title: '修改密码'
-                                },
-                            },
+                           
                         ]
                 },
                 {
                     path: '/test2',
                     access:1,
-                    component: () => import('../page/test2/indexA.vue'),
+                    component: () => import('../page/teacherweb/indexAdmin.vue'),
                     meta: {
                         title: '一级菜单2',
                         permission2: true,
@@ -431,81 +297,48 @@ export default new Router({
                             
                             {
                                 path: 'test2-1-1',
-                                component: () => import('../page/test2/test2-1/test2-1-1.vue'),
+                                component: () => import('../page/teacherweb/exam/ExamList.vue'),
                                 meta: {
                                     title: '考试列表'
                                 }
                             },
                             {
                                 path: 'test2-1-2',
-                                component: () => import('../page/test2/test2-1/test2-1-2.vue'),
+                                component: () => import('../page/teacherweb/exam/ExamPublish.vue'),
                                 meta: {
                                     title: '发布考试'
                                 }
                              },
                              {
                                 path: 'test2-1-3',
-                                component: () => import('../page/test2/test2-1/test2-1-3.vue'),
+                                component: () => import('../page/teacherweb/exam/MyquestionBank.vue'),
                                 meta: {
                                     title: '题库'
                                 }
                              },
                             {
                                 path: 'test2-1-4',
-                                component: () => import('../page/test2/test2-1/test2-1-4.vue'),
+                                component: () => import('../page/teacherweb/exam/Paper.vue'),
                                 meta: {
                                     title: '试卷库'
                                 }
                             },
-                            {
-                                path: 'test2-1-5',
-                                component: () => import('../page/test2/test2-1/test2-1-5.vue'),
-                                meta: {
-                                    title: '成绩管理'
-                                }
-                            },
-                             {
-                                path: 'test2-2-1',
-                                component: () => import('../page/test2/test2-2/test2-2-1.vue'),
-                                meta: {
-                                    title: '通知'
-                                }
-                            },
+                         
                             {
                                 path: 'test2-2-2',
-                                component: () => import('../page/test2/test2-2/test2-2-2.vue'),
+                                component: () => import('../page/teacherweb/invigilate/InvigilateList.vue'),
                                 meta: {
                                     title: '监考场次'
                                 }
                              },
-                             {
-                                path: 'test2-2-3',
-                                component: () => import('../page/test2/test2-2/test2-2-3.vue'),
-                                meta: {
-                                    title: '结算'
-                                }
-                             },
-                             {
-                                path: 'test2-3-1',
-                                component: () => import('../page/test2/test2-3/test2-3-1.vue'),
-                                meta: {
-                                    title: '个人信息'
-                                },
-                            },
-                            {
-                                path: 'test2-3-2',
-                                component: () => import('../page/test2/test2-3/test2-3-2.vue'),
-                                meta: {
-                                    title: '修改密码'
-                                },
-                            },
+                            
                          ]
                 },
                 {
                     path: '/test3',
                     access:0,
                     
-                    component: () => import('../page/test3/indexA.vue'),
+                    component: () => import('../page/adminweb/indexAdmin.vue'),
                     meta: {
                         title: '一级菜单3',
                         permission1: false,
@@ -515,34 +348,22 @@ export default new Router({
                     },
                     
                         children:[
-                            {
-                                path: 'test3-1',
-                                component: () => import('../page/test3/test3-1.vue'),
-                                meta: {
-                                    title: '功能模块管理'
-                                },
-                            },
+                          
                             {
                                 path: 'test3-2',
-                                component: () => import('../page/test3/test3-2.vue'),
+                                component: () => import('../page/adminweb/InstitutionManage.vue'),
                                 meta: {
                                     title: '组织机构管理'
                                 },
                             },
                             {
                                 path: 'test3-3',
-                                component: () => import('../page/test3/test3-3.vue'),
+                                component: () => import('../page/adminweb/UserManage.vue'),
                                 meta: {
                                     title: '角色权限管理'
                                 },
                             },
-                            {
-                                path: 'test3-4',
-                                component: () => import('../page/test3/test3-4.vue'),
-                                meta: {
-                                    title: '操作日志管理'
-                                },
-                            },
+                            
                             
                         ]
                 },
@@ -558,14 +379,14 @@ export default new Router({
                 
                 {
                     path: '/404',
-                    component: () => import('../page/404.vue'),
+                    component: () => import('../page/errorpage/404.vue'),
                     meta: {
                         title: '404'
                     }
                 },
                 {
                     path: '/403',
-                    component: () => import('../page/403.vue'),
+                    component: () => import('../page/errorpage/403.vue'),
                     meta: {
                         title: '403'
                     }
@@ -576,7 +397,7 @@ export default new Router({
         {
             // 登录页面1
             path: '/login1',
-            component: () => import('../page/Login1.vue'),
+            component: () => import('../page/Login.vue'),
             meta: {
                 title: '登录'
             }
@@ -585,5 +406,50 @@ export default new Router({
             path: '*',
             redirect: '/404'
         }
+         
+        
+//*************************************** */
+// {
+//     path: '/grade',
+//     component:()=>import('../components/gradeManage/grade.vue'),
+    
+// },
+
+// {
+//     path: '/tuxing',
+//     component:()=>import('../components/gradeManage/tuxing.vue'),
+    
+// },
+// {
+//     path: '/upload',
+//     component:()=>import('../components/upload.vue'),
+
+// },
+
+// {
+//     path: '/test22-2-2-1',
+//     component:()=>import('../components/invigilate.vue'),
+//     meta: {
+//         title:'监考页面'
+//     }
+// },
+
+// {
+//     path: '/yuejuan-paper',
+//     component:() => import('../components/yuejuan.vue'),
+//     meta: {
+//         title: '阅卷页面'
+//     }
+// },
+// {
+//     path: '/look-paper',
+//     component:() => import('../components/lookpaper.vue'),
+//     meta: {
+//         title: '查看试卷页面'
+//     }
+// },
     ]
 })
+
+
+

@@ -28,6 +28,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-service": "^3.9.0",
+    "crypto-js": "^4.1.1",
     "node-sass": "^6.0.1",
     "sass-loader": "^10.2.1",
     "vue-resource": "^1.5.1",
