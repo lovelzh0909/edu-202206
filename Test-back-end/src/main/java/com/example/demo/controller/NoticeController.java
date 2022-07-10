@@ -69,7 +69,7 @@ public class NoticeController {
     public CommonReturnType notice(@RequestParam int testId,@RequestParam String text,@RequestParam String deadline) {
         log.info("获取基本通知信息");
         log.info("前端发送:"+testId);
-        List<TestRelStudent> testrelstudent = testrelstudentService.list(new QueryWrapper<TestRelStudent>().eq("testId",testId));
+        List<TestRelStudent> testrelstudent = testrelstudentService.list(new QueryWrapper<TestRelStudent>().eq("test_id",testId));
         //new CommonReturnType();
         if(testrelstudent ==null){
             return CommonReturnType.create(null,"该测试没有学生参加");
@@ -93,7 +93,7 @@ public class NoticeController {
         // Map<String, Object> map = new HashMap<>();
 //        Page<StudentTestNoticeVO> Studentnote =new Page<>();
         List<StudentTestNoticeVO> note =new ArrayList<>();
-        List<TestRelStudent> testrelstudents =testrelstudentService.list(new QueryWrapper<TestRelStudent>().eq("studentPhone",phone));
+        List<TestRelStudent> testrelstudents =testrelstudentService.list(new QueryWrapper<TestRelStudent>().eq("student_phone",phone));
         for(TestRelStudent testrelstudent:testrelstudents){
             Test test = testService.getById(testrelstudent.getTestId());
             StudentTestNoticeVO studentTestNoticeVO =new StudentTestNoticeVO();
@@ -146,7 +146,7 @@ public class NoticeController {
         queryWrapper.select("TestTime","coursename","note");
 //        List<Test> note = testService.list(queryWrapper.eq("phone", phone));
         List<Test> note =new ArrayList<>();
-        List<TestRelStudent> testrelstudents =testrelstudentService.list(new QueryWrapper<TestRelStudent>().eq("studentPhone",phone));
+        List<TestRelStudent> testrelstudents =testrelstudentService.list(new QueryWrapper<TestRelStudent>().eq("student_phone",phone));
         for(TestRelStudent testrelstudent:testrelstudents){
             Test test = testService.getById(testrelstudent.getTestId());
             if(test!=null)

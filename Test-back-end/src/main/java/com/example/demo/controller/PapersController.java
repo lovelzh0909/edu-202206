@@ -61,7 +61,7 @@ public class PapersController {
     }
 
     @PostMapping("/update/{paperId}")
-    public CommonReturnType updatePaper(@RequestBody Papers p,@PathVariable("paperId") Integer paperId){
+    public CommonReturnType updatePaper(@RequestBody Papers p,@PathVariable("paper_id") Integer paperId){
         log.info("更新试卷数据");
         log.info("前端发送:"+paperId+":"+p);
         p.setPaperId(paperId);
@@ -139,9 +139,9 @@ public class PapersController {
     public CommonReturnType getallpaper(@RequestParam String phone,@PathVariable int page,@PathVariable int size) {
         Page <Papers> p = new Page<>(page, size);
         Page<Papers> page3=papersService.page(p, new QueryWrapper<Papers>()
-        .eq("createrPhone", phone));
+        .eq("creater_phone", phone));
         List<Papers> picture = papersService.list(new QueryWrapper<Papers>()
-        .eq("createrPhone", phone));
+        .eq("creater_phone", phone));
         page3.setSize(picture.size());
         if(picture.size()==0){
 
@@ -156,7 +156,7 @@ public class PapersController {
     public CommonReturnType removeQuestion(@RequestParam int paperId){
 
         boolean data=papersService.remove(new QueryWrapper<Papers>()
-                .eq("paperId", paperId)
+                .eq("paper_id", paperId)
         );
         if(!data){
             return CommonReturnType.create(null,"试卷已不存在");
