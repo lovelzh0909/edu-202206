@@ -86,9 +86,9 @@ public class QuestionController {
         log.info("前端发送:"+phone+":"+coursename);
         Page <Question> p = new Page<>(page, size);
         p=questionService.page(p, new QueryWrapper<Question>()
-        .eq("user_id", phone) .eq("coursename", coursename));
+        .eq("user_id", phone) .eq("course_name", coursename));
         List<Question> data=questionService.list(new QueryWrapper<Question>()
-                .eq("user_id", phone) .eq("coursename", coursename)
+                .eq("user_id", phone) .eq("course_name", coursename)
         );
         p.setSize(data.size());
         log.info("后端发送:"+data);
@@ -104,9 +104,9 @@ public class QuestionController {
             log.info("前端发送:"+phone+":"+coursename+":"+quesTypeId);
         Page <Question> p = new Page<>(page, size);
             p=questionService.page(p, new QueryWrapper<Question>()
-            .eq("user_id", phone) .eq("coursename", coursename).eq("quesTypeId", quesTypeId));
+            .eq("user_id", phone) .eq("course_name", coursename).eq("quesType_id", quesTypeId));
             List<Question> data=questionService.list(new QueryWrapper<Question>()
-                    .eq("user_id", phone) .eq("coursename", coursename) .eq("quesTypeId", quesTypeId)
+                    .eq("user_id", phone) .eq("course_name", coursename) .eq("quesType_id", quesTypeId)
             );
             p.setTotal(data.size());
             log.info("后端发送:"+data);
@@ -128,7 +128,7 @@ public class QuestionController {
             //         .eq("user_id", phone) 
             // );
             List<Map<String, Object>> m=
-             questionService.listMaps(new QueryWrapper<Question>().select("distinct coursename")
+             questionService.listMaps(new QueryWrapper<Question>().select("distinct course_name")
             .eq("user_id", phone) );
             //确定这些问题的coursename 集合
             if(m==null){
@@ -146,7 +146,7 @@ public class QuestionController {
         // );
         List<Map<String, Object>> m=
                 questionService.listMaps(new QueryWrapper<Question>().select("distinct pointId")
-                        .eq("coursename", coursename) );
+                        .eq("course_name", coursename) );
         //确定这些问题的coursename 集合
         if(m==null){
             return CommonReturnType.create(null,"没有该题目或已经被删除");
@@ -179,7 +179,7 @@ public class QuestionController {
     public CommonReturnType removeQuestion(@RequestParam String coursename ,String phone){
 
         boolean data=questionService.remove(new QueryWrapper<Question>()
-                .eq("user_id", phone).eq("coursename",coursename)
+                .eq("user_id", phone).eq("course_name",coursename)
         );
         if(!data){
             return CommonReturnType.create(null,"没有该题目或已经被删除");
@@ -192,7 +192,7 @@ public class QuestionController {
     public CommonReturnType changeCoursename(@RequestParam String coursename ,String phone){
 
         boolean data=questionService.update(new UpdateWrapper<Question>()
-                .eq("user_id", phone).set("coursename",coursename)
+                .eq("user_id", phone).set("course_name",coursename)
         );
         if(!data){
             return CommonReturnType.create(null,"没有该题目或已经被删除");
@@ -231,7 +231,7 @@ public class QuestionController {
         log.info("前端发送:"+phone+":"+coursename);
         Question q=new Question();
         List<Question> m=
-                questionService.list(new QueryWrapper<Question>().select("distinct coursename")
+                questionService.list(new QueryWrapper<Question>().select("distinct course_name")
                         .eq("user_id", phone) );
         log.info(String.valueOf(m));
         log.info(coursename);

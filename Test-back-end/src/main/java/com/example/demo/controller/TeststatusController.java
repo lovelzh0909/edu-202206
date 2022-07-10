@@ -40,21 +40,21 @@ public class TeststatusController {
         return CommonReturnType.create(data);
     }
 
-    @PostMapping("/selectbyname")
-    public CommonReturnType showTestbyname( String name){
-        // if(q.getStem()==null||q.getAnswer()==null||q.getCoursename()==null||q.getType()==null)
-        // return CommonReturnType.create(null,"信息不全");
-        // if(q.getId()==null){
-        //     q.setId(questionService.lastQuestionId()+1);
-        // }
-        Teststatus data = teststatusService.getOne(new QueryWrapper<Teststatus>() .eq("test_Status", name));
-        if(data==null)
-        return CommonReturnType.create(null,"没有该状态");
-        return CommonReturnType.create(data);
-    }
+//    @PostMapping("/selectbyname")
+//    public CommonReturnType showTeststatusbyname( String name){
+//        // if(q.getStem()==null||q.getAnswer()==null||q.getCoursename()==null||q.getType()==null)
+//        // return CommonReturnType.create(null,"信息不全");
+//        // if(q.getId()==null){
+//        //     q.setId(questionService.lastQuestionId()+1);
+//        // }
+//        Teststatus data = teststatusService.getOne(new QueryWrapper<Teststatus>() .eq("test_status", name));
+//        if(data==null)
+//        return CommonReturnType.create(null,"没有该状态");
+//        return CommonReturnType.create(data);
+//    }
 
     @PostMapping("/selectbyId")
-    public CommonReturnType showTestbyID(@RequestBody int id ){
+    public CommonReturnType showTeststatusbyID(@RequestBody int id ){
         // if(q.getStem()==null||q.getAnswer()==null||q.getCoursename()==null||q.getType()==null)
         // return CommonReturnType.create(null,"信息不全");
         // if(q.getId()==null){

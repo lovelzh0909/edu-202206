@@ -190,7 +190,7 @@ public class MakePaperController {
         log.info("添加题目(字符串ID形式)");
         log.info("前端发送："+paperId+": "+papercontext);
         //new CommonReturnType();
-        boolean b = papersService.update(new UpdateWrapper<Papers>().set("paper_context", papercontext).eq("paperId", paperId));
+        boolean b = papersService.update(new UpdateWrapper<Papers>().set("paper_context", papercontext).eq("paper_id", paperId));
         log.info("后端发送：success");
         if (b) {
             return CommonReturnType.create(null);
@@ -204,7 +204,7 @@ public class MakePaperController {
         log.info("添加题目(list(question))");
         log.info("前端发送："+paperId+": "+l);
         //new CommonReturnType();
-        QuestionRelScoreService.remove(new QueryWrapper<QuestionRelScore>().eq("paperId",paperId));
+        QuestionRelScoreService.remove(new QueryWrapper<QuestionRelScore>().eq("paper_id",paperId));
         StringBuilder papercontext = new StringBuilder();
         for (Question q : l) {
             papercontext.append(q.getId());
@@ -219,7 +219,7 @@ public class MakePaperController {
             }
             papercontext.append(",");
         }
-        boolean b = papersService.update(new UpdateWrapper<Papers>().set("paper_context", papercontext.toString()).eq("paperId", paperId));
+        boolean b = papersService.update(new UpdateWrapper<Papers>().set("paper_context", papercontext.toString()).eq("paper_id", paperId));
         log.info("后端发送：success");
         if (b) {
             return CommonReturnType.create(null);
