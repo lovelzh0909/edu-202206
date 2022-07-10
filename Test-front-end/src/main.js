@@ -58,7 +58,7 @@ Vue.config.productionTip = false;
 // })
 
 router.beforeEach((to, from, next) => {
-    document.title = `${to.meta.title} | 揽月`;
+    document.title = `${to.meta.title} | 踏星`;
     //if(localStorage.getItem('ms_username1'))
     const role = localStorage.getItem('ms_userrole');
     // const name = localStorage.getItem('ms_username');
