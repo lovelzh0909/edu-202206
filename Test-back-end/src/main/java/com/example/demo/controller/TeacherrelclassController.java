@@ -48,6 +48,7 @@ public class TeacherrelclassController {
      * @param t
      * @return
      */
+    @PostMapping("/getStudent/byclass")
     public CommonReturnType getStudentbyclass(@RequestBody List<String> t) {
 
         List<User> student = userService.list(new QueryWrapper<User>().in("classroom", t).ne("role", "teacher"));
