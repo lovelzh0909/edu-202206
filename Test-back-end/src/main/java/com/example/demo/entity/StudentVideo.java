@@ -26,35 +26,27 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("school")
-@ApiModel(value = "School对象", description = "")
-public class School implements Serializable {
+@TableName("student_video")
+@ApiModel(value = "StudentVideo对象", description = "")
+public class StudentVideo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("学校编号")
+    @ApiModelProperty("照片编号")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("学校名")
-    @TableField("school")
-    private String school;
+    @ApiModelProperty("学生电话")
+    @TableField("phone")
+    private String phone;
 
-    @ApiModelProperty("学生人数")
-    @TableField("student_num")
-    private Integer studentNum;
+    @ApiModelProperty("照片内容")
+    @TableField("video")
+    private String video;
 
-    @ApiModelProperty("教师人数")
-    @TableField("teacher_num")
-    private Integer teacherNum;
-
-    @ApiModelProperty("电话号码")
-    @TableField("telephone")
-    private String telephone;
-
-    @ApiModelProperty("传真")
-    @TableField("fax")
-    private String fax;
+    @ApiModelProperty("拍摄时间")
+    @TableField("time")
+    private LocalDateTime time;
 
     @TableField("version")
     @Version
@@ -69,4 +61,6 @@ public class School implements Serializable {
     @TableField("is_deleted")
     @TableLogic
     private Boolean isDeleted;
+
+
 }

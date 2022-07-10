@@ -1,7 +1,8 @@
 package com.example.demo.mapper;
 
-import com.example.demo.entity.TeacherRelClass;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.demo.entity.Rule;
+
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -10,9 +11,9 @@ import org.apache.ibatis.annotations.Mapper;
  * </p>
  *
  * @author 作者
- * @since 2022-03-28
+ * @since 2022-03-12
  */
 @Mapper
-public interface TeacherrelclassMapper extends BaseMapper<TeacherRelClass> {
+public interface RuleMapper extends BaseMapper<Rule> {
 
 }

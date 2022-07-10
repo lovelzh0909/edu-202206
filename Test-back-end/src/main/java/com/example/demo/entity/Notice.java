@@ -26,40 +26,29 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("school")
-@ApiModel(value = "School对象", description = "")
-public class School implements Serializable {
+@TableName("notice")
+@ApiModel(value = "Notice对象", description = "")
+public class Notice implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("学校编号")
+    @ApiModelProperty("通知编号")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("学校名")
-    @TableField("school")
-    private String school;
+    @ApiModelProperty("被通知者电话")
+    @TableField("phone")
+    private String phone;
 
-    @ApiModelProperty("学生人数")
-    @TableField("student_num")
-    private Integer studentNum;
+    @ApiModelProperty("通知内容")
+    @TableField("notice")
+    private String notice;
 
-    @ApiModelProperty("教师人数")
-    @TableField("teacher_num")
-    private Integer teacherNum;
+    @ApiModelProperty("截止时间")
+    @TableField("deadline")
+    private String deadline;
 
-    @ApiModelProperty("电话号码")
-    @TableField("telephone")
-    private String telephone;
-
-    @ApiModelProperty("传真")
-    @TableField("fax")
-    private String fax;
-
-    @TableField("version")
-    @Version
-    private Integer version;
-
+    @ApiModelProperty("创建时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
@@ -69,4 +58,9 @@ public class School implements Serializable {
     @TableField("is_deleted")
     @TableLogic
     private Boolean isDeleted;
+
+    @TableField("version")
+    @Version
+    private Integer version;
+
 }

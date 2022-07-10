@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
@@ -17,7 +16,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ * 成绩管理表
  * </p>
  *
  * @author ct
@@ -26,35 +25,47 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("school")
-@ApiModel(value = "School对象", description = "")
-public class School implements Serializable {
+@TableName("score")
+@ApiModel(value = "Score对象", description = "成绩管理表")
+public class Score implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("学校编号")
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    @ApiModelProperty("分数编号")
+    @TableId("score_id")
+    private Integer scoreId;
 
-    @ApiModelProperty("学校名")
-    @TableField("school")
-    private String school;
+    @ApiModelProperty("考试编号")
+    @TableField("exam_code")
+    private Integer examCode;
 
-    @ApiModelProperty("学生人数")
-    @TableField("student_num")
-    private Integer studentNum;
+    @ApiModelProperty("学号")
+    @TableField("student_id")
+    private String studentId;
 
-    @ApiModelProperty("教师人数")
-    @TableField("teacher_num")
-    private Integer teacherNum;
+    @ApiModelProperty("教师电话")
+    @TableField("teacher_phone")
+    private String teacherPhone;
 
-    @ApiModelProperty("电话号码")
-    @TableField("telephone")
-    private String telephone;
+    @ApiModelProperty("课程名称")
+    @TableField("subject")
+    private String subject;
 
-    @ApiModelProperty("传真")
-    @TableField("fax")
-    private String fax;
+    @ApiModelProperty("平时成绩")
+    @TableField("pt-score")
+    private Double ptscore;
+
+    @ApiModelProperty("期末成绩")
+    @TableField("et_score")
+    private Double etScore;
+
+    @ApiModelProperty("总成绩")
+    @TableField("score")
+    private Double score;
+
+    @ApiModelProperty("答题日期//成绩登记时间")
+    @TableField("answer_date")
+    private String answerDate;
 
     @TableField("version")
     @Version
@@ -69,4 +80,5 @@ public class School implements Serializable {
     @TableField("is_deleted")
     @TableLogic
     private Boolean isDeleted;
+
 }

@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.TeacherRelClass;
+import com.example.demo.entity.Ruleqnum;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author 作者
- * @since 2022-03-28
+ * @since 2022-03-25
  */
-public interface TeacherrelclassService extends IService<TeacherRelClass> {
+public interface RuleqnumService extends IService<Ruleqnum> {
 
 }
