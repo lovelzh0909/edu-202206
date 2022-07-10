@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.QuestionRelScore;
+import com.example.demo.entity.Testrelstudent;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author 作者
- * @since 2022-04-08
+ * @since 2022-03-23
  */
-public interface QuestionRelScoreService extends IService<QuestionRelScore> {
+public interface TestrelstudentService extends IService<Testrelstudent> {
 
 }

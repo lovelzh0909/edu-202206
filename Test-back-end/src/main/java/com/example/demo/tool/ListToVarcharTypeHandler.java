@@ -14,8 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author:
- * @date:
+ * @author: lzyCug
+ * @date: 2021/3/8 15:24
  * @description: 类型转换器，用于数据库的varchar和Java中List<String>类型的相互转换
  */
 @MappedJdbcTypes(JdbcType.VARCHAR)

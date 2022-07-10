@@ -41,8 +41,8 @@ public class SchoolController {
         QueryWrapper<User> teacherwrapper = new QueryWrapper<>();
         teacherwrapper.eq("role","teacher").eq("school",school.getSchool());
         int countteacher = Math.toIntExact(userService.count(teacherwrapper));
-        school.setStudentNum(countstudent);
-        school.setTeacherNum(countteacher);
+        school.setStudentnum(countstudent);
+        school.setTeachernum(countteacher);
         schoolService.save(school);
         return CommonReturnType.create(null);
     }

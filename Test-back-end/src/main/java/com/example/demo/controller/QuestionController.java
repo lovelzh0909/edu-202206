@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.Response.CommonReturnType;
 import com.example.demo.entity.Question;
 import com.example.demo.service.QuestionService;
-import com.example.demo.service.QuestionRelScoreService;
+import com.example.demo.service.QuestionrelscoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,12 +32,12 @@ public class QuestionController {
     @Autowired
     QuestionService questionService;
     @Autowired
-    QuestionRelScoreService questionrelscoreService;
+    QuestionrelscoreService questionrelscoreService;
     //fillQuestion
     //添加成功
     @PostMapping("/save")
     public CommonReturnType saveQuestion(@RequestBody Question q ){
-        if(q.getStem()==null||q.getAnswer()==null||q.getCourseName()==null)
+        if(q.getStem()==null||q.getAnswer()==null||q.getCoursename()==null)
         return CommonReturnType.create(null,"信息不全");
         if(q.getCreateTime()==null){
             q.setCreateTime(LocalDateTime.now());
@@ -69,7 +69,7 @@ public class QuestionController {
     public CommonReturnType getAllQuesion(@RequestParam String phone){
 
         List<Question> data=questionService.list(new QueryWrapper<Question>()
-                .eq("user_id", phone)
+                .eq("userId", phone)
         );
 
         if(data==null){
@@ -86,9 +86,9 @@ public class QuestionController {
         log.info("前端发送:"+phone+":"+coursename);
         Page <Question> p = new Page<>(page, size);
         p=questionService.page(p, new QueryWrapper<Question>()
-        .eq("user_id", phone) .eq("course_name", coursename));
+        .eq("userId", phone) .eq("coursename", coursename));
         List<Question> data=questionService.list(new QueryWrapper<Question>()
-                .eq("user_id", phone) .eq("course_name", coursename)
+                .eq("userId", phone) .eq("coursename", coursename)
         );
         p.setSize(data.size());
         log.info("后端发送:"+data);
@@ -104,9 +104,9 @@ public class QuestionController {
             log.info("前端发送:"+phone+":"+coursename+":"+quesTypeId);
         Page <Question> p = new Page<>(page, size);
             p=questionService.page(p, new QueryWrapper<Question>()
-            .eq("user_id", phone) .eq("course_name", coursename).eq("quesType_id", quesTypeId));
+            .eq("userId", phone) .eq("coursename", coursename).eq("quesTypeId", quesTypeId));
             List<Question> data=questionService.list(new QueryWrapper<Question>()
-                    .eq("user_id", phone) .eq("course_name", coursename) .eq("quesType_id", quesTypeId)
+                    .eq("userId", phone) .eq("coursename", coursename) .eq("quesTypeId", quesTypeId)
             );
             p.setTotal(data.size());
             log.info("后端发送:"+data);
@@ -125,12 +125,11 @@ public class QuestionController {
         log.info("获取题库名称");
         log.info("前端发送:"+phone);
             // List<Question> data=questionService.list(new QueryWrapper<Question>().select("distinct coursename")
-            //         .eq("user_id", phone) 
+            //         .eq("userId", phone) 
             // );
-            List<Question> m=
-             questionService.list(new QueryWrapper<Question>().select("distinct course_name")
-            .eq("user_id", phone) );
-
+            List<Map<String, Object>> m=
+             questionService.listMaps(new QueryWrapper<Question>().select("distinct coursename")
+            .eq("userId", phone) );
             //确定这些问题的coursename 集合
             if(m==null){
                 return CommonReturnType.create(null,"没有该题目或已经被删除");
@@ -143,11 +142,11 @@ public class QuestionController {
     public CommonReturnType getPointId(@RequestParam String coursename){
 
         // List<Question> data=questionService.list(new QueryWrapper<Question>().select("distinct coursename")
-        //         .eq("user_id", phone)
+        //         .eq("userId", phone)
         // );
         List<Map<String, Object>> m=
                 questionService.listMaps(new QueryWrapper<Question>().select("distinct pointId")
-                        .eq("course_name", coursename) );
+                        .eq("coursename", coursename) );
         //确定这些问题的coursename 集合
         if(m==null){
             return CommonReturnType.create(null,"没有该题目或已经被删除");
@@ -180,7 +179,7 @@ public class QuestionController {
     public CommonReturnType removeQuestion(@RequestParam String coursename ,String phone){
 
         boolean data=questionService.remove(new QueryWrapper<Question>()
-                .eq("user_id", phone).eq("course_name",coursename)
+                .eq("userId", phone).eq("coursename",coursename)
         );
         if(!data){
             return CommonReturnType.create(null,"没有该题目或已经被删除");
@@ -193,7 +192,7 @@ public class QuestionController {
     public CommonReturnType changeCoursename(@RequestParam String coursename ,String phone){
 
         boolean data=questionService.update(new UpdateWrapper<Question>()
-                .eq("user_id", phone).set("course_name",coursename)
+                .eq("userId", phone).set("coursename",coursename)
         );
         if(!data){
             return CommonReturnType.create(null,"没有该题目或已经被删除");
@@ -232,17 +231,17 @@ public class QuestionController {
         log.info("前端发送:"+phone+":"+coursename);
         Question q=new Question();
         List<Question> m=
-                questionService.list(new QueryWrapper<Question>().select("distinct course_name")
-                        .eq("user_id", phone) );
+                questionService.list(new QueryWrapper<Question>().select("distinct coursename")
+                        .eq("userId", phone) );
         log.info(String.valueOf(m));
         log.info(coursename);
         for(Question qs:m){
-            log.info(qs.getCourseName());
-            if(qs.getCourseName().contentEquals(coursename)){
+            log.info(qs.getCoursename());
+            if(qs.getCoursename().contentEquals(coursename)){
                 return  CommonReturnType.create(null,"题库名重复");
             }
         }
-        q.setCourseName(coursename);
+        q.setCoursename(coursename);
         q.setUserId(phone);
         log.info("save["+q+"]");
         boolean data = questionService.save(q);

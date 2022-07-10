@@ -16,15 +16,16 @@ import com.example.demo.service.PapersService;
 import com.example.demo.service.QuestionService;
 
 
-import com.example.demo.service.QuestionRelScoreService;
+import com.example.demo.service.QuestionrelscoreService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.transform.Result;
 @Slf4j
 @RestController
 @RequestMapping("/MakePaper")
-public class MakePaperController {
+public class MakePaper {
     //    RuleService ruleService;
     @Autowired
     QuestionService questionService;
@@ -33,7 +34,7 @@ public class MakePaperController {
     PapersService papersService;
 
     @Autowired
-    QuestionRelScoreService QuestionRelScoreService;
+    QuestionrelscoreService questionrelscoreService;
 
     int typenum =20;
     /**
@@ -190,7 +191,7 @@ public class MakePaperController {
         log.info("添加题目(字符串ID形式)");
         log.info("前端发送："+paperId+": "+papercontext);
         //new CommonReturnType();
-        boolean b = papersService.update(new UpdateWrapper<Papers>().set("paper_context", papercontext).eq("paper_id", paperId));
+        boolean b = papersService.update(new UpdateWrapper<Papers>().set("papercontext", papercontext).eq("paperId", paperId));
         log.info("后端发送：success");
         if (b) {
             return CommonReturnType.create(null);
@@ -204,22 +205,22 @@ public class MakePaperController {
         log.info("添加题目(list(question))");
         log.info("前端发送："+paperId+": "+l);
         //new CommonReturnType();
-        QuestionRelScoreService.remove(new QueryWrapper<QuestionRelScore>().eq("paper_id",paperId));
+        questionrelscoreService.remove(new QueryWrapper<Questionrelscore>().eq("paperId",paperId));
         StringBuilder papercontext = new StringBuilder();
         for (Question q : l) {
             papercontext.append(q.getId());
-            QuestionRelScore qrs = new QuestionRelScore();
+            Questionrelscore qrs = new Questionrelscore();
             qrs.setPaperId(paperId);
             qrs.setQuestionId(q.getId());
             qrs.setScore(q.getScore());
             log.info("qrs" + qrs);
-            boolean b1 = QuestionRelScoreService.save(qrs);
+            boolean b1 = questionrelscoreService.save(qrs);
             if (q == l.get(l.size() - 1)) {
                 break;
             }
             papercontext.append(",");
         }
-        boolean b = papersService.update(new UpdateWrapper<Papers>().set("paper_context", papercontext.toString()).eq("paper_id", paperId));
+        boolean b = papersService.update(new UpdateWrapper<Papers>().set("papercontext", papercontext.toString()).eq("paperId", paperId));
         log.info("后端发送：success");
         if (b) {
             return CommonReturnType.create(null);

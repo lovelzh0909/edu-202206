@@ -1,4 +1,4 @@
-package com.example.demo.GA;//package com.example.demo.GA;
+//package com.example.demo.GA;
 //
 //import com.example.demo.GA.Paper;
 //import com.example.demo.GA.Population;

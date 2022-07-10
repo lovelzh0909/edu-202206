@@ -33,19 +33,19 @@ public class StudentTestNoticeVO implements Serializable {
     private String coursename;
 
     @TableField("testtime")
-    private String testTime;
+    private String testtime;
 
     @TableField("phone")
     private String phone;
 
     @TableField("createdate")
-    private String createDate;
+    private String createdate;
 
     @TableField("invigilator")
     private String invigilator;
 
     @TableField("timelast")
-    private String timeLast;
+    private String timelast;
 
     @TableField("studentId")
     private String studentId;

@@ -1,6 +1,6 @@
 package com.example.demo.mapper;
 
-import com.example.demo.entity.QuestionRelScore;
+import com.example.demo.entity.Questionrelscore;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-04-08
  */
 @Mapper
-public interface QuestionRelScoreMapper extends BaseMapper<QuestionRelScore> {
+public interface QuestionrelscoreMapper extends BaseMapper<Questionrelscore> {
 
 }

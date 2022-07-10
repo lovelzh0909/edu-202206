@@ -3,7 +3,7 @@ package com.example.demo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.Response.CommonReturnType;
-import com.example.demo.entity.TeacherRelClass;
+import com.example.demo.entity.Teacherrelclass;
 import com.example.demo.entity.User;
 import com.example.demo.service.TeacherrelclassService;
 import com.example.demo.service.UserService;
@@ -22,10 +22,10 @@ import java.util.List;
  * @since 2022-03-28
  */
 @RestController
-@RequestMapping("/TeacherRelClass")
-public class TeacherRelClassController {
+@RequestMapping("/teacherrelclass")
+public class TeacherrelclassController {
     @Autowired
-    TeacherrelclassService teacherRelClassService;
+    TeacherrelclassService teacherrelclassService;
     @Autowired
     UserService userService;
 
@@ -37,7 +37,7 @@ public class TeacherRelClassController {
     @PostMapping("/getClass/byTeacher")
     public CommonReturnType getTeacherClass(@RequestParam String teacherphone) {
 
-        return CommonReturnType.create(teacherRelClassService.list( new QueryWrapper<TeacherRelClass>().eq("teacher",teacherphone)));
+        return CommonReturnType.create(teacherrelclassService.list( new QueryWrapper<Teacherrelclass>().eq("teacher",teacherphone)));
     }
 
     /**
@@ -50,8 +50,8 @@ public class TeacherRelClassController {
 
         List<User> student = userService.list(new QueryWrapper<User>().in("classroom", t).ne("role", "teacher"));
         System.out.println(student);
-//        for (TeacherRelClass TeacherRelClass : teacher) {
-//            list.add(userService.list(new QueryWrapper<User>().eq("class", TeacherRelClass.getClassroom()))
+//        for (Teacherrelclass teacherrelclass : teacher) {
+//            list.add(userService.list(new QueryWrapper<User>().eq("class", teacherrelclass.getClassroom()))
 //            );
 //        }
         return CommonReturnType.create(student);

@@ -20,15 +20,14 @@
  	private static final String mapperPath = projectPath + "\\src\\main\\resources\\mybatis\\mappers";// 设置mapperXml 模板路径
 
  	public static void main(String[] args) {
- 		String[] tableNames = {"user","test","school","paper","notice","paper_justify","question","question_rel_score","score"
-				,"student_test_flag","student_video","teacher_rel_class","test_rel_student"};//可生成多个表
+ 		String[] tableNames = {"questionrelscore"};//可生成多个表
  		GeneratorApplication.execute(tableNames);
  	}
 
  	public static void execute(String[] tableNames) {
  		FastAutoGenerator.create(url, username, password)
  				.globalConfig(builder -> {
- 					builder.author(writer) // 设置作者
+ 					builder//.author(writer) // 设置作者
  							.enableSwagger() // 开启 swagger 模式
  							.fileOverride() // 覆盖已生成文件
  							.outputDir(outPath) // 指定输出目录
@@ -44,8 +43,6 @@
  				.strategyConfig(builder -> {
  					builder.addInclude(tableNames)// 设置需要生成的表名
  							.addTablePrefix("t_") // 设置过滤表前缀
-							//Mapper 策略配置
-									.mapperBuilder().enableMapperAnnotation()
  							//Service 策略配置
  							.serviceBuilder()
  							.formatServiceFileName("%sService")//格式化 service 接口文件名称
@@ -55,12 +52,12 @@
  							.enableChainModel()//开启链式模型
  							.enableLombok()//开启Lombok模型
  							.enableTableFieldAnnotation()//开启生成实体时生成字段注解
- 							.logicDeleteColumnName("is_deleted")//默认删除属性名称（数据库）
+ 							.logicDeleteColumnName("deleted")//默认删除属性名称（数据库）
  							.logicDeletePropertyName("deleted")//默认删除属性名称（实体）
  							.versionColumnName("version")//乐观锁属性名（数据库）
  							.versionPropertyName("version")//乐观锁属性名（实体）
- 							.addTableFills(new Column("create_time", FieldFill.INSERT))//添加表字段填充(自动填充)
- 							.addTableFills(new Column("update_time", FieldFill.INSERT_UPDATE))//添加表字段填充（自动填充）
+ 							.addTableFills(new Column("create_Time", FieldFill.INSERT))//添加表字段填充(自动填充)
+ 							.addTableFills(new Column("update_Time", FieldFill.INSERT_UPDATE))//添加表字段填充（自动填充）
  							//controller 策略配置
  							.controllerBuilder()
  							.enableRestStyle();//开启生成@RestController 控制器

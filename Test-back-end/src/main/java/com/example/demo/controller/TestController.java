@@ -7,11 +7,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.Response.CommonReturnType;
 import com.example.demo.entity.Papers;
 import com.example.demo.entity.Test;
-import com.example.demo.entity.TestRelStudent;
+import com.example.demo.entity.Testrelstudent;
 import com.example.demo.entity.User;
 import com.example.demo.service.PapersService;
-import com.example.demo.service.TestRelStudentService;
 import com.example.demo.service.TestService;
+import com.example.demo.service.TestrelstudentService;
 import com.example.demo.service.UserService;
 import com.sun.net.httpserver.Authenticator;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +40,7 @@ public class TestController {
     @Autowired
     TestService testService;
     @Autowired
-    TestRelStudentService testrelstudentService;
+    TestrelstudentService testrelstudentService;
     @Autowired
     UserService userService;
     @Autowired
@@ -61,13 +61,13 @@ public class TestController {
         log.info(t.toString());
         // if(q.getStem()==null||q.getAnswer()==null||q.getCoursename()==null||q.getType()==null)
         // return CommonReturnType.create(null,"信息不全");
-        if (t.getCreateDate() == null) {
+        if (t.getCreatedate() == null) {
             //添加时间
             // Date d= new Date();
-            t.setCreateDate(String.valueOf(LocalDateTime.now()));
+            t.setCreatedate(String.valueOf(LocalDateTime.now()));
         }
-        if(t.getTestTime()!=null){
-            String sub=t.getTestTime().substring(0,9);
+        if(t.getTesttime()!=null){
+            String sub=t.getTesttime().substring(0,9);
         }
         // if(q.getId()==null){
         //     q.setId(questionService.lastQuestionId()+1);
@@ -84,30 +84,30 @@ public class TestController {
         log.info("前端发送："+t);
         boolean data = false;
         for (Test te : t) {
-            if (te.getCreateDate() == null) {
+            if (te.getCreatedate() == null) {
 
-                te.setCreateDate(String.valueOf(LocalDate.now()));
+                te.setCreatedate(String.valueOf(LocalDate.now()));
             }
-            te.setTestStatus(1);
+            te.setTeststatus(1);
 //            if (te.getRoomId() == null) {
 //
 //                te.setRoomId(te.getTestId());
 //            }
-            List<TestRelStudent> tsl = new ArrayList<>();
-            List<String> phone = te.getStudentPhone();
-            te.setStudentPhone(null);
+            List<Testrelstudent> tsl = new ArrayList<>();
+            List<String> phone = te.getStudentphone();
+            te.setStudentphone(null);
             List<User> userList = new ArrayList<>();
-            if (te.getTestTime() != null) {
-                String sub = te.getTestTime().substring(0, 10);
+            if (te.getTesttime() != null) {
+                String sub = te.getTesttime().substring(0, 10);
                 log.info(sub);
 //                List<User> l = userService.list(new QueryWrapper<User>().in("role", new String[]{"teacher","admin"}));
                 List<User> l = userService.list(new QueryWrapper<User>().in("role", "teacher","admin"));
                 for (User u : l) {
                     int flag = 1;
-                    List<Test> testList = testService.list(new QueryWrapper<Test>().eq("invigilator_id", u.getPhone()));
+                    List<Test> testList = testService.list(new QueryWrapper<Test>().eq("invigilatorId", u.getPhone()));
                     log.info(testList.toString());
                     for (Test tes : testList) {
-                        if (tes.getTestTime().substring(0, 10).equals(sub)) {
+                        if (tes.getTesttime().substring(0, 10).equals(sub)) {
                             flag = 0;
                             break;
                         }
@@ -126,7 +126,7 @@ public class TestController {
             te.setInvigilatorId(userList.get(i).getPhone());
             te.setInvigilator(userList.get(i).getName());
             testService.save(te);
-            Papers papers =papersService.getOne(new QueryWrapper<Papers>().eq("paper_id",te.getPaperId()));
+            Papers papers =papersService.getOne(new QueryWrapper<Papers>().eq("paperId",te.getPaperId()));
             papers.setPapernum(papers.getPapernum()+1);
             papersService.updateById(papers);
             if (te.getRoomId() == null) {
@@ -134,7 +134,7 @@ public class TestController {
             }
             testService.saveOrUpdate(te);
             for (String p : phone) {
-                TestRelStudent trs = new TestRelStudent();
+                Testrelstudent trs = new Testrelstudent();
                 trs.setTestId(te.getTestId());
                 trs.setStudentPhone(p);
                 trs.setStatus(1);
@@ -154,7 +154,7 @@ public class TestController {
     public CommonReturnType changeStatus(@RequestBody int id) {
         Test t = testService.getById(id);
         t.setPystatus("pystatus");
-        t.setTestStatus(1);
+        t.setTeststatus(1);
         boolean data = testService.save(t);
         if (!data)
             return CommonReturnType.create(null, "添加失败");
@@ -171,10 +171,10 @@ public class TestController {
         log.info("获取考试列表（学生）");
         log.info("前端发送："+phone);
         Page<Test> page2 = new Page<>(page, size);
-        List<TestRelStudent> ts = testrelstudentService.list(new QueryWrapper<TestRelStudent>().eq("student_phone", phone));
+        List<Testrelstudent> ts = testrelstudentService.list(new QueryWrapper<Testrelstudent>().eq("studentPhone", phone));
 //        List<Test> l=new ArrayList<Test>();
         List<Integer> ll = new ArrayList<>();
-        for (TestRelStudent t : ts) {
+        for (Testrelstudent t : ts) {
 //            l.add(testService.getById(t.getTestId())) ;
             ll.add(t.getTestId());
         }
@@ -182,37 +182,37 @@ public class TestController {
             return CommonReturnType.create(null, "没有该学生考试信息");
         }
 
-        Page<Test> page3 = testService.page(page2, new QueryWrapper<Test>().in("test_id", ll));
+        Page<Test> page3 = testService.page(page2, new QueryWrapper<Test>().in("testId", ll));
         for(Test test:page3.getRecords()){
-            TestRelStudent testrelstudent=testrelstudentService.getOne(new QueryWrapper<TestRelStudent>().eq("test_id",test.getTestId()).eq("student_phone",phone));
+            Testrelstudent testrelstudent=testrelstudentService.getOne(new QueryWrapper<Testrelstudent>().eq("testId",test.getTestId()).eq("studentPhone",phone));
             LocalDateTime localDateTime=LocalDateTime.now();
-            String s= test.getTestTime().substring(0,10)+"T"+test.getTestTime().substring(11);
+            String s= test.getTesttime().substring(0,10)+"T"+test.getTesttime().substring(11);
             log.info("-----------log--------");
             log.info(s);
             LocalDateTime localDateTime1 = LocalDateTime.parse(s);
 
-            if(test.getTimeLast()==null){
+            if(test.getTimelast()==null){
                 return CommonReturnType.create("该测试没有测试时间");
             }
-            LocalDateTime localDateTime2 = localDateTime1.plusMinutes(test.getTimeLast());
+            LocalDateTime localDateTime2 = localDateTime1.plusMinutes(test.getTimelast());
 
             if(localDateTime.isBefore(localDateTime1)){
-                test.setTestStatus(1);
+                test.setTeststatus(1);
             }
             else if(localDateTime.isBefore(localDateTime2)){
-                test.setTestStatus(2);
+                test.setTeststatus(2);
             }
             else
             {
-                test.setTestStatus(3);
+                test.setTeststatus(3);
             }
             Papers p=papersService.getById(test.getPaperId());
             test.setNote(p.getNote());
             testService.saveOrUpdate(test);
             if(testrelstudent.getStatus()==3||testrelstudent.getStatus()==4)
-               test.setTestStatus(testrelstudent.getStatus());
+               test.setTeststatus(testrelstudent.getStatus());
             else
-                testrelstudent.setStatus(test.getTestStatus());
+                testrelstudent.setStatus(test.getTeststatus());
             testrelstudentService.saveOrUpdate(testrelstudent);
         }
 
@@ -239,26 +239,26 @@ public class TestController {
     public CommonReturnType listteacherOne(@RequestBody Test te, @PathVariable("page") Integer page, @PathVariable("size") Integer size) {
         log.info("获取监考考试列表（教师）");
         log.info("前端发送："+te);
-        List<Test> l = testService.list(new QueryWrapper<Test>().eq("invigilator_id", te.getInvigilatorId()));
+        List<Test> l = testService.list(new QueryWrapper<Test>().eq("invigilatorId", te.getInvigilatorId()));
         Page<Test> page2 = new Page<>(page, size);
-        Page<Test> p = testService.page(page2, new QueryWrapper<Test>().eq("invigilator_id", te.getInvigilatorId()));
+        Page<Test> p = testService.page(page2, new QueryWrapper<Test>().eq("invigilatorId", te.getInvigilatorId()));
         for(Test test:p.getRecords()){
             LocalDateTime localDateTime=LocalDateTime.now();
-            String s= test.getTestTime().substring(0,10)+"T"+test.getTestTime().substring(11);
+            String s= test.getTesttime().substring(0,10)+"T"+test.getTesttime().substring(11);
             log.info("-----------log--------");
             log.info(s);
             LocalDateTime localDateTime1 = LocalDateTime.parse(s);
-            LocalDateTime localDateTime2 = localDateTime1.plusMinutes(test.getTimeLast());
+            LocalDateTime localDateTime2 = localDateTime1.plusMinutes(test.getTimelast());
 
             if(localDateTime.isBefore(localDateTime1)){
-                test.setTestStatus(1);
+                test.setTeststatus(1);
             }
             else if(localDateTime.isBefore(localDateTime2)){
-                test.setTestStatus(2);
+                test.setTeststatus(2);
             }
             else
             {
-                test.setTestStatus(3);
+                test.setTeststatus(3);
             }
             testService.saveOrUpdate(test);
         }
@@ -268,7 +268,7 @@ public class TestController {
             return CommonReturnType.create("没有该老师相关考试信息");
         }
         return CommonReturnType.create(p);
-        // return testService.list(new QueryWrapper<Test>().eq("teacher_phone", test.getTeacherPhone()));
+        // return testService.list(new QueryWrapper<Test>().eq("teacherphone", test.getTeacherphone()));
     }
 
     /**
@@ -279,28 +279,28 @@ public class TestController {
     public CommonReturnType listteacherOnereal(@RequestBody Test te, @PathVariable("page") Integer page, @PathVariable("size") Integer size) {
         log.info("获取考试列表（老师）");
         log.info("前端发送："+te);
-        List<Test> l = testService.list(new QueryWrapper<Test>().eq("teacher_phone", te.getTeacherPhone()));
+        List<Test> l = testService.list(new QueryWrapper<Test>().eq("teacherphone", te.getTeacherphone()));
         Page<Test> page2 = new Page<>(page, size);
-        Page<Test> p = testService.page(page2, new QueryWrapper<Test>().eq("teacher_phone", te.getTeacherPhone()));
+        Page<Test> p = testService.page(page2, new QueryWrapper<Test>().eq("teacherphone", te.getTeacherphone()));
         for(Test test:p.getRecords()){
             //现在时间
             LocalDateTime localDateTime=LocalDateTime.now();
-            String s= test.getTestTime().substring(0,10)+"T"+test.getTestTime().substring(11);
+            String s= test.getTesttime().substring(0,10)+"T"+test.getTesttime().substring(11);
             log.info("-----------log--------");
             log.info(s);
             LocalDateTime localDateTime1 = LocalDateTime.parse(s);
-            LocalDateTime localDateTime2 = localDateTime1.plusMinutes(test.getTimeLast());
+            LocalDateTime localDateTime2 = localDateTime1.plusMinutes(test.getTimelast());
             log.info("-------------log--------");
             log.info(String.valueOf(localDateTime2));
             if(localDateTime.isBefore(localDateTime1)){
-                test.setTestStatus(1);
+                test.setTeststatus(1);
             }
             else if(localDateTime.isBefore(localDateTime2)){
-                test.setTestStatus(2);
+                test.setTeststatus(2);
             }
             else
             {
-                test.setTestStatus(3);
+                test.setTeststatus(3);
             }
             testService.saveOrUpdate(test);
         }
@@ -310,7 +310,7 @@ public class TestController {
             return CommonReturnType.create("没有该老师相关考试信息");
         }
         return CommonReturnType.create(p);
-//         return testService.list(new QueryWrapper<Test>().eq("teacher_phone", test.getTeacherPhone()));
+//         return testService.list(new QueryWrapper<Test>().eq("teacherphone", test.getTeacherphone()));
     }
 
     /**
@@ -322,10 +322,10 @@ public class TestController {
         log.info("删除考试");
         log.info("前端发送:"+id);
         boolean data = testService.remove(new QueryWrapper<Test>()
-                .eq("test_id", id)
+                .eq("testId", id)
         );
-        boolean data2 =testrelstudentService.remove(new QueryWrapper<TestRelStudent>()
-                .eq("test_id", id));
+        boolean data2 =testrelstudentService.remove(new QueryWrapper<Testrelstudent>()
+                .eq("testId", id));
         log.info("后端发送: success");
         if (!data) {
             return CommonReturnType.create(null,"没有该测试或已经被删除");
