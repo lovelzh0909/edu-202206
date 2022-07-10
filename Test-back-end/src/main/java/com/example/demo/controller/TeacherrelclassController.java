@@ -7,6 +7,7 @@ import com.example.demo.entity.Teacherrelclass;
 import com.example.demo.entity.User;
 import com.example.demo.service.TeacherrelclassService;
 import com.example.demo.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ import java.util.List;
  * @author 作者
  * @since 2022-03-28
  */
+@Slf4j
 @RestController
 @RequestMapping("/teacherrelclass")
 public class TeacherrelclassController {
@@ -47,12 +49,8 @@ public class TeacherrelclassController {
      * @return
      */
     @PostMapping("/getStudent/byclass")
-    public CommonReturnType getStudentbyclass(@RequestParam List<Teacherrelclass> teacherrelclassList) {
+    public CommonReturnType getStudentbyclass(@RequestBody List<String> t) {
 
-        List<String> t =new ArrayList<>();
-        for(var e:teacherrelclassList){
-            t.add(e.getClassroom());
-        }
         List<User> student = userService.list(new QueryWrapper<User>().in("classroom", t).ne("role", "teacher"));
         System.out.println(student);
 //        for (Teacherrelclass teacherrelclass : teacher) {
