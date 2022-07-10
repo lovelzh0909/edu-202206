@@ -172,25 +172,15 @@ export default new Router({
                         ]
                 },
                 
-                {
-                    // 国际化组件
-                    path: '/i18n',
-                    component: () => import('../components/common/I18n.vue'),
-                    meta: {
-                        title: '国际化',
-                    }
-                },
-                {
-                    // 权限页面
-                    path: '/permission',
-                    access:2,
-                    component: () => import('../page/Permission.vue'),
-                    meta: {
-                        title: '权限测试',
-                        permission3: true,
-                        
-                    }
-                },
+                // {
+                //     // 国际化组件
+                //     path: '/i18n',
+                //     component: () => import('../components/common/I18n.vue'),
+                //     meta: {
+                //         title: '国际化',
+                //     }
+                // },
+               
                 {
                     path: '/404',
                     component: () => import('../page/404.vue'),
@@ -320,25 +310,15 @@ export default new Router({
                              },
                          ]
                 },
-                {
-                    // 国际化组件
-                    path: '/i18n',
-                    component: () => import('../components/common/I18n.vue'),
-                    meta: {
-                        title: '国际化',
-                    }
-                },
-                {
-                    // 权限页面
-                    path: '/permission',
-                    access:2,
-                    component: () => import('../page/Permission.vue'),
-                    meta: {
-                        title: '权限测试',
-                        permission3: true,
-                        
-                    }
-                },
+                // {
+                //     // 国际化组件
+                //     path: '/i18n',
+                //     component: () => import('../components/common/I18n.vue'),
+                //     meta: {
+                //         title: '国际化',
+                //     }
+                // },
+               
                 {
                     path: '/404',
                     component: () => import('../page/404.vue'),
@@ -569,25 +549,15 @@ export default new Router({
                         ]
                 },
                 
-                {
-                    // 国际化组件
-                    path: '/i18n',
-                    component: () => import('../components/common/I18n.vue'),
-                    meta: {
-                        title: '国际化',
-                    }
-                },
-                {
-                    // 权限页面
-                    path: '/permission',
-                    access:2,
-                    component: () => import('../page/Permission.vue'),
-                    meta: {
-                        title: '权限测试',
-                        permission3: true,
-                        
-                    }
-                },
+                // {
+                //     // 国际化组件
+                //     path: '/i18n',
+                //     component: () => import('../components/common/I18n.vue'),
+                //     meta: {
+                //         title: '国际化',
+                //     }
+                // },
+                
                 {
                     path: '/404',
                     component: () => import('../page/404.vue'),
