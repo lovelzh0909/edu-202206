@@ -1,17 +1,15 @@
 package com.example.demo.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.Version;
+import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
@@ -19,11 +17,11 @@ import lombok.experimental.Accessors;
  * 用于存储学生问题答案	
  * </p>
  *
- * @author ct
- * @since 2022-07-10
+ * @author 作者
+ * @since 2022-03-17
  */
-@Getter
-@Setter
+@Data
+@ToString
 @Accessors(chain = true)
 @TableName("paper_justify")
 @ApiModel(value = "PaperJustify对象", description = "用于存储学生问题答案	")
@@ -31,50 +29,39 @@ public class PaperJustify implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("改卷编号")
     @TableId(value = "id", type = IdType.AUTO)
+    @JSONField(format="id")
     private Integer id;
 
-    @ApiModelProperty("考试编号")
-    @TableField("test_id")
-    private Integer testId;
-
-    @ApiModelProperty("题目编号")
-    @TableField("question_id")
+    @TableField("questionId")
+    @JSONField(format="questionId")
     private Integer questionId;
 
-    @ApiModelProperty("学生电话")
-    @TableField("student_phone")
-    private String studentPhone;
+    @JSONField(format="studentphone")
+    @TableField("studentphone")
+    private String studentphone;
 
-    @ApiModelProperty("学生答案")
-    @TableField("student_answer")
-    private String studentAnswer;
+    @JSONField(format="exmaineAnswer")
+    @TableField("studentAnswer")
+    private String exmaineAnswer;
 
-    @ApiModelProperty("正确答案")
-    @TableField("correct_answer")
+    @JSONField(format="correctAnswer")
+    @TableField("correctAnswer")
     private String correctAnswer;
 
-    @ApiModelProperty("教师批阅分数")
+    @JSONField(format="score")
+    @ApiModelProperty("1 dui 0 cuo")
     @TableField("justify")
-    private Double justify;
-
-    @ApiModelProperty("题目实际分数")
-    @TableField("score")
     private Double score;
 
-    @TableField("version")
+    @JSONField(format="totalscore")
+    @TableField("score")
+    private Double totalscore;
+
+    @JSONField(format="testId")
+    @TableField("testId")
+    private Integer testId;
+
     @Version
-    private Integer version;
-
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
-
-    @TableField("is_delete")
-    private Boolean isDelete;
-
-    private String exmaineAnswer;
+    private int version;
 }

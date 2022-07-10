@@ -1,11 +1,7 @@
 package com.example.demo.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,6 +10,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
@@ -21,10 +18,11 @@ import lombok.experimental.Accessors;
  * 
  * </p>
  *
- * @author ct
- * @since 2022-07-10
+ * @author 作者
+ * @since 2022-03-12
  */
 @Getter
+@ToString
 @Setter
 @Accessors(chain = true)
 @TableName("test")
@@ -33,83 +31,58 @@ public class Test implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("考试编号")
-    @TableId("test_id")
+    @TableId(value = "testId", type = IdType.AUTO)
     private Integer testId;
 
-    @ApiModelProperty("试卷编号")
-    @TableField("paper_id")
-    private Integer paperId;
+    @TableField("testsettingid")
+    private Integer testsettingid;
 
-    @ApiModelProperty("考场号")
-    @TableField("room_id")
+    @TableField("roomId")
     private Integer roomId;
 
-    @ApiModelProperty("课程名称")
-    @TableField("course_name")
-    private String courseName;
-
-    @ApiModelProperty("考试老师")
-    @TableField("test_teacher")
-    private String testTeacher;
-
-    @ApiModelProperty("教师电话")
-    @TableField("teacher_phone")
-    private String teacherPhone;
-
-    @ApiModelProperty("监考老师")
-    @TableField("invigilator")
-    private String invigilator;
-
-    @ApiModelProperty("监考老师电话")
-    @TableField("invigilator_id")
-    private String invigilatorId;
-
-    @ApiModelProperty("备注")
     @TableField("note")
     private String note;
 
-    @ApiModelProperty("创建日期")
-    @TableField("create_date")
-    private String createDate;
+    @TableField("teststatus")/*未开始 考试中 待批阅 考试完成 */
+    private int teststatus;
 
-    @ApiModelProperty("考试时间")
-    @TableField("test_time")
-    private String testTime;
+    @TableField("invigilator")
+    private String invigilator;
 
-    @ApiModelProperty("持续时间")
-    @TableField("time_last")
-    private Integer timeLast;
+    @TableField("testteacher")
+    private String testteacher;
 
-    @ApiModelProperty("考试类型")
-    @TableField("test_type")
-    private String testType;
+    @TableField("coursename")
+    private String coursename;
 
-    @ApiModelProperty("考试状态")
-    @TableField("test_status")
-    private Integer testStatus;
 
-    @ApiModelProperty("批阅状态")
+    @TableField("createdate")
+    private String createdate;
+
+    @TableField("testtime")
+    private String testtime;
+
+    @TableField("timelast")
+    private Integer timelast;
+
     @TableField("pystatus")
     private String pystatus;
 
-    @ApiModelProperty("考试设置状态")
-    @TableField("test_setting_id")
-    private Integer testSettingId;
+    @TableField("teacherphone")
+    private String teacherphone;
 
-    @TableField("version")
+    @TableField("paperId")
+    private int paperId;
+
+    @TableField("testtype")
+    private String testtype;
+
+    @TableField("invigilatorId")
+    private String invigilatorId;
+
+    @TableField(exist = false)
+    private List<String> studentphone;
+
     @Version
-    private Integer version;
-
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
-
-    @TableField("is_deleted")
-    @TableLogic
-    private Boolean isDeleted;
-
-    private List<String> studentPhone;
+    private int version;
 }

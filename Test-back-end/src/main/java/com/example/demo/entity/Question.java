@@ -1,16 +1,12 @@
 package com.example.demo.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -20,11 +16,10 @@ import lombok.experimental.Accessors;
  * 
  * </p>
  *
- * @author ct
- * @since 2022-07-10
+ * @author 作者
+ * @since 2022-03-12
  */
-@Getter
-@Setter
+@Data
 @Accessors(chain = true)
 @TableName("question")
 @ApiModel(value = "Question对象", description = "")
@@ -32,99 +27,73 @@ public class Question implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("试题编号")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("试题类型（1单选 2多选 3填空 4简答 5判断）")
-    @TableField("quesType_id")
-    private Integer quesTypeId;
+    @TableField("quesTypeId")
+    private int quesTypeId;
 
-    @ApiModelProperty("课程名称")
-    @TableField("course_name")
-    private String courseName;
+    @TableField("coursename")
+    private String coursename;
 
-    @ApiModelProperty("题目内容")
     @TableField("stem")
     private String stem;
 
-    @ApiModelProperty("A选项")
-    @TableField("choice_a")
+    @TableField("choiceA")
     private String choiceA;
 
-    @ApiModelProperty("B选项")
-    @TableField("choice_b")
+    @TableField("choiceB")
     private String choiceB;
 
-    @ApiModelProperty("C选项")
-    @TableField("choice_c")
+    @TableField("choiceC")
     private String choiceC;
 
-    @ApiModelProperty("D选项")
-    @TableField("choice_d")
+    @TableField("choiceD")
     private String choiceD;
 
-    @ApiModelProperty("E选项")
-    @TableField("choice_e")
+    @TableField("choiceE")
     private String choiceE;
 
-    @ApiModelProperty("F选项")
-    @TableField("choice_f")
+    @TableField("choiceF")
     private String choiceF;
 
-    @ApiModelProperty("G选项")
-    @TableField("choice_g")
+    @TableField("choiceG")
     private String choiceG;
 
-    @ApiModelProperty("答案")
     @TableField("answer")
     private String answer;
 
-    @ApiModelProperty("创建时间")
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    @TableField("userId")
+    private String userId;
+
+    @TableField("createTime")
     private LocalDateTime createTime;
 
-    @ApiModelProperty("创建者")
-    @TableField("user_name")
+    @TableField("userName")
     private String userName;
 
-    @ApiModelProperty("知识点名称")
-    @TableField("knowledge_name")
+    @TableField("knowledgeName")
     private String knowledgeName;
 
-    @ApiModelProperty("分数")
     @TableField("score")
     private Double score;
 
-    @ApiModelProperty("难度")
     @TableField("difficulty")
     private Double difficulty;
 
-    @ApiModelProperty("知识点ID")
-    @TableField("point_id")
+    @TableField("pointId")
     private String pointId;
 
-    @ApiModelProperty("用户编号")
-    @TableField("user_id")
-    private String userId;
-
-    @ApiModelProperty("选项集合")
     @TableField("content")
     private String content;
 
-    @TableField("version")
+    @TableField(exist = false)
+    private  String studentAnswer;
+
+    @TableField(exist = false)
+    private  Double getScore;
+
     @Version
-    private Integer version;
-
-    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
-
-    @TableField("is_deleted")
-    @TableLogic
-    private Boolean isDeleted;
-
-    private Double getScore;
-
-    private String studentAnswer;
+    private int version;
 
 }

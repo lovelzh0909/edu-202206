@@ -99,7 +99,7 @@ public class GA {
             } else {
 //                int type = getTypeByIndex(i, rule);
                 int type=child.getQuestion(i).getQuesTypeId();
-                String coursename =child.getQuestion(i).getCourseName();
+                String coursename =child.getQuestion(i).getCoursename();
                 // getQuestionArray()用来选择指定类型和知识点的试题数组
                 List<Question> singleArray = questionService.list(new QueryWrapper<Question>().eq("quesTypeId", type)
                         .eq("coursename", coursename)
@@ -117,7 +117,7 @@ public class GA {
             } else {
 //                int type = getTypeByIndex(i, rule);
                 int type=child.getQuestion(i).getQuesTypeId();
-                String coursename =child.getQuestion(i).getCourseName();
+                String coursename =child.getQuestion(i).getCoursename();
                 List<Question> singleArray = questionService.list(new QueryWrapper<Question>().eq("quesTypeId", type)
                         .eq("coursename", coursename)
                         .in("pointId", rule.getpointIdList()));
@@ -163,7 +163,7 @@ public class GA {
 
                 // 从题库中获取和变异的题目类型一样分数相同的题目（不包含变异题目）
                 list = questionService.list(new QueryWrapper<Question>().eq("quesTypeId", tmpQuestion.getQuesTypeId())
-                        .eq("coursename", tmpQuestion.getCourseName())
+                        .eq("coursename", tmpQuestion.getCoursename())
                         .in("pointId", rule.getpointIdList()));
                 // QuestionService.getQuestionListWithOutSId(idString.substring(1, idString.indexOf(']')),paper.getidString(),tmpQuestion.getType());
 //                null;

@@ -9,15 +9,17 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.Response.CommonReturnType;
 import com.example.demo.entity.Notice;
 import com.example.demo.entity.Test;
-import com.example.demo.entity.TestRelStudent;
+import com.example.demo.entity.Testrelstudent;
 import com.example.demo.entity.User;
 import com.example.demo.entity.vo.StudentTestNoticeVO;
 import com.example.demo.service.NoticeService;
-import com.example.demo.service.TestRelStudentService;
 import com.example.demo.service.TestService;
+
+import com.example.demo.service.TestrelstudentService;
 import com.example.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +45,7 @@ public class NoticeController {
     @Autowired
     TestService testService;
     @Autowired
-    TestRelStudentService testrelstudentService;
+    TestrelstudentService testrelstudentService;
     @Autowired
     UserService userService;
 
@@ -69,18 +71,18 @@ public class NoticeController {
     public CommonReturnType notice(@RequestParam int testId,@RequestParam String text,@RequestParam String deadline) {
         log.info("获取基本通知信息");
         log.info("前端发送:"+testId);
-        List<TestRelStudent> testrelstudent = testrelstudentService.list(new QueryWrapper<TestRelStudent>().eq("test_id",testId));
+        List<Testrelstudent> testrelstudent = testrelstudentService.list(new QueryWrapper<Testrelstudent>().eq("testId",testId));
         //new CommonReturnType();
         if(testrelstudent ==null){
             return CommonReturnType.create(null,"该测试没有学生参加");
         }
-        for(TestRelStudent t:testrelstudent){
+        for(Testrelstudent t:testrelstudent){
             Notice notice = new Notice();
             notice.setNotice(text);
             notice.setPhone(t.getStudentPhone());
-//            notice.setCreateTime(String.valueOf(LocalDateTime.now()));
+            notice.setCreatTime(String.valueOf(LocalDateTime.now()));
             log.info(deadline);
-            notice.setDeadline(deadline);
+            notice.setDeadLine(deadline);
             noticeService.save(notice);
         }
         log.info("后端发送:success");
@@ -93,15 +95,15 @@ public class NoticeController {
         // Map<String, Object> map = new HashMap<>();
 //        Page<StudentTestNoticeVO> Studentnote =new Page<>();
         List<StudentTestNoticeVO> note =new ArrayList<>();
-        List<TestRelStudent> testrelstudents =testrelstudentService.list(new QueryWrapper<TestRelStudent>().eq("student_phone",phone));
-        for(TestRelStudent testrelstudent:testrelstudents){
+        List<Testrelstudent> testrelstudents =testrelstudentService.list(new QueryWrapper<Testrelstudent>().eq("studentPhone",phone));
+        for(Testrelstudent testrelstudent:testrelstudents){
             Test test = testService.getById(testrelstudent.getTestId());
             StudentTestNoticeVO studentTestNoticeVO =new StudentTestNoticeVO();
-            studentTestNoticeVO.setTestTime(test.getTestTime());
-            studentTestNoticeVO.setCoursename(test.getCourseName());
+            studentTestNoticeVO.setTesttime(test.getTesttime());
+            studentTestNoticeVO.setCoursename(test.getCoursename());
             studentTestNoticeVO.setInvigilator(test.getInvigilator());
-            studentTestNoticeVO.setTestteacher(test.getTestTeacher());
-            studentTestNoticeVO.setTimeLast(test.getTimeLast()+"分钟");
+            studentTestNoticeVO.setTestteacher(test.getTestteacher());
+            studentTestNoticeVO.setTimelast(test.getTimelast()+"分钟");
 //            User user =userService.getById(phone);
             User user =userService.getOne( new QueryWrapper<User>().eq("phone",phone));
             studentTestNoticeVO.setName(user.getName());
@@ -143,11 +145,11 @@ public class NoticeController {
         double betweenDate = 0;
         long nowDate = calendar.getTime().getTime(); //Date.getTime() 获得毫秒型日期
         QueryWrapper<Test> queryWrapper = new QueryWrapper();
-        queryWrapper.select("TestTime","coursename","note");
+        queryWrapper.select("testtime","coursename","note");
 //        List<Test> note = testService.list(queryWrapper.eq("phone", phone));
         List<Test> note =new ArrayList<>();
-        List<TestRelStudent> testrelstudents =testrelstudentService.list(new QueryWrapper<TestRelStudent>().eq("student_phone",phone));
-        for(TestRelStudent testrelstudent:testrelstudents){
+        List<Testrelstudent> testrelstudents =testrelstudentService.list(new QueryWrapper<Testrelstudent>().eq("studentPhone",phone));
+        for(Testrelstudent testrelstudent:testrelstudents){
             Test test = testService.getById(testrelstudent.getTestId());
             if(test!=null)
             note.add(test);
@@ -155,7 +157,7 @@ public class NoticeController {
         List<Test> notes =new ArrayList<>();
         for (int i = 0; i < note.size(); i++) {
             try {
-                specialDate = sdf.parse(note.get(i).getTestTime()).getTime();
+                specialDate = sdf.parse(note.get(i).getTesttime()).getTime();
                 betweenDate = (specialDate - nowDate) / (1000 * 60 * 60 * 24 *1.0);
             } catch (ParseException e) {
                 e.printStackTrace();

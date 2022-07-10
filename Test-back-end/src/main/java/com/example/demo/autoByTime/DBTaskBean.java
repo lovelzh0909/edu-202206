@@ -32,7 +32,7 @@ public class DBTaskBean {
 
 
         for (Notice notice : note) {
-            specialDate = LocalDateTime.parse(notice.getDeadline());
+            specialDate = LocalDateTime.parse(notice.getDeadLine());
             betweenDate = Duration.between(nowDate, specialDate).toDays();
             if (betweenDate < 0) {
                 log.info("delete[" + notice + "]");

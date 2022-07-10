@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.*;
 
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 
 import io.swagger.annotations.ApiModel;
@@ -26,65 +25,50 @@ import net.sf.jsqlparser.expression.DateTimeLiteralExpression.DateTime;
  */
 @Data
 @Accessors(chain = true)
-@TableName("paper")
+@TableName("papers")
 @ApiModel(value = "Papers对象", description = "")
 public class Papers implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("试卷编号")
-    @TableId(value = "paper_id", type = IdType.AUTO)
+    @TableId(value = "paperId", type = IdType.AUTO)
     private Integer paperId;
 
-    @ApiModelProperty("创建者电话")
-    @TableField("creater_phone")
-    private String createrphone;
+    @TableField("createrPhone")
+    private String Phone;
 
-    @ApiModelProperty("试卷包含的题目")
-    @TableField("paper_context")
+    @TableField("papercontext")
     private String papercontext;
 
     @ApiModelProperty("试卷使用状态（待发布，已发布，已完成，答题中，待批阅，批阅完成）")
-    @TableField("paper_status")
+    @TableField("paperstatus")
     private String paperstatus;
 
-    @ApiModelProperty("使用次数\r\n")
-    @TableField("paper_num")
+    @ApiModelProperty("使用次数	")
+    @TableField("papernum")
     private Integer papernum;
-
-    @ApiModelProperty("试卷名")
-    @TableField("source")
-    private String source;
-
-    @ApiModelProperty("试卷描述")
-    @TableField("description")
-    private String description;
-
-    @ApiModelProperty("试卷时长")
-    @TableField("total_time")
-    private String totaltime;
-
-    @ApiModelProperty("总分")
-    @TableField("total_score")
-    private Double totalscore;
 
     @ApiModelProperty("备注")
     @TableField("note")
     private String note;
 
-    @ApiModelProperty("创建时间")
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    @ApiModelProperty("试卷名")
+    @TableField("source")
+    private String source;
 
-    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
+    @TableField("totalScore")
+    private double totalScore;
 
-    @TableField("is_deleted")
-    @TableLogic
-    private Boolean isDeleted;
+    @TableField("totalTime")
+    private String totalTime;
 
-    @TableField("version")
+    @TableField("createtime")
+    private String createTime;
+    
+    @TableField("description")
+    private String description;
+
     @Version
-    private Integer version;
+    private int version;
 
 }

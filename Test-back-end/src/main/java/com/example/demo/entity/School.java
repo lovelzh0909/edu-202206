@@ -1,14 +1,8 @@
 package com.example.demo.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -20,8 +14,8 @@ import lombok.experimental.Accessors;
  * 
  * </p>
  *
- * @author ct
- * @since 2022-07-10
+ * @author 作者
+ * @since 2022-04-12
  */
 @Getter
 @Setter
@@ -33,7 +27,7 @@ public class School implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("学校编号")
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id" , type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty("学校名")
@@ -41,32 +35,18 @@ public class School implements Serializable {
     private String school;
 
     @ApiModelProperty("学生人数")
-    @TableField("student_num")
-    private Integer studentNum;
+    @TableField("studentnum")
+    private Integer studentnum;
 
     @ApiModelProperty("教师人数")
-    @TableField("teacher_num")
-    private Integer teacherNum;
+    @TableField("teachernum")
+    private Integer teachernum;
 
     @ApiModelProperty("电话号码")
     @TableField("telephone")
     private String telephone;
 
-    @ApiModelProperty("传真")
-    @TableField("fax")
-    private String fax;
-
-    @TableField("version")
     @Version
-    private Integer version;
+    private int version;
 
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
-
-    @TableField("is_deleted")
-    @TableLogic
-    private Boolean isDeleted;
 }

@@ -43,7 +43,7 @@ public class PapersController {
 
     @PostMapping("/save")
     public CommonReturnType saveQuestion(@RequestBody Papers p){
-        p.setCreateTime(LocalDateTime.now());
+        p.setCreateTime(String.valueOf(LocalDateTime.now()));
 //        if(p.getPhone()==null||p.getPapercontext()==null)
 //        return CommonReturnType.create(null,"信息不全");
         // if(p.getSource()==null){
@@ -53,7 +53,7 @@ public class PapersController {
         if(p.getPapernum()==null){
             p.setPapernum(0);
         }
-        p.setCreateTime(LocalDateTime.now());
+        p.setCreateTime(String.valueOf(LocalDateTime.now()));
         boolean b = papersService.save(p);
         if(!b)
         return CommonReturnType.create(null,"添加试卷失败");
@@ -61,7 +61,7 @@ public class PapersController {
     }
 
     @PostMapping("/update/{paperId}")
-    public CommonReturnType updatePaper(@RequestBody Papers p,@PathVariable("paper_id") Integer paperId){
+    public CommonReturnType updatePaper(@RequestBody Papers p,@PathVariable("paperId") Integer paperId){
         log.info("更新试卷数据");
         log.info("前端发送:"+paperId+":"+p);
         p.setPaperId(paperId);
@@ -139,9 +139,9 @@ public class PapersController {
     public CommonReturnType getallpaper(@RequestParam String phone,@PathVariable int page,@PathVariable int size) {
         Page <Papers> p = new Page<>(page, size);
         Page<Papers> page3=papersService.page(p, new QueryWrapper<Papers>()
-        .eq("creater_phone", phone));
+        .eq("createrPhone", phone));
         List<Papers> picture = papersService.list(new QueryWrapper<Papers>()
-        .eq("creater_phone", phone));
+        .eq("createrPhone", phone));
         page3.setSize(picture.size());
         if(picture.size()==0){
 
@@ -156,7 +156,7 @@ public class PapersController {
     public CommonReturnType removeQuestion(@RequestParam int paperId){
 
         boolean data=papersService.remove(new QueryWrapper<Papers>()
-                .eq("paper_id", paperId)
+                .eq("paperId", paperId)
         );
         if(!data){
             return CommonReturnType.create(null,"试卷已不存在");
@@ -191,7 +191,7 @@ public class PapersController {
             return CommonReturnType.create(null,"改试卷不存在或没有题目");
         }
         p.setPaperId(null);
-        p.setCreateTime(LocalDateTime.now());
+        p.setCreateTime(String.valueOf(LocalDateTime.now()));
         papersService.save(p);
         return CommonReturnType.create(p);
     }

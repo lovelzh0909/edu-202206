@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.demo.entity.StudentVideo;
+import com.example.demo.entity.Studentvideo;
 import com.example.demo.entity.vo.StudentVideoVO;
 
 
@@ -14,6 +14,6 @@ import com.example.demo.entity.vo.StudentVideoVO;
  * @author 作者
  * @since 2022-03-12
  */
-public interface StudentvideoService extends IService<StudentVideo> {
+public interface StudentvideoService extends IService<Studentvideo> {
     Page<StudentVideoVO> getStudentPicture(Page<StudentVideoVO> page, String phone);
 }

@@ -5,9 +5,8 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.Response.CommonReturnType;
-import com.example.demo.entity.TestRelStudent;
-import com.example.demo.service.TestRelStudentService;
-
+import com.example.demo.entity.Testrelstudent;
+import com.example.demo.service.TestrelstudentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +26,7 @@ public class TestrelstudentController {
 
 
     @Autowired
-    TestRelStudentService testrelstudentService;
+    TestrelstudentService testrelstudentService;
     /**
      * 通过测试id，获取参与该测试学生
      * @param t 测试id
@@ -40,8 +39,8 @@ public class TestrelstudentController {
         // if(q.getId()==null){
         //     q.setId(questionService.lastQuestionId()+1);
         // }
-        List<TestRelStudent> data = testrelstudentService.list(new QueryWrapper<TestRelStudent>()
-        .eq("test_id", t));
+        List<Testrelstudent> data = testrelstudentService.list(new QueryWrapper<Testrelstudent>()
+        .eq("testId", t));
         if(data.size()==0)
         return CommonReturnType.create(null,"没有任何该考试信息");
         return CommonReturnType.create(null);
@@ -59,8 +58,8 @@ public class TestrelstudentController {
         // if(q.getId()==null){
         //     q.setId(questionService.lastQuestionId()+1);
         // }
-        List<TestRelStudent> data = testrelstudentService.list(new QueryWrapper<TestRelStudent>()
-        .eq("student_phone", t));
+        List<Testrelstudent> data = testrelstudentService.list(new QueryWrapper<Testrelstudent>()
+        .eq("studentPhone", t));
         if(data.size()==0)
         return CommonReturnType.create(null,"没有任何该考试信息");
         return CommonReturnType.create(null);
@@ -75,13 +74,13 @@ public class TestrelstudentController {
      * @return 
      */
     @PostMapping("/save")
-    public CommonReturnType saveTest(@RequestBody TestRelStudent t ){
+    public CommonReturnType saveTest(@RequestBody Testrelstudent t ){
         // if(q.getStem()==null||q.getAnswer()==null||q.getCoursename()==null||q.getType()==null)
         // return CommonReturnType.create(null,"信息不全");
         // if(q.getId()==null){
         //     q.setId(questionService.lastQuestionId()+1);
         // }
-        boolean data = testrelstudentService.save(t);
+        Boolean data = testrelstudentService.save(t);
         if(data==false)
         return CommonReturnType.create(null,"添加失败");
         return CommonReturnType.create(null);
@@ -99,8 +98,8 @@ public class TestrelstudentController {
         // if(q.getId()==null){
         //     q.setId(questionService.lastQuestionId()+1);
         // }
-        boolean data = testrelstudentService.remove(new QueryWrapper<TestRelStudent>()
-        .eq("test_id", t));
+        Boolean data = testrelstudentService.remove(new QueryWrapper<Testrelstudent>()
+        .eq("testId", t));
         if(data==false)
         return CommonReturnType.create(null,"添加失败");
         return CommonReturnType.create(null);
@@ -112,15 +111,15 @@ public class TestrelstudentController {
      * @return 
      */
     @PostMapping("/removeStufromtest")
-    public CommonReturnType removeTest(@RequestBody TestRelStudent t ){
+    public CommonReturnType removeTest(@RequestBody Testrelstudent t ){
         // if(q.getStem()==null||q.getAnswer()==null||q.getCoursename()==null||q.getType()==null)
         // return CommonReturnType.create(null,"信息不全");
         // if(q.getId()==null){
         //     q.setId(questionService.lastQuestionId()+1);
         // }
-        boolean data = testrelstudentService.remove(new QueryWrapper<TestRelStudent>()
-        .eq("test_id", t.getTestId())
-        .eq("student_phone", t.getStudentPhone()));
+        Boolean data = testrelstudentService.remove(new QueryWrapper<Testrelstudent>()
+        .eq("testId", t.getTestId())
+        .eq("studentPhone", t.getStudentPhone()));
         if(data==false)
         return CommonReturnType.create(null,"添加失败");
         return CommonReturnType.create(null);
@@ -132,7 +131,7 @@ public class TestrelstudentController {
      * @return
      */
     @PostMapping("/saveall")
-    public CommonReturnType saveallTest(@RequestBody List<TestRelStudent> t ) {
+    public CommonReturnType saveallTest(@RequestBody List<Testrelstudent> t ) {
         // if(q.getStem()==null||q.getAnswer()==null||q.getCoursename()==null||q.getType()==null)
         // return CommonReturnType.create(null,"信息不全");
         // if(q.getId()==null){

@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.StudentTestFlag;
+import com.example.demo.entity.Studenttestflag;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.stereotype.Service;
 
 /**
  * <p>
@@ -12,6 +11,6 @@ import org.springframework.stereotype.Service;
  * @author 作者
  * @since 2022-04-08
  */
-public interface StudenttestflagService extends IService<StudentTestFlag> {
+public interface StudenttestflagService extends IService<Studenttestflag> {
 
 }

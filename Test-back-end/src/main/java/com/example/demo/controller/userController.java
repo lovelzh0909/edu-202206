@@ -3,10 +3,11 @@ package com.example.demo.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.Response.CommonReturnType;
 import com.example.demo.entity.School;
-import com.example.demo.entity.TeacherRelClass;
+import com.example.demo.entity.Teacherrelclass;
 import com.example.demo.entity.User;
 import com.example.demo.service.SchoolService;
 import com.example.demo.service.TeacherrelclassService;
+import com.example.demo.service.TestrelstudentService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class userController {
     @PostMapping("/logon")
     public CommonReturnType logon(@RequestBody User user) {
         //new CommonReturnType();
-        log.info("logon["+user.toString() +"]");
+
         User one = userService.getOne(
                 new QueryWrapper<User>()
                         .eq("phone", user.getPhone())
@@ -75,23 +76,24 @@ public class userController {
             return CommonReturnType.create(null,"用户名已存在");
         }else{
             if (Objects.equals(user.getRole(), "admin") || Objects.equals(user.getRole(), "teacher")){
-                TeacherRelClass teacherrelclass=new TeacherRelClass();
+                Teacherrelclass teacherrelclass=new Teacherrelclass();
                 teacherrelclass.setTeacher(user.getPhone());
                 teacherrelclass.setClassroom(user.getClassroom());
                 teacherrelclassService.save(teacherrelclass);
             }
-//            查找学生所在学校
+
+            userService.save(user);
+            //查找学生所在学校
             School school=schoolService.getOne(new QueryWrapper<School>().eq("school", user.getSchool()));
             long count = userService.count(new QueryWrapper<User>().eq("role", "student").eq("school", school.getSchool()));
             long count1 = userService.count(new QueryWrapper<User>().eq("role", "teacher").eq("school", school.getSchool()));
-            school.setStudentNum(Math.toIntExact(count));
-            school.setTeacherNum(Math.toIntExact(count1));
+            school.setStudentnum(Math.toIntExact(count));
+            school.setTeachernum(Math.toIntExact(count1));
             schoolService.updateById(school);
             log.info("--------------------logo-------------------");
             log.info("register["+ user +"]");
             assert false;
-            userService.save(user);
-            return CommonReturnType.create(null,"success");
+            return CommonReturnType.create(user.getRole(),"success");
         }
     }
     @PostMapping("/delete")
