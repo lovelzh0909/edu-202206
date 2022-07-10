@@ -116,10 +116,10 @@ public class MakePaper {
         for (Ruleqnum r : ruleqnum) {
             if(r.getTypeId()!=null){
             log.info("l"+r);
-            // questionnum.set(r.getTypeId(), (int) questionService.count(new QueryWrapper<Question> ().eq("type",1).eq("coursename", coursename)));
-            long l = questionService.count(new QueryWrapper<Question>().eq("quesTypeId", r.getTypeId())
-                    .eq("coursename", coursename)
-                    .in("pointId", rule.getpointIdList()));
+            // questionnum.set(r.getTypeId(), (int) questionService.count(new QueryWrapper<Question> ().eq("type",1).eq("course_name", coursename)));
+            long l = questionService.count(new QueryWrapper<Question>().eq("quesType_id", r.getTypeId())
+                    .eq("course_name", coursename)
+                    .in("point_id", rule.getpointIdList()));
             log.info("l"+l);
             log.info("l"+r.getTypeId());
             questionnnum[r.getTypeId()] =(int) l;
@@ -133,9 +133,9 @@ public class MakePaper {
             /***
              *   获取 该类型题目
              */
-            List<Question> qArray = questionService.list(new QueryWrapper<Question>().eq("quesTypeId", r.getTypeId())
-                    .eq("coursename", coursename)
-                    .in("pointId", rule.getpointIdList()));
+            List<Question> qArray = questionService.list(new QueryWrapper<Question>().eq("quesType_id", r.getTypeId())
+                    .eq("course_name", coursename)
+                    .in("point_id", rule.getpointIdList()));
             log.info("l:"+qArray+rule.getSingleNum()+r.getScore());
             list.addAll(randsquestion(qArray, r.getNum(), r.getScore()));
             }
@@ -191,7 +191,7 @@ public class MakePaper {
         log.info("添加题目(字符串ID形式)");
         log.info("前端发送："+paperId+": "+papercontext);
         //new CommonReturnType();
-        boolean b = papersService.update(new UpdateWrapper<Papers>().set("papercontext", papercontext).eq("paperId", paperId));
+        boolean b = papersService.update(new UpdateWrapper<Papers>().set("paper_context", papercontext).eq("paper_id", paperId));
         log.info("后端发送：success");
         if (b) {
             return CommonReturnType.create(null);
@@ -205,7 +205,7 @@ public class MakePaper {
         log.info("添加题目(list(question))");
         log.info("前端发送："+paperId+": "+l);
         //new CommonReturnType();
-        questionrelscoreService.remove(new QueryWrapper<Questionrelscore>().eq("paperId",paperId));
+        questionrelscoreService.remove(new QueryWrapper<Questionrelscore>().eq("paper_id",paperId));
         StringBuilder papercontext = new StringBuilder();
         for (Question q : l) {
             papercontext.append(q.getId());
@@ -220,7 +220,7 @@ public class MakePaper {
             }
             papercontext.append(",");
         }
-        boolean b = papersService.update(new UpdateWrapper<Papers>().set("papercontext", papercontext.toString()).eq("paperId", paperId));
+        boolean b = papersService.update(new UpdateWrapper<Papers>().set("paper_context", papercontext.toString()).eq("paper_id", paperId));
         log.info("后端发送：success");
         if (b) {
             return CommonReturnType.create(null);

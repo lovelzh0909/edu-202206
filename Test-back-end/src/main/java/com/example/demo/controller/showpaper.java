@@ -60,7 +60,7 @@ public class showpaper {
                 return CommonReturnType.create(null, "某题目已被删除");
             }
             question.setAnswer(null);
-            Questionrelscore questionrelscore = questionrelscoreService.getOne(new QueryWrapper<Questionrelscore>().eq("questionId", question.getId()).eq("paperId", p.getPaperId()));
+            Questionrelscore questionrelscore = questionrelscoreService.getOne(new QueryWrapper<Questionrelscore>().eq("question_id", question.getId()).eq("paper_id", p.getPaperId()));
             question.setScore(questionrelscore.getScore());
             q.add(question);
         }
@@ -79,23 +79,23 @@ public class showpaper {
         List<Question> q = new ArrayList<>();
         Map<String, Object> m = new HashMap<>();
         List<Testrelstudent> testrelstudent = testrelstudentService.list(new QueryWrapper<Testrelstudent>()
-                .eq("testId", testId).eq("status", 3));
+                .eq("test_id", testId).eq("status", 3));
         if (testrelstudent.size() == 0 || testrelstudent == null) {
-            testService.update(new UpdateWrapper<Test>().set("teststatus", 4).eq("testId", testId));
+            testService.update(new UpdateWrapper<Test>().set("teststatus", 4).eq("test_id", testId));
             return CommonReturnType.create(null, "没有待批阅学生");
         }
         for (String s : qs) {
-            m.put("studentphone", testrelstudent.get(0).getStudentPhone());
+            m.put("student_phone", testrelstudent.get(0).getStudentPhone());
             Question tempq = questionService.getById(Integer.valueOf(s));
             if(tempq==null){
                 return CommonReturnType.create(null, "该题目已经被删除");
             }
-            tempq.setScore(questionrelscoreService.getOne(new QueryWrapper<Questionrelscore>().eq("questionId", tempq.getId()).eq("paperId", t.getPaperId())).getScore());
+            tempq.setScore(questionrelscoreService.getOne(new QueryWrapper<Questionrelscore>().eq("question_id", tempq.getId()).eq("paper_id", t.getPaperId())).getScore());
             log.info(String.valueOf(tempq.getId()));
             PaperJustify paperJustify = paperJustifyService.getOne(new QueryWrapper<PaperJustify>()
-                    .eq("testId", testId)
-                    .eq("studentphone", testrelstudent.get(0).getStudentPhone())
-                    .eq("questionid", tempq.getId()));
+                    .eq("test_id", testId)
+                    .eq("student_phone", testrelstudent.get(0).getStudentPhone())
+                    .eq("question_id", tempq.getId()));
             if(paperJustify==null){
                 tempq.setGetScore(0.0);
                 tempq.setStudentAnswer("");
@@ -127,12 +127,12 @@ public class showpaper {
             if (question == null) {
                 return CommonReturnType.create(null, "某题目已被删除");
             }
-            Questionrelscore questionrelscore = questionrelscoreService.getOne(new QueryWrapper<Questionrelscore>().eq("questionId", question.getId()).eq("paperId", p.getPaperId()));
+            Questionrelscore questionrelscore = questionrelscoreService.getOne(new QueryWrapper<Questionrelscore>().eq("question_id", question.getId()).eq("paper_id", p.getPaperId()));
             question.setScore(questionrelscore.getScore());
             q.add(question);
         }
         for (Question qq : q) {
-            qq.setScore(questionrelscoreService.getOne(new QueryWrapper<Questionrelscore>().eq("questionId", qq.getId()).eq("paperId", paperId)).getScore());
+            qq.setScore(questionrelscoreService.getOne(new QueryWrapper<Questionrelscore>().eq("question_id", qq.getId()).eq("paper_id", paperId)).getScore());
         }
 
         if (q.size() == 0) {
@@ -156,16 +156,16 @@ public class showpaper {
     public CommonReturnType savescore(@RequestBody List<Question> questionList, @PathVariable String studentphone, @PathVariable Integer testId, @PathVariable String teacherPhone) {
         Double sum = 0.0;
         for (Question q : questionList) {
-            PaperJustify paperJustify = paperJustifyService.getOne(new QueryWrapper<PaperJustify>().eq("studentphone", studentphone).eq("testId", testId)
-                    .eq("questionId", q.getId()));
+            PaperJustify paperJustify = paperJustifyService.getOne(new QueryWrapper<PaperJustify>().eq("student_phone", studentphone).eq("test_id", testId)
+                    .eq("question_id", q.getId()));
             if (paperJustify == null) {
                 return CommonReturnType.create("没找到该学生某题目答案");
             }
             sum += paperJustify.setScore(q.getGetScore()).getScore();
         }
-//        Testrelstudent stu = testrelstudentService.getOne(new QueryWrapper<Testrelstudent>().eq("studentphone", studentphone).eq("testId", testId));
+//        Testrelstudent stu = testrelstudentService.getOne(new QueryWrapper<Testrelstudent>().eq("student_phone", studentphone).eq("test_id", testId));
 //        stu.setStatus(3);
-        testrelstudentService.update(new UpdateWrapper<Testrelstudent>().set("status", 4).eq("studentPhone", studentphone).eq("testId", testId));
+        testrelstudentService.update(new UpdateWrapper<Testrelstudent>().set("status", 4).eq("student_phone", studentphone).eq("test_id", testId));
         Test t = testService.getById(testId);
         Papers p = papersService.getById(t.getPaperId());
         if (p == null) {

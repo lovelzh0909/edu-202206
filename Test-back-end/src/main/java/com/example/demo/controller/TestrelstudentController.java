@@ -40,7 +40,7 @@ public class TestrelstudentController {
         //     q.setId(questionService.lastQuestionId()+1);
         // }
         List<Testrelstudent> data = testrelstudentService.list(new QueryWrapper<Testrelstudent>()
-        .eq("testId", t));
+        .eq("test_id", t));
         if(data.size()==0)
         return CommonReturnType.create(null,"没有任何该考试信息");
         return CommonReturnType.create(null);
@@ -59,7 +59,7 @@ public class TestrelstudentController {
         //     q.setId(questionService.lastQuestionId()+1);
         // }
         List<Testrelstudent> data = testrelstudentService.list(new QueryWrapper<Testrelstudent>()
-        .eq("studentPhone", t));
+        .eq("student_phone", t));
         if(data.size()==0)
         return CommonReturnType.create(null,"没有任何该考试信息");
         return CommonReturnType.create(null);
@@ -99,7 +99,7 @@ public class TestrelstudentController {
         //     q.setId(questionService.lastQuestionId()+1);
         // }
         Boolean data = testrelstudentService.remove(new QueryWrapper<Testrelstudent>()
-        .eq("testId", t));
+        .eq("test_id", t));
         if(data==false)
         return CommonReturnType.create(null,"添加失败");
         return CommonReturnType.create(null);
@@ -118,8 +118,8 @@ public class TestrelstudentController {
         //     q.setId(questionService.lastQuestionId()+1);
         // }
         Boolean data = testrelstudentService.remove(new QueryWrapper<Testrelstudent>()
-        .eq("testId", t.getTestId())
-        .eq("studentPhone", t.getStudentPhone()));
+        .eq("test_id", t.getTestId())
+        .eq("student_phone", t.getStudentPhone()));
         if(data==false)
         return CommonReturnType.create(null,"添加失败");
         return CommonReturnType.create(null);
