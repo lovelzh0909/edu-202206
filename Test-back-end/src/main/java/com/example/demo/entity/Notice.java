@@ -36,15 +36,26 @@ public class Notice implements Serializable {
     @TableField("notice")
     private String notice;
 
-    @TableField("deadLine")
+    @TableField("deadline")
     private String deadLine;
 
-    @TableField("creatTime")
+    @TableField("creat_time")
     private String creatTime;
 
     @Version
     private int version;
 
+    @ApiModelProperty("创建时间")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
 
+    @ApiModelProperty("更新时间")
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    @ApiModelProperty("是否删除")
+    @TableField("is_deleted")
+    @TableLogic
+    private Boolean isDeleted;
 
 }

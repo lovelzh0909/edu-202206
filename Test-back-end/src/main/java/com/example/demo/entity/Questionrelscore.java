@@ -3,6 +3,8 @@ package com.example.demo.entity;
 import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -20,7 +22,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("questionrelscore")
+@TableName("question_rel_score")
 @ApiModel(value = "Questionrelscore对象", description = "")
 public class Questionrelscore implements Serializable {
 
@@ -29,10 +31,10 @@ public class Questionrelscore implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @TableField("paperId")
+    @TableField("paper_id")
     private Integer paperId;
 
-    @TableField("questionId")
+    @TableField("question_id")
     private Integer questionId;
 
     @TableField("score")
@@ -40,5 +42,18 @@ public class Questionrelscore implements Serializable {
 
     @Version
     private int version;
+
+    @ApiModelProperty("创建时间")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    @ApiModelProperty("更新时间")
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    @ApiModelProperty("是否删除")
+    @TableField("is_deleted")
+    @TableLogic
+    private Boolean isDeleted;
 
 }

@@ -4,6 +4,8 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -33,20 +35,20 @@ public class PaperJustify implements Serializable {
     @JSONField(format="id")
     private Integer id;
 
-    @TableField("questionId")
-    @JSONField(format="questionId")
+    @TableField("question_idId")
+    @JSONField(format="question_id")
     private Integer questionId;
 
-    @JSONField(format="studentphone")
-    @TableField("studentphone")
+    @JSONField(format="student_phone")
+    @TableField("student_phone")
     private String studentphone;
 
     @JSONField(format="exmaineAnswer")
-    @TableField("studentAnswer")
+    @TableField("student_answer")
     private String exmaineAnswer;
 
     @JSONField(format="correctAnswer")
-    @TableField("correctAnswer")
+    @TableField("correct_answer")
     private String correctAnswer;
 
     @JSONField(format="score")
@@ -59,9 +61,21 @@ public class PaperJustify implements Serializable {
     private Double totalscore;
 
     @JSONField(format="testId")
-    @TableField("testId")
+    @TableField("test_id")
     private Integer testId;
 
     @Version
     private int version;
+    @ApiModelProperty("创建时间")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    @ApiModelProperty("更新时间")
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    @ApiModelProperty("是否删除")
+    @TableField("is_deleted")
+    @TableLogic
+    private Boolean isDeleted;
 }
