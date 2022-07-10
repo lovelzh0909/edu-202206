@@ -31,11 +31,11 @@ public class Test implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "testId", type = IdType.AUTO)
+    @TableId(value = "test_id", type = IdType.AUTO)
     private Integer testId;
 
-    @TableField("testsettingid")
-    private Integer test_setting_id;
+    @TableField("test_setting_id")
+    private Integer testsettingid;
 
     @TableField("room_id")
     private Integer roomId;
