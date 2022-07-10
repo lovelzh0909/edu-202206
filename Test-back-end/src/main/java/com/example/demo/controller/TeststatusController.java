@@ -47,7 +47,7 @@ public class TeststatusController {
         // if(q.getId()==null){
         //     q.setId(questionService.lastQuestionId()+1);
         // }
-        Teststatus data = teststatusService.getOne(new QueryWrapper<Teststatus>() .eq("testStatus", name));
+        Teststatus data = teststatusService.getOne(new QueryWrapper<Teststatus>() .eq("test_Status", name));
         if(data==null)
         return CommonReturnType.create(null,"没有该状态");
         return CommonReturnType.create(data);

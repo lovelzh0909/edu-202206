@@ -104,7 +104,7 @@ public class TestController {
                 List<User> l = userService.list(new QueryWrapper<User>().in("role", "teacher","admin"));
                 for (User u : l) {
                     int flag = 1;
-                    List<Test> testList = testService.list(new QueryWrapper<Test>().eq("invigilatorId", u.getPhone()));
+                    List<Test> testList = testService.list(new QueryWrapper<Test>().eq("invigilator_id", u.getPhone()));
                     log.info(testList.toString());
                     for (Test tes : testList) {
                         if (tes.getTestTime().substring(0, 10).equals(sub)) {
@@ -126,7 +126,7 @@ public class TestController {
             te.setInvigilatorId(userList.get(i).getPhone());
             te.setInvigilator(userList.get(i).getName());
             testService.save(te);
-            Papers papers =papersService.getOne(new QueryWrapper<Papers>().eq("paperId",te.getPaperId()));
+            Papers papers =papersService.getOne(new QueryWrapper<Papers>().eq("paper_id",te.getPaperId()));
             papers.setPapernum(papers.getPapernum()+1);
             papersService.updateById(papers);
             if (te.getRoomId() == null) {
@@ -171,7 +171,7 @@ public class TestController {
         log.info("获取考试列表（学生）");
         log.info("前端发送："+phone);
         Page<Test> page2 = new Page<>(page, size);
-        List<TestRelStudent> ts = testrelstudentService.list(new QueryWrapper<TestRelStudent>().eq("StudentPhone", phone));
+        List<TestRelStudent> ts = testrelstudentService.list(new QueryWrapper<TestRelStudent>().eq("student_phone", phone));
 //        List<Test> l=new ArrayList<Test>();
         List<Integer> ll = new ArrayList<>();
         for (TestRelStudent t : ts) {
@@ -182,9 +182,9 @@ public class TestController {
             return CommonReturnType.create(null, "没有该学生考试信息");
         }
 
-        Page<Test> page3 = testService.page(page2, new QueryWrapper<Test>().in("testId", ll));
+        Page<Test> page3 = testService.page(page2, new QueryWrapper<Test>().in("test_id", ll));
         for(Test test:page3.getRecords()){
-            TestRelStudent testrelstudent=testrelstudentService.getOne(new QueryWrapper<TestRelStudent>().eq("testId",test.getTestId()).eq("StudentPhone",phone));
+            TestRelStudent testrelstudent=testrelstudentService.getOne(new QueryWrapper<TestRelStudent>().eq("test_id",test.getTestId()).eq("student_phone",phone));
             LocalDateTime localDateTime=LocalDateTime.now();
             String s= test.getTestTime().substring(0,10)+"T"+test.getTestTime().substring(11);
             log.info("-----------log--------");
@@ -239,9 +239,9 @@ public class TestController {
     public CommonReturnType listteacherOne(@RequestBody Test te, @PathVariable("page") Integer page, @PathVariable("size") Integer size) {
         log.info("获取监考考试列表（教师）");
         log.info("前端发送："+te);
-        List<Test> l = testService.list(new QueryWrapper<Test>().eq("invigilatorId", te.getInvigilatorId()));
+        List<Test> l = testService.list(new QueryWrapper<Test>().eq("invigilator_id", te.getInvigilatorId()));
         Page<Test> page2 = new Page<>(page, size);
-        Page<Test> p = testService.page(page2, new QueryWrapper<Test>().eq("invigilatorId", te.getInvigilatorId()));
+        Page<Test> p = testService.page(page2, new QueryWrapper<Test>().eq("invigilator_id", te.getInvigilatorId()));
         for(Test test:p.getRecords()){
             LocalDateTime localDateTime=LocalDateTime.now();
             String s= test.getTestTime().substring(0,10)+"T"+test.getTestTime().substring(11);
@@ -268,7 +268,7 @@ public class TestController {
             return CommonReturnType.create("没有该老师相关考试信息");
         }
         return CommonReturnType.create(p);
-        // return testService.list(new QueryWrapper<Test>().eq("TeacherPhone", test.getTeacherPhone()));
+        // return testService.list(new QueryWrapper<Test>().eq("teacher_phone", test.getTeacherPhone()));
     }
 
     /**
@@ -279,9 +279,9 @@ public class TestController {
     public CommonReturnType listteacherOnereal(@RequestBody Test te, @PathVariable("page") Integer page, @PathVariable("size") Integer size) {
         log.info("获取考试列表（老师）");
         log.info("前端发送："+te);
-        List<Test> l = testService.list(new QueryWrapper<Test>().eq("TeacherPhone", te.getTeacherPhone()));
+        List<Test> l = testService.list(new QueryWrapper<Test>().eq("teacher_phone", te.getTeacherPhone()));
         Page<Test> page2 = new Page<>(page, size);
-        Page<Test> p = testService.page(page2, new QueryWrapper<Test>().eq("TeacherPhone", te.getTeacherPhone()));
+        Page<Test> p = testService.page(page2, new QueryWrapper<Test>().eq("teacher_phone", te.getTeacherPhone()));
         for(Test test:p.getRecords()){
             //现在时间
             LocalDateTime localDateTime=LocalDateTime.now();
@@ -310,7 +310,7 @@ public class TestController {
             return CommonReturnType.create("没有该老师相关考试信息");
         }
         return CommonReturnType.create(p);
-//         return testService.list(new QueryWrapper<Test>().eq("TeacherPhone", test.getTeacherPhone()));
+//         return testService.list(new QueryWrapper<Test>().eq("teacher_phone", test.getTeacherPhone()));
     }
 
     /**
@@ -322,10 +322,10 @@ public class TestController {
         log.info("删除考试");
         log.info("前端发送:"+id);
         boolean data = testService.remove(new QueryWrapper<Test>()
-                .eq("testId", id)
+                .eq("test_id", id)
         );
         boolean data2 =testrelstudentService.remove(new QueryWrapper<TestRelStudent>()
-                .eq("testId", id));
+                .eq("test_id", id));
         log.info("后端发送: success");
         if (!data) {
             return CommonReturnType.create(null,"没有该测试或已经被删除");

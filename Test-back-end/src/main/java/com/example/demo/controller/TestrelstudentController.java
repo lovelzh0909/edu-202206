@@ -41,7 +41,7 @@ public class TestrelstudentController {
         //     q.setId(questionService.lastQuestionId()+1);
         // }
         List<TestRelStudent> data = testrelstudentService.list(new QueryWrapper<TestRelStudent>()
-        .eq("testId", t));
+        .eq("test_id", t));
         if(data.size()==0)
         return CommonReturnType.create(null,"没有任何该考试信息");
         return CommonReturnType.create(null);
@@ -60,7 +60,7 @@ public class TestrelstudentController {
         //     q.setId(questionService.lastQuestionId()+1);
         // }
         List<TestRelStudent> data = testrelstudentService.list(new QueryWrapper<TestRelStudent>()
-        .eq("studentPhone", t));
+        .eq("student_phone", t));
         if(data.size()==0)
         return CommonReturnType.create(null,"没有任何该考试信息");
         return CommonReturnType.create(null);
@@ -81,7 +81,7 @@ public class TestrelstudentController {
         // if(q.getId()==null){
         //     q.setId(questionService.lastQuestionId()+1);
         // }
-        Boolean data = testrelstudentService.save(t);
+        boolean data = testrelstudentService.save(t);
         if(data==false)
         return CommonReturnType.create(null,"添加失败");
         return CommonReturnType.create(null);
@@ -99,8 +99,8 @@ public class TestrelstudentController {
         // if(q.getId()==null){
         //     q.setId(questionService.lastQuestionId()+1);
         // }
-        Boolean data = testrelstudentService.remove(new QueryWrapper<TestRelStudent>()
-        .eq("testId", t));
+        boolean data = testrelstudentService.remove(new QueryWrapper<TestRelStudent>()
+        .eq("test_id", t));
         if(data==false)
         return CommonReturnType.create(null,"添加失败");
         return CommonReturnType.create(null);
@@ -118,9 +118,9 @@ public class TestrelstudentController {
         // if(q.getId()==null){
         //     q.setId(questionService.lastQuestionId()+1);
         // }
-        Boolean data = testrelstudentService.remove(new QueryWrapper<TestRelStudent>()
-        .eq("testId", t.getTestId())
-        .eq("studentPhone", t.getStudentPhone()));
+        boolean data = testrelstudentService.remove(new QueryWrapper<TestRelStudent>()
+        .eq("test_id", t.getTestId())
+        .eq("student_phone", t.getStudentPhone()));
         if(data==false)
         return CommonReturnType.create(null,"添加失败");
         return CommonReturnType.create(null);
