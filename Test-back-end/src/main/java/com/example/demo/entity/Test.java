@@ -65,7 +65,7 @@ public class Test implements Serializable {
     @TableField("time_last")
     private Integer timelast;
 
-    @TableField("py_status")
+    @TableField("pystatus")
     private String pystatus;
 
     @TableField("teacher_phone")
