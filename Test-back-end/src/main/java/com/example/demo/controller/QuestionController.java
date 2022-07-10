@@ -127,9 +127,10 @@ public class QuestionController {
             // List<Question> data=questionService.list(new QueryWrapper<Question>().select("distinct coursename")
             //         .eq("user_id", phone) 
             // );
-            List<Map<String, Object>> m=
-             questionService.listMaps(new QueryWrapper<Question>().select("distinct course_name")
+            List<Question> m=
+             questionService.list(new QueryWrapper<Question>().select("distinct course_name")
             .eq("user_id", phone) );
+
             //确定这些问题的coursename 集合
             if(m==null){
                 return CommonReturnType.create(null,"没有该题目或已经被删除");
