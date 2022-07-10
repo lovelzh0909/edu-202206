@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -18,24 +17,28 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author 作者
- * @since 2022-03-28
+ * @since 2022-04-08
  */
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
-@TableName("teacher_rel_class")
-@ApiModel(value = "Teacherrelclass对象", description = "")
-public class Teacherrelclass implements Serializable {
+@TableName("question_rel_score")
+@ApiModel(value = "Questionrelscore对象", description = "")
+public class Questionrelscore implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @TableField("teacher")
-    private String teacher;
+    @TableField("paper_id")
+    private Integer paperId;
 
-    @TableField("classroom")
-    private String classroom;
+    @TableField("question_id")
+    private Integer questionId;
+
+    @TableField("score")
+    private Double score;
 
     @Version
     private int version;
@@ -52,6 +55,5 @@ public class Teacherrelclass implements Serializable {
     @TableField("is_deleted")
     @TableLogic
     private Boolean isDeleted;
-
 
 }

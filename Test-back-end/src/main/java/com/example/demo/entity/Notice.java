@@ -18,24 +18,29 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author 作者
- * @since 2022-03-28
+ * @since 2022-03-08
  */
 @Data
 @Accessors(chain = true)
-@TableName("teacher_rel_class")
-@ApiModel(value = "Teacherrelclass对象", description = "")
-public class Teacherrelclass implements Serializable {
+@TableName("notice")
+@ApiModel(value = "Notice对象", description = "")
+public class Notice implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @TableField("teacher")
-    private String teacher;
+    @TableField("phone")
+    private String phone;
 
-    @TableField("classroom")
-    private String classroom;
+    @TableField("notice")
+    private String notice;
+
+    @TableField("deadline")
+    private String deadLine;
+
+    @TableField("creat_time")
+    private String creatTime;
 
     @Version
     private int version;
@@ -52,6 +57,5 @@ public class Teacherrelclass implements Serializable {
     @TableField("is_deleted")
     @TableLogic
     private Boolean isDeleted;
-
 
 }

@@ -18,24 +18,24 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author 作者
- * @since 2022-03-28
+ * @since 2022-03-12
  */
 @Data
 @Accessors(chain = true)
-@TableName("teacher_rel_class")
-@ApiModel(value = "Teacherrelclass对象", description = "")
-public class Teacherrelclass implements Serializable {
+@TableName("student_video")
+@ApiModel(value = "Studentvideo对象", description = "")
+public class Studentvideo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    @TableField("phone")
+    private String phone;
 
-    @TableField("teacher")
-    private String teacher;
+    @TableField("video")
+    private String video;
 
-    @TableField("classroom")
-    private String classroom;
+    @TableField("time")
+    private LocalDateTime time;
 
     @Version
     private int version;
