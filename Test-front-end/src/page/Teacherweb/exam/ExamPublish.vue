@@ -93,7 +93,7 @@
           :data="tableData"
           :edit-config="{trigger: 'click', mode: 'cell', icon: 'fa fa-pencil', showStatus: true}">
           <vxe-column type="checkbox" width="60"></vxe-column>
-          <vxe-column type="seq" align="center" title="序号"width="60"></vxe-column>
+          <vxe-column type="seq" align="center" title="序号" width="60"></vxe-column>
           <vxe-column type="seq" align="center" title="考场序号" >
           
           </vxe-column>
@@ -167,7 +167,9 @@
 
 <script>
 import Axios from 'axios';
-
+import {postRequest} from "../utils/request";
+import {post1Request} from "../utils/request";
+import {post2Request} from "../utils/request";
 import VXETable from 'vxe-table'
 
 
@@ -179,17 +181,10 @@ import VXETable from 'vxe-table'
         const _this = this
         const students= [];
         // const studentsphone= [];
-        Axios({
-        url: 'http://localhost:8080/teacherrelclass/getClass/byTeacher/',
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params:{
-          teacherphone: localStorage.getItem('ms_username')
-
-        }
-      }).then(function (res) {
+        const data={
+        teacherphone: localStorage.getItem('ms_username')
+      }
+      post1Request('/teacherrelclass/getClass/byTeacher/',data).then(function (res) {
             console.log('aaaaa');
             console.log(res.data.data);
             _this.classname = res.data.data
@@ -208,18 +203,41 @@ import VXETable from 'vxe-table'
               t.push(classroom)
               
             })
+      //   Axios({
+      //   url: 'http://localhost:8080/teacherrelclass/getClass/byTeacher/',
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   params:{
+      //     teacherphone: localStorage.getItem('ms_username')
+
+      //   }
+      // }).then(function (res) {
+      //       console.log('aaaaa');
+      //       console.log(res.data.data);
+      //       _this.classname = res.data.data
+      //       let i =0;
+            
+      //       for(i=0;i<res.data.data.length;i++){
+      //         //  classname.push(res.data.data[i].classroom)
+      //          _this.classname[i]=res.data.data[i].classroom
+      //       }
+      //       console.log(_this.classname)
+      //       console.log('aaaaa');
+      //       // this.testList = res.data.data.records;
+      //     }).then(function(){
+      //       let t = []
+      //       _this.classname.forEach(function (classroom){
+      //         t.push(classroom)
+              
+      //       })
             // t = JSON.stringify(t)
            
-            
-            Axios({
-              // dataq = qs.stringify(classname),
-              url: 'http://localhost:8080/teacherrelclass/getStudent/byclass',
-              method: 'post',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-               data: t  
-            }).then(function(res1){
+             const data={
+        t
+      }
+      postRequest('/teacherrelclass/getStudent/byclass',data).then(function(res1){
               console.log('fffff')
               console.log(res1)
               console.log('fffff')
@@ -252,6 +270,47 @@ import VXETable from 'vxe-table'
             alert("服务器错误!稍后重试");
           };
           })
+        //     Axios({
+        //       // dataq = qs.stringify(classname),
+        //       url: 'http://localhost:8080/teacherrelclass/getStudent/byclass',
+        //       method: 'post',
+        //       headers: {
+        //         'Content-Type': 'application/json'
+        //       },
+        //        data: t  
+        //     }).then(function(res1){
+        //       console.log('fffff')
+        //       console.log(res1)
+        //       console.log('fffff')
+        //       console.log(students)
+        //       for(let i=0;i<res1.data.data.length;i++){
+        //       students.push(res1.data.data[i].name)
+        //       _this.studentsphone.push(res1.data.data[i].phone)
+        //       }
+              
+        //       console.log(_this.studentsphone)
+        //       const pinyin = []
+        //       students.forEach(function (name){
+        //         pinyin.push(name)
+        //       })
+        //       console.log('aaaa'+pinyin)
+              
+        //       students.forEach((name, phone) => {
+        //   leftdata.push({
+        //     label: name,
+        //     key: phone,
+        //     phone:phone,
+        //     pinyin: pinyin[phone],
+        //     disabled:false
+        //   });
+        // });
+        //     })
+        //     console.log('66666'),
+        //     function (err) {
+        //     console.log(err);
+        //     alert("服务器错误!稍后重试");
+        //   };
+        //   })
         return leftdata;
       };
       return {
@@ -408,17 +467,10 @@ import VXETable from 'vxe-table'
       getList(){
         const _this = this;
       // console.log(this.phoneNumber,this.passWord)
-      this.$axios({
-        url: `http://localhost:8080/papers/getteacherallpaper/${1}/${1}`,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params:{
-          phone: localStorage.getItem('ms_username')
-
-        }
-      }).then(function (res) {
+      const data={
+        t
+      }
+      post1Request(`/papers/getteacherallpaper/${1}/${1}`,data).then(function (res) {
 
             console.log(res);
             _this.testList = res.data.data.records;
@@ -428,6 +480,26 @@ import VXETable from 'vxe-table'
             console.log(err);
             alert("服务器错误!稍后重试");
           })
+      // this.$axios({
+      //   url: `http://localhost:8080/papers/getteacherallpaper/${1}/${1}`,
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   params:{
+      //     phone: localStorage.getItem('ms_username')
+
+      //   }
+      // }).then(function (res) {
+
+      //       console.log(res);
+      //       _this.testList = res.data.data.records;
+
+      //     },
+      //     function (err) {
+      //       console.log(err);
+      //       alert("服务器错误!稍后重试");
+      //     })
       },
       //得到穿梭框左边值的方法
       getLeftdata(){
@@ -519,19 +591,10 @@ import VXETable from 'vxe-table'
         // }
         // console.log(data1)
         console.log('aaa')
-        Axios({
-        url: 'http://localhost:8080/test/saveall',
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        // params: 
-        //   this.studentsphone
-        data: dataa
-          
-
-          
-      }).then(res => {
+        const data={
+          dataa
+        }
+        postRequest('/teacherrelclass/getStudent/byclass',data).then(res => {
           if(res.data.msg !== 'success') {
             alert(res.data.msg)
             }
@@ -546,6 +609,33 @@ import VXETable from 'vxe-table'
             console.log(err);
             alert("服务器错误!稍后重试");
           })
+      //   Axios({
+      //   url: 'http://localhost:8080/test/saveall',
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   // params: 
+      //   //   this.studentsphone
+      //   data: dataa
+          
+
+          
+      // }).then(res => {
+      //     if(res.data.msg !== 'success') {
+      //       alert(res.data.msg)
+      //       }
+      //     else 
+      //     {alert('提交成功')
+      //       // this.$router.go(-1)
+      //       // this.$router.push({path: '/test2/test2-1-3'})
+          
+      //     this.$router.go(0)}
+      //     },
+      //     function (err) {
+      //       console.log(err);
+      //       alert("服务器错误!稍后重试");
+      //     })
       console.log(this.newRow1)
       },
 

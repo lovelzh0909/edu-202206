@@ -76,6 +76,7 @@
 
 <script>
 import axios from "axios";
+import {postRequest} from "../utils/request";
 
 export default {
   data() {
@@ -143,19 +144,10 @@ export default {
     getTestlist() {
       const _this = this;
       // console.log(this.phoneNumber,this.passWord)
-      axios({
-        url: `http://localhost:8080/test/getTeachertest/${1}/${8}` ,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data:{
-          invigilatorId: localStorage.getItem('ms_username')
-
-        }
-      })
-
-          .then(
+      const data={
+       invigilatorId: localStorage.getItem('ms_username')
+      }
+      postRequest(`/test/getTeachertest/${1}/${8}`,data).then(
               function (res) {
                 console.log(res);
                 _this.tableData = res.data.data.records;
@@ -175,6 +167,38 @@ export default {
                 alert("服务器错误!稍后重试");
               }
           );
+      // axios({
+      //   url: `http://localhost:8080/test/getTeachertest/${1}/${8}` ,
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   data:{
+      //     invigilatorId: localStorage.getItem('ms_username')
+
+      //   }
+      // })
+
+      //     .then(
+      //         function (res) {
+      //           console.log(res);
+      //           _this.tableData = res.data.data.records;
+      //           for(let i=0;i<_this.tableData.length;i++){
+      //         // _this.student.push("teststatus:")
+      //         if(_this.tableData[i].teststatus == 1){
+      //           _this.tableData[i].status = '未开始'
+      //         }
+      //         else if(_this.tableData[i].teststatus == 2){
+      //           _this.tableData[i].status = '已开始'
+      //         }
+      //         else _this.tableData[i].status = '已结束'
+      //       }
+      //         },
+      //         function (err) {
+      //           console.log(err);
+      //           alert("服务器错误!稍后重试");
+      //         }
+      //     );
     },
 
 
