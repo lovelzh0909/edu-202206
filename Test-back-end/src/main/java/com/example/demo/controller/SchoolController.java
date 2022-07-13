@@ -25,21 +25,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/school")
 public class SchoolController {
-    @Autowired
     SchoolService schoolService;
-    @Autowired
     UserService userService;
 
+    @Autowired
+    public SchoolController(SchoolService schoolService, UserService userService) {
+        this.schoolService = schoolService;
+        this.userService = userService;
+    }
 
     @PostMapping("/save")
-    public CommonReturnType save(@RequestBody School school){
+    public CommonReturnType save(@RequestBody School school) {
         //查询user中学生人数
         QueryWrapper<User> studentwrapper = new QueryWrapper<>();
-        studentwrapper.eq("role","student").eq("school",school.getSchool());
+        studentwrapper.eq("role", "student").eq("school", school.getSchool());
         int countstudent = Math.toIntExact(userService.count(studentwrapper));
         //查询user中老师人数
         QueryWrapper<User> teacherwrapper = new QueryWrapper<>();
-        teacherwrapper.eq("role","teacher").eq("school",school.getSchool());
+        teacherwrapper.eq("role", "teacher").eq("school", school.getSchool());
         int countteacher = Math.toIntExact(userService.count(teacherwrapper));
         school.setStudentnum(countstudent);
         school.setTeachernum(countteacher);

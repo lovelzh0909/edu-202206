@@ -66,12 +66,14 @@ const http = {
     }
 }
 
+
 // let base="http://localhost:8080"
+
+const base="http://localhost:8080"
 export const postRequest=(_url,params)=>{
     return axios({
         method:'post',
-        url:'http://localhost:8080'+_url,
-        data:params
+        url:'http://localhost:8080/'+_url,
     })
 }
 export const post1Request=(_url,params)=>{

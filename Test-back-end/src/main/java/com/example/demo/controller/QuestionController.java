@@ -29,27 +29,32 @@ import java.util.Map;
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
-    @Autowired
     QuestionService questionService;
-    @Autowired
     QuestionrelscoreService questionrelscoreService;
+
+    @Autowired
+    public QuestionController(QuestionService questionService, QuestionrelscoreService questionrelscoreService) {
+        this.questionService = questionService;
+        this.questionrelscoreService = questionrelscoreService;
+    }
+
     //fillQuestion
     //添加成功
     @PostMapping("/save")
-    public CommonReturnType saveQuestion(@RequestBody Question q ){
-        if(q.getStem()==null||q.getAnswer()==null||q.getCoursename()==null)
-        return CommonReturnType.create(null,"信息不全");
-        if(q.getCreateTime()==null){
+    public CommonReturnType saveQuestion(@RequestBody Question q) {
+        if (q.getStem() == null || q.getAnswer() == null || q.getCoursename() == null)
+            return CommonReturnType.create(null, "信息不全");
+        if (q.getCreateTime() == null) {
             q.setCreateTime(LocalDateTime.now());
             //添加时间
             // Date d= new Date();
         }
-        if(q.getId()==null){
-            q.setId(questionService.lastQuestionId()+1);
+        if (q.getId() == null) {
+            q.setId(questionService.lastQuestionId() + 1);
         }
         boolean data = questionService.save(q);
-        if(!data)
-        return CommonReturnType.create(null,"添加失败");
+        if (!data)
+            return CommonReturnType.create(null, "添加失败");
         return CommonReturnType.create(null);
     }
     //多条题目保存

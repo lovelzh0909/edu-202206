@@ -24,14 +24,17 @@ import java.util.Objects;
 @Slf4j
 @RequestMapping("/user")
 public class userController {
-    @Autowired
     UserService userService;
-
-    @Autowired
     SchoolService schoolService;
+    TeacherrelclassService teacherrelclassService;
 
     @Autowired
-    TeacherrelclassService teacherrelclassService;
+    public userController(UserService userService, SchoolService schoolService, TeacherrelclassService teacherrelclassService) {
+        this.userService = userService;
+        this.schoolService = schoolService;
+        this.teacherrelclassService = teacherrelclassService;
+    }
+
     //@ResponseBody
 //    @GetMapping("/user")
 //    public User getById(@RequestParam("id") int id){

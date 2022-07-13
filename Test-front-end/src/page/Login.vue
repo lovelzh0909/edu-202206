@@ -53,6 +53,10 @@
 import  cryptoJSObj  from  '../utils/asc.js'
 import axios from "axios";
 import {postRequest} from "../utils/request";
+import  {loginTosystem}  from "../api/login.js";
+
+import { postRequest } from "../utils/request";
+
 export default {
   name: "Login",
   data() {
@@ -69,7 +73,7 @@ export default {
         phone: this.phoneNumber,
        password: cryptoJSObj.encryptFunc(this.passWord, '123456789GFEDCBA')  //密码加密
       }
-      postRequest('/user/logon',data).then(
+      postRequest('user/logon',data).then(
               function (res) {
                 console.log(res);
                 localStorage.setItem('ms_userrole',res.data.data);
@@ -96,10 +100,10 @@ export default {
                   alert("手机号或密码错误!");
                 }
               },
-              function (err) {
-                // console.log(err);
-                alert("服务器错误!稍后重试");
-              }
+              // function (err) {
+              //   // console.log(err);
+              //   alert("服务器错误!稍后重试");
+              // }
           );
       // loginTosystem(data).then(
       //         function (res) {

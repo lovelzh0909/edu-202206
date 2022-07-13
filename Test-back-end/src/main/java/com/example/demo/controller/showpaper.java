@@ -27,30 +27,35 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/showpaper")
 @Slf4j
 public class showpaper {
-    @Autowired
     PapersService papersService;
-    @Autowired
     QuestionService questionService;
-    @Autowired
     TestService testService;
-    @Autowired
     PaperJustifyService paperJustifyService;
-    @Autowired
     TestrelstudentService testrelstudentService;
-    @Autowired
     ScoreService scoreService;
-    @Autowired
     QuestionrelscoreService questionrelscoreService;
+
+    @Autowired
+    public showpaper(PapersService papersService, QuestionService questionService, TestService testService, PaperJustifyService paperJustifyService,
+                     TestrelstudentService testrelstudentService, ScoreService scoreService, QuestionrelscoreService questionrelscoreService) {
+        this.papersService = papersService;
+        this.questionService = questionService;
+        this.testService = testService;
+        this.paperJustifyService = paperJustifyService;
+        this.testrelstudentService = testrelstudentService;
+        this.scoreService = scoreService;
+        this.questionrelscoreService = questionrelscoreService;
+    }
 
     @PostMapping("/getQuestion/bytestId")
     public CommonReturnType getStudentvideo(@RequestParam Integer testId) {
         Test t = testService.getById(testId);
-        if(t==null){
-            return CommonReturnType.create(null,"没有该考试");
+        if (t == null) {
+            return CommonReturnType.create(null, "没有该考试");
         }
         Papers p = papersService.getById(t.getPaperId());
-        if(p==null){
-            return CommonReturnType.create(null,"没有该考试试卷");
+        if (p == null) {
+            return CommonReturnType.create(null, "没有该考试试卷");
         }
         List<String> qs = stringToList(p.getPapercontext());
         List<Question> q = new ArrayList<>();

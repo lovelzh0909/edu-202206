@@ -27,25 +27,29 @@ import javax.xml.transform.Result;
 @RequestMapping("/MakePaper")
 public class MakePaper {
     //    RuleService ruleService;
-    @Autowired
     QuestionService questionService;
-
-    @Autowired
     PapersService papersService;
-
-    @Autowired
     QuestionrelscoreService questionrelscoreService;
 
-    int typenum =20;
+    @Autowired
+    public MakePaper(QuestionService questionService, PapersService papersService, QuestionrelscoreService questionrelscoreService) {
+        this.questionService = questionService;
+        this.papersService = papersService;
+        this.questionrelscoreService = questionrelscoreService;
+    }
+
+    int typenum = 20;
+
     /**
      * 返回问题id
+     *
      * @param rule
      * @return
      */
     @PostMapping("/autoProblem")
     public CommonReturnType saveQuestion(@RequestBody Rule rule) {
         log.info("执行随机组卷");
-        log.info("前端发送："+rule);
+        log.info("前端发送：" + rule);
         List<Question> list = randpaper(rule);
         if (list==null||list.size() == 0)
             return CommonReturnType.create(null, "题目不足");
