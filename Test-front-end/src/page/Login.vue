@@ -52,7 +52,7 @@
 <script>
 import  cryptoJSObj  from  '../utils/asc.js'
 import axios from "axios";
-import { loginTosystem } from "../api/login";
+import  {loginTosystem}  from "../api/login.js";
 export default {
   name: "Login",
   data() {
