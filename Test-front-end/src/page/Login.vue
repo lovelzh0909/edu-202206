@@ -53,6 +53,9 @@
 import  cryptoJSObj  from  '../utils/asc.js'
 import axios from "axios";
 import  {loginTosystem}  from "../api/login.js";
+
+import { postRequest } from "../utils/request";
+
 export default {
   name: "Login",
   data() {
@@ -69,7 +72,7 @@ export default {
         phone: this.phoneNumber,
        password: cryptoJSObj.encryptFunc(this.passWord, '123456789GFEDCBA')  //密码加密
       }
-      loginTosystem(data).then(
+      postRequest('/user/logon',data).then(
               function (res) {
                 console.log(res);
                 localStorage.setItem('ms_userrole',res.data.data);
@@ -101,6 +104,38 @@ export default {
                 alert("服务器错误!稍后重试");
               }
           );
+      // loginTosystem(data).then(
+      //         function (res) {
+      //           console.log(res);
+      //           localStorage.setItem('ms_userrole',res.data.data);
+      //           localStorage.setItem('ms_username',_this.phoneNumber);
+      //           //根据后端返回的内容做出处理
+      //           // var commonReturn = JSON.parse(res.data.commonReturn);
+      //           if (res.data.status === 1) {
+
+      //             if(res.data.data === 'admin'){
+      //               // this.$router.push('/');
+
+      //               return _this.$router.push('/Whole3');
+      //             }
+      //             else if(res.data.data === 'teacher'){
+      //               // this.$router.push('/');
+      //               return _this.$router.push('/Whole2');
+      //             }
+      //             else if(res.data.data === 'student'){
+
+      //               return _this.$router.push('/Whole1');
+      //             }else alert("错误!")
+
+      //           } else {
+      //             alert("手机号或密码错误!");
+      //           }
+      //         },
+      //         function (err) {
+      //           // console.log(err);
+      //           alert("服务器错误!稍后重试");
+      //         }
+      //     );
     //   const _this = this;
     //   // console.log(this.phoneNumber,this.passWord)
     //   axios.post("http://localhost:8080/user/logon", {
