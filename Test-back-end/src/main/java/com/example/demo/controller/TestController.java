@@ -37,14 +37,18 @@ import java.util.Random;
 @RestController
 @RequestMapping("/test")
 public class TestController {
-    @Autowired
     TestService testService;
-    @Autowired
     TestrelstudentService testrelstudentService;
-    @Autowired
     UserService userService;
-    @Autowired
     PapersService papersService;
+
+    @Autowired
+    public TestController(TestService testService, TestrelstudentService testrelstudentService, UserService userService, PapersService papersService) {
+        this.testService = testService;
+        this.testrelstudentService = testrelstudentService;
+        this.userService = userService;
+        this.papersService = papersService;
+    }
 
     @PostMapping("/all")
     public CommonReturnType listAll() {
