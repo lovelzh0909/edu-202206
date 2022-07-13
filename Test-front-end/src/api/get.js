@@ -1,6 +1,6 @@
 import { http } from "../utils/request";
   export default{
-    testApi(datas) {
+    getType(datas) {
         return http.request({
           method: "get",
           url: "/sso/getAuthCode",

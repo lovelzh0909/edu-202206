@@ -13,7 +13,7 @@ import VueI18n from 'vue-i18n';
 import { messages } from './components/common/i18n';
 import './assets/css/main.css';
 import 'babel-polyfill';
-import api from './api/index';
+// import api from './api/index';
 
 import 'xe-utils'
 import VXETable from 'vxe-table'
@@ -27,7 +27,7 @@ VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
 Vue.prototype.$axios = axios;
-Vue.prototype.$api = api;
+// Vue.prototype.$api = api;
 Vue.use(VueResource);
 Vue.use(ElementUI);
 Vue.use(ViewUI);
