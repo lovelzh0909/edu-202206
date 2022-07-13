@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/showpaper")
 @Slf4j
-public class showpaper {
+public class showpaperController {
     PapersService papersService;
     QuestionService questionService;
     TestService testService;
@@ -36,8 +36,8 @@ public class showpaper {
     QuestionrelscoreService questionrelscoreService;
 
     @Autowired
-    public showpaper(PapersService papersService, QuestionService questionService, TestService testService, PaperJustifyService paperJustifyService,
-                     TestrelstudentService testrelstudentService, ScoreService scoreService, QuestionrelscoreService questionrelscoreService) {
+    public showpaperController(PapersService papersService, QuestionService questionService, TestService testService, PaperJustifyService paperJustifyService,
+                               TestrelstudentService testrelstudentService, ScoreService scoreService, QuestionrelscoreService questionrelscoreService) {
         this.papersService = papersService;
         this.questionService = questionService;
         this.testService = testService;

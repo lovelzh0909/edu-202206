@@ -21,18 +21,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.transform.Result;
 @Slf4j
 @RestController
 @RequestMapping("/MakePaper")
-public class MakePaper {
+public class MakePaperController {
     //    RuleService ruleService;
     QuestionService questionService;
     PapersService papersService;
     QuestionrelscoreService questionrelscoreService;
 
     @Autowired
-    public MakePaper(QuestionService questionService, PapersService papersService, QuestionrelscoreService questionrelscoreService) {
+    public MakePaperController(QuestionService questionService, PapersService papersService, QuestionrelscoreService questionrelscoreService) {
         this.questionService = questionService;
         this.papersService = papersService;
         this.questionrelscoreService = questionrelscoreService;
