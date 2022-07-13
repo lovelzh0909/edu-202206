@@ -58,7 +58,7 @@
           <el-table-column prop="note" label="备注" align="center" width="180"></el-table-column>
           <el-table-column fixed="right" label="操作"  width="360" align="center">
             <template slot-scope="scope">
-              <el-button @click="toPathaddexam(scope.row.paperId,scope.row.totalScore)" type="primary" size="small" circle>组卷</el-button>
+              <el-button @click="toPathtestpaper(scope.row.paperId,scope.row.totalScore)" type="primary" size="small" circle>组卷</el-button>
               <el-button @click="edit(scope.row.paperId)" type="success" size="small" circle>修改</el-button>
               <el-button @click="copy(scope.row.paperId)" type="info" size="small" circle>复制</el-button>
               <el-button @click="toLook(scope.row.paperId)" type="warning" size="small" circle>预览</el-button>
@@ -282,9 +282,9 @@ export default {
       this.$router.push({path: '/look-paper',query: {paperId: paperId}})
 
     },
-    toPathaddexam(paperId,totalScore) {
+    toPathtestpaper(paperId,totalScore) {
       this.$router.push({
-        path:'/addexam',
+        path:'/testpaper',
         query: {
           paperId: paperId,
           totalScore:totalScore

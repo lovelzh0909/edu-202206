@@ -8,11 +8,8 @@ import com.example.demo.entity.User;
 import com.example.demo.service.TeacherrelclassService;
 import com.example.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,10 +24,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/teacherrelclass")
 public class TeacherrelclassController {
+
+    private final TeacherrelclassService teacherrelclassService;
+    private final UserService userService;
+
     @Autowired
-    TeacherrelclassService teacherrelclassService;
-    @Autowired
-    UserService userService;
+    public TeacherrelclassController(TeacherrelclassService teacherrelclassService, UserService userService){
+        this.teacherrelclassService = teacherrelclassService;
+        this.userService = userService;
+    }
 
     /**
      * 根据教师手机获得班级名称
@@ -53,10 +55,6 @@ public class TeacherrelclassController {
 
         List<User> student = userService.list(new QueryWrapper<User>().in("classroom", t).ne("role", "teacher"));
         System.out.println(student);
-//        for (Teacherrelclass teacherrelclass : teacher) {
-//            list.add(userService.list(new QueryWrapper<User>().eq("class", teacherrelclass.getClassroom()))
-//            );
-//        }
         return CommonReturnType.create(student);
     }
 }

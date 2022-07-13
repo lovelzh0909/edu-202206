@@ -57,7 +57,7 @@
 <script>
 // import crudRoles from '@/api/system/role'
 // import crudExam from '@/api/exam/exam'
-import question from '@/components/addquestion/question'
+import question from '@/components/addquestion/Question'
 import axios from "axios";
 // import crudList from '@/api/exam/list'
 export default {

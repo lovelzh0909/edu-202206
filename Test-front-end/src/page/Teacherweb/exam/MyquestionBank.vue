@@ -41,7 +41,7 @@
       </ul>
       <ul class="paper" >
         <li class="item" style="border-radius: 15px" v-for="(item,index) in form" :key="index"><el-button icon="el-icon-close" @click="deleteRecord(item.coursename)" circle style="margin-left:300px;margin-top:-60px;"></el-button>
-          <h2  @click="toExamMsg(item.coursename)">{{item.coursename}}
+          <h2  @click="toQuestionBank(item.coursename)">{{item.coursename}}
           <el-divider></el-divider>
           <p class="name">介绍：{{item.coursename}}-题库</p>
           </h2>
@@ -238,18 +238,7 @@ export default {
       this.pagination.current = val
       this.getCourseInfo()
     },
-    //搜索试卷
-    search() {
-      this.$axios('http://47.103.94.131:8089/exams').then(res => {
-        if(res.data.code == 200) {
-          let allExam = res.data.data
-          let newPage = allExam.filter(item => {
-            return item.source.includes(this.key)
-          })
-          this.pagination.records = newPage
-        }
-      })
-    },
+    
     //跳转到试卷详情页
     toQuestionBank(coursename) {
       this.$router.push({path: '/QuestionBank', query: {coursename: coursename}})

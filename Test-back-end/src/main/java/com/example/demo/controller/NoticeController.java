@@ -40,14 +40,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/notice")
 public class NoticeController {
-    @Autowired
     NoticeService noticeService;
-    @Autowired
     TestService testService;
-    @Autowired
     TestrelstudentService testrelstudentService;
-    @Autowired
     UserService userService;
+
+    @Autowired
+    public NoticeController(NoticeService noticeService, TestService testService, TestrelstudentService testrelstudentService, UserService userService) {
+        this.noticeService = noticeService;
+        this.testService = testService;
+        this.testrelstudentService = testrelstudentService;
+        this.userService = userService;
+    }
 
 
     @PostMapping

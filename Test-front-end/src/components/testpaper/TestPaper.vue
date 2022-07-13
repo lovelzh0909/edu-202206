@@ -490,7 +490,7 @@ import VXETable from 'vxe-table'
         //当前的步骤
         curStep: 1,
         //组卷模式
-        makeModel: 1,
+        makeModel: 2,
         //添加考试题目信息(makeModel = 1的时候)
         addExamQuestion: [],
         //所有题库信息

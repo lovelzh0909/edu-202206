@@ -134,7 +134,7 @@
         <el-button v-if="type===2" type="success" @click.native="btnClick('readPaperUpper')">上一个</el-button>
         <el-button v-if="type===2" type="success" @click.native="btnClick('readPaperNext')">下一个</el-button>
       </div>
-      <div>
+      <!-- <div>
         <video style="margin-left:85%;"id="videoCamera" :width="videoWidth" :height="videoHeight"  autoplay></video>
         <canvas style="display:none;margin-left:85%;" id="canvasCamera" :width="videoWidth" :height="videoHeight"></canvas>
 
@@ -146,7 +146,7 @@
           <img :src="imgSrc" alt class="tx_img" width="100%" />
         </div>
         <p class="res_tips" style="margin-left:1500px;">抓拍效果展示</p> -->
-      </div>
+      </div> -->
       <!--    防切屏提示的弹窗-->
       <el-dialog title="提示" :visible.sync="tipsFlag" width="480px" class="commonDialog multi clickLight" center :close-on-click-modal="false" :close-on-press-escape= false>
         <div class="dialogTipsbox" v-if="tips===1">你还有试题未作答，确认要交卷？</div>
