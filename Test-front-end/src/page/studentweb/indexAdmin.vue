@@ -29,26 +29,26 @@ export default {
                 index: 'test1-1',
                 title: '考试列表'
             },
-            {
-                index: 'test1-2',
-                title: '考试通知'
-            },
-            {
-                index: 'test1-3',
-                title: '个人信息'
-            },
-            {
-                index: 'test1-4',
-                title: '错题集'
-            },
-            {
-                index: 'test1-5',
-                title: '成绩查询'
-            },
-            {
-                index: 'test1-6',
-                title: '修改密码'
-            }
+            // {
+            //     index: 'test1-2',
+            //     title: '考试通知'
+            // },
+            // {
+            //     index: 'test1-3',
+            //     title: '个人信息'
+            // },
+            // {
+            //     index: 'test1-4',
+            //     title: '错题集'
+            // },
+            // {
+            //     index: 'test1-5',
+            //     title: '成绩查询'
+            // },
+            // {
+            //     index: 'test1-6',
+            //     title: '修改密码'
+            // }
         ],
         }
     }

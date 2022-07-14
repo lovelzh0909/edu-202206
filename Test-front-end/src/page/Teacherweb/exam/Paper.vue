@@ -55,13 +55,13 @@
           <el-table-column prop="createTime" sortable label="创建时间" align="center" width="160"></el-table-column>
           <el-table-column prop="totalScore" label="总分" align="center" width="120"></el-table-column>
           <!-- <el-table-column prop="type" label="试卷类型" width="120"></el-table-column> -->
-          <el-table-column prop="note" label="备注" align="center" width="180"></el-table-column>
-          <el-table-column fixed="right" label="操作"  width="360" align="center">
+          <el-table-column prop="note" label="备注" align="center" width="360"></el-table-column>
+          <el-table-column fixed="right" label="操作"  width="180" align="center">
             <template slot-scope="scope">
               <el-button @click="toPathtestpaper(scope.row.paperId,scope.row.totalScore)" type="primary" size="small" circle>组卷</el-button>
-              <el-button @click="edit(scope.row.paperId)" type="success" size="small" circle>修改</el-button>
+              <!-- <el-button @click="edit(scope.row.paperId)" type="success" size="small" circle>修改</el-button>
               <el-button @click="copy(scope.row.paperId)" type="info" size="small" circle>复制</el-button>
-              <el-button @click="toLook(scope.row.paperId)" type="warning" size="small" circle>预览</el-button>
+              <el-button @click="toLook(scope.row.paperId)" type="warning" size="small" circle>预览</el-button> -->
               <el-button @click="deleteRecord(scope.row.paperId)" type="danger" size="small" circle>删除</el-button>
             </template>
           </el-table-column>

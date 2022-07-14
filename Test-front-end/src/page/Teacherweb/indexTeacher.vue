@@ -46,31 +46,31 @@ export default {
                         },
                     ]
                 },
-                {
-                    index: 'test22-2',
-                    title: '我的监考',
-                    nextItems: [
-                        {
-                            index: 'test22-2-1',
-                            title: '监考场次'
-                        },
+                // {
+                //     index: 'test22-2',
+                //     title: '我的监考',
+                //     nextItems: [
+                //         {
+                //             index: 'test22-2-1',
+                //             title: '监考场次'
+                //         },
                         
-                    ]
-                },
-                {
-                    index: 'test22-3',
-                    title: '个人设置',
-                    nextItems:[
-                        {
-                            index: 'test22-3-1',
-                            title: '个人信息'
-                        },
-                        {
-                            index: 'test22-3-2',
-                            title: '修改密码'
-                        },
-                    ]                    
-                },
+                //     ]
+                // },
+                // {
+                //     index: 'test22-3',
+                //     title: '个人设置',
+                //     nextItems:[
+                //         {
+                //             index: 'test22-3-1',
+                //             title: '个人信息'
+                //         },
+                //         {
+                //             index: 'test22-3-2',
+                //             title: '修改密码'
+                //         },
+                //     ]                    
+                // },
                 
             ]
         }

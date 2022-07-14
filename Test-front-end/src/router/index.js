@@ -63,14 +63,14 @@ export default new Router({
             children: [
                 {
                     path: '/dashboard1',
-                    component: () => import('../page/dashboard/DashboardStu.vue'),
+                    component: () => import('../page/dashboard/StudentHome.vue'),
                     meta: {
                         title: '首页'
                     },
                     redirect:'/Home1',     // 该配置是若点击选择父目录时，默认选中该父目录下的子路径页面
                         children: [{
                             path: '/Home1',
-                            component: () => import('../page/dashboard/DashboardStu.vue'),
+                            component: () => import('../page/dashboard/StudentHome.vue'),
                             meta: {
                                 title: '首页'
                             },
@@ -139,14 +139,14 @@ export default new Router({
             children: [
                 {
                     path: '/dashboard2',
-                    component: () => import('../page/dashboard/DashboardTea.vue'),
+                    component: () => import('../page/dashboard/TeacherHome.vue'),
                     meta: {
                         title: '首页'
                     },
                     redirect:'/Home2',     // 该配置是若点击选择父目录时，默认选中该父目录下的子路径页面
                         children: [{
                             path: '/Home2',
-                            component: () => import('../page/dashboard/DashboardTea.vue'),
+                            component: () => import('../page/dashboard/TeacherHome.vue'),
                             meta: {
                                 title: '首页'
                             },
@@ -245,14 +245,14 @@ export default new Router({
             children: [
                 {
                     path: '/dashboard3',
-                    component: () => import('../page/dashboard/DashboardAdm.vue'),
+                    component: () => import('../page/dashboard/AdminHome.vue'),
                     meta: {
                         title: '首页'
                     },
                     redirect:'/Home3',     // 该配置是若点击选择父目录时，默认选中该父目录下的子路径页面
                         children: [{
                             path: '/Home3',
-                            component: () => import('../page/dashboard/DashboardAdm.vue'),
+                            component: () => import('../page/dashboard/AdminHome.vue'),
                             meta: {
                                 title: '首页'
                             },
