@@ -248,7 +248,8 @@ export default {
               type: 'success'
             })
             this.form = res.data.data
-            this.$router.go(0),
+            this.getExamInfo()
+            
             this.$router.push({path: '/test2/test2-1-4'})
           }
         })

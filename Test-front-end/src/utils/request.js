@@ -68,9 +68,10 @@ const http = {
 
 const base="http://localhost:8080"
 export const postRequest=(_url,params)=>{
+    console.log(base,_url)
     return axios({
         method:'post',
-        url:'http://localhost:8080/'+_url,
+        url: `${base}/${_url}`,
         data:params
     })
 }
