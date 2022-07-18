@@ -2,10 +2,10 @@ package com.example.demo.GA;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.configure.SpringUtil;
-import com.example.demo.entity.Question;
-import com.example.demo.entity.Rule;
-import com.example.demo.service.QuestionService;
-import com.example.demo.service.impl.QuestionServiceImpl;
+import com.example.demo.QuestionManage.entity.Question;
+import com.example.demo.PaperManage.entity.Rule;
+import com.example.demo.QuestionManage.service.QuestionService;
+import com.example.demo.QuestionManage.service.impl.QuestionServiceImpl;
 import org.springframework.context.ApplicationContext;
 
 

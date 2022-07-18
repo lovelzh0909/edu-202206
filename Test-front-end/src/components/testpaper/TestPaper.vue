@@ -123,7 +123,7 @@
         <el-button @click="returnback()" type="primary" size="small" style="margin-top:30px">返回</el-button>
         <el-button style="float:right;margin-top: 10px" v-show="curStep === 1" type="primary" @click=" submitQuestion()">提交</el-button>
         </div> 
-        <!-- 随机组卷 -->
+                <!-- 随机组卷 -->
         <div v-show="makeModel === 1">
           <el-card class="box-card" >
           <div slot="header" class="clearfix">
@@ -245,6 +245,7 @@
           </el-form>
         </el-card>
         </div>
+        
       </el-card>
 
       

@@ -1,20 +1,15 @@
 package com.example.demo.autoByTime;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.demo.entity.Notice;
-import com.example.demo.entity.Test;
-import com.example.demo.service.NoticeService;
+import com.example.demo.Common.entity.Notice;
+import com.example.demo.Common.service.NoticeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.List;
 
 @Slf4j
