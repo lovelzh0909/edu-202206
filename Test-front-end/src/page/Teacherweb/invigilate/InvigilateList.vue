@@ -76,7 +76,7 @@
 
 <script>
 import axios from "axios";
-import {postRequest} from "../utils/request";
+import {postRequest} from "@/utils/request";
 
 export default {
   data() {
@@ -147,7 +147,7 @@ export default {
       const data={
        invigilatorId: localStorage.getItem('ms_username')
       }
-      postRequest(`/test/getTeachertest/${1}/${8}`,data).then(
+      postRequest(`test/getTeachertest/${1}/${8}`,data).then(
               function (res) {
                 console.log(res);
                 _this.tableData = res.data.data.records;

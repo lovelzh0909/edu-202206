@@ -167,9 +167,9 @@
 
 <script>
 import Axios from 'axios';
-import {postRequest} from "../utils/request";
-import {post1Request} from "../utils/request";
-import {post2Request} from "../utils/request";
+import {postRequest} from "@/utils/request";
+import {post1Request} from "@/utils/request";
+import {post2Request} from "@/utils/request";
 import VXETable from 'vxe-table'
 
 
@@ -184,7 +184,7 @@ import VXETable from 'vxe-table'
         const data={
         teacherphone: localStorage.getItem('ms_username')
       }
-      post1Request('/teacherrelclass/getClass/byTeacher/',data).then(function (res) {
+      post1Request('teacherrelclass/getClass/byTeacher/',data).then(function (res) {
             console.log('aaaaa');
             console.log(res.data.data);
             _this.classname = res.data.data
@@ -234,10 +234,8 @@ import VXETable from 'vxe-table'
       //       })
             // t = JSON.stringify(t)
            
-             const data={
-        t
-      }
-      postRequest('/teacherrelclass/getStudent/byclass',data).then(function(res1){
+             const data= t
+      postRequest('teacherrelclass/getStudent/byclass',data).then(function(res1){
               console.log('fffff')
               console.log(res1)
               console.log('fffff')
@@ -468,9 +466,9 @@ import VXETable from 'vxe-table'
         const _this = this;
       // console.log(this.phoneNumber,this.passWord)
       const data={
-        t
+        phone: localStorage.getItem('ms_username')
       }
-      post1Request(`/papers/getteacherallpaper/${1}/${1}`,data).then(function (res) {
+      post1Request(`papers/getteacherallpaper/${1}/${1}`,data).then(function (res) {
 
             console.log(res);
             _this.testList = res.data.data.records;
@@ -591,10 +589,8 @@ import VXETable from 'vxe-table'
         // }
         // console.log(data1)
         console.log('aaa')
-        const data={
-          dataa
-        }
-        postRequest('/teacherrelclass/getStudent/byclass',data).then(res => {
+        const data=dataa
+        postRequest('teacherrelclass/getStudent/byclass',data).then(res => {
           if(res.data.msg !== 'success') {
             alert(res.data.msg)
             }

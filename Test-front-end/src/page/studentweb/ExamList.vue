@@ -118,7 +118,7 @@
 <script>
 import axios from "axios";
 import * as jQuery from "xe-utils";
-import {post1Request} from "../utils/request";
+import {post1Request} from "@/utils/request";
 export default {
   name: '',
   data() {
@@ -241,7 +241,7 @@ export default {
       const data={
         phone: localStorage.getItem('ms_username')
       }
-      post1Request(`/test/getStudenttest/${1}/${6}`,data).then(function (res) {
+      post1Request(`test/getStudenttest/${1}/${6}`,data).then(function (res) {
 
             console.log(res);
             _this.pagination = res.data.data;

@@ -109,8 +109,8 @@
 
 <script>
 import axios from "axios";
-import {postRequest} from "../utils/request";
-import {post1Request} from "../utils/request";
+import {postRequest} from "@/utils/request";
+import {post1Request} from "@/utils/request";
 
 export default {
   data() {
@@ -151,7 +151,7 @@ export default {
       const data={
         id:testId,
       }
-      post1Request('/test/remove',data).then(res => {
+      post1Request('test/remove',data).then(res => {
           this.getTestlist()
         })
       }).catch(() => {
@@ -174,7 +174,7 @@ export default {
       const data={
         teacherphone: localStorage.getItem('ms_username')
       }
-      postRequest('/test/getTeachertest/distribute/${1}/${6}',data).then(
+      postRequest(`test/getTeachertest/distribute/${1}/${6}`,data).then(
               function (res) {
                 console.log(res);
                 _this.pagination = res.data.data;

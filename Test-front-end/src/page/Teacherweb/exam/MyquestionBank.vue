@@ -66,9 +66,9 @@
 
 <script>
 import axios from "axios";
-import {postRequest} from "../utils/request";
-import {post1Request} from "../utils/request";
-import {post2Request} from "../utils/request";
+import {postRequest} from "@/utils/request";
+import {post1Request} from "@/utils/request";
+import {post2Request} from "@/utils/request";
 export default {
   // name: 'myExam'
   data() {
@@ -146,7 +146,7 @@ export default {
         phone: localStorage.getItem('ms_username'),
             coursename
       }
-      post1Request('/question/remove/bycoursename',data).then(res => {
+      post1Request('question/remove/bycoursename',data).then(res => {
           console.log('coursename')
           console.log('phone')
           this.getCourseInfo()
@@ -188,7 +188,7 @@ export default {
          ...this.form,
             phone: localStorage.getItem('ms_username')
       }
-      post1Request('/question/coursename/save',data).then(res => {
+      post1Request('question/coursename/save',data).then(res => {
           if(res.data.msg != 'success'){
           alert(res.data.msg)
 
@@ -239,7 +239,7 @@ export default {
       const data={
          phone: localStorage.getItem('ms_username')
       }
-      post1Request('/question/getCoursename/',data).then(function(res) {
+      post1Request('question/getCoursename/',data).then(function(res) {
         
             console.log(res);
             _this.form = res.data.data
