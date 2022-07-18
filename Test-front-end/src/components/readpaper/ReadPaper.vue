@@ -279,7 +279,7 @@
               console.log(_this.dataSource);
               console.log(_this.dataSource.list);
             this.convertData();
-              this.studentphone = res.data.data2.studentphone
+              this.studentphone = res.data.data2.student_phone
               console.log(this.studentphone)
 
             },
@@ -294,7 +294,7 @@
       btnClick(type){
         // console.log(this.tempDataSource);
         switch (type) {
-          //交卷
+          
           
           //提交该份考卷阅卷结果
           case 'readPaper':
@@ -306,7 +306,7 @@
 
             // }
             console.log('aaa')
-            console.log(this.dataSource.list)
+            console.log(studentphone)
             let dataa = this.dataSource.list
             console.log(this.studentphone)
             let teacherphone = localStorage.getItem('ms_username')
