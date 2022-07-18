@@ -172,6 +172,7 @@ import VXETable from 'vxe-table'
 
 
   export default {
+    // inject: ['reload'],//引入刷新
     name: 'AddExam',
     data () {
       const generateData = _ => {
@@ -536,11 +537,13 @@ import VXETable from 'vxe-table'
             alert(res.data.msg)
             }
           else 
-          {alert('提交成功')
-            // this.$router.go(-1)
-            // this.$router.push({path: '/test2/test2-1-3'})
-          
-          this.$router.go(0)}
+          {
+            this.$message({
+              message: '数据添加成功',
+              type: 'success'
+            })
+            
+          }
           },
           function (err) {
             console.log(err);
