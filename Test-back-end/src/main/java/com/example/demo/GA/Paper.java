@@ -6,12 +6,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import com.example.demo.entity.Question;
-import com.example.demo.entity.Rule;
-
-import org.assertj.core.internal.Strings;
+import com.example.demo.QuestionManage.entity.Question;
+import com.example.demo.PaperManage.entity.Rule;
 
 /**
  * 遗传算法中的个体，即一套可能的试卷。对试卷进行编码，而不是对整个题库编码

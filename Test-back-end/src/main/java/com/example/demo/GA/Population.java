@@ -2,23 +2,15 @@ package com.example.demo.GA;
 
 
 import com.example.demo.configure.SpringUtil;
-import com.example.demo.configure.configure;
-import com.example.demo.entity.Rule;
+import com.example.demo.PaperManage.entity.Rule;
 
 
 
-import com.example.demo.service.QuestionService;
-import com.example.demo.service.impl.QuestionServiceImpl;
+import com.example.demo.QuestionManage.service.QuestionService;
+import com.example.demo.QuestionManage.service.impl.QuestionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.WebApplicationContext;
 
-import java.security.PrivateKey;
 import java.util.Random;
 
 /**

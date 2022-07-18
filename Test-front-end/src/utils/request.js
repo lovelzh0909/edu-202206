@@ -10,7 +10,7 @@ axios.defaults.baseURL = global.baseURL;
 //     // baseURL: '/', // api的base_Url
 //     // 后端的请求路径
 //     baseURL: 'http://localhost:8080', // api的base_Url
-//     timeout: 50000 // 请求超时时间
+//     timeout: 5000 // 请求超时时间
 // })
 
 // 请求拦截器
@@ -66,6 +66,9 @@ const http = {
     }
 }
 
+
+// let base="http://localhost:8080"
+
 const base="http://localhost:8080"
 export const postRequest=(_url,params)=>{
     console.log(base,_url)
@@ -73,6 +76,28 @@ export const postRequest=(_url,params)=>{
         method:'post',
         url: `${base}/${_url}`,
         data:params
+    })
+}
+export const post1Request=(_url,params)=>{
+    return axios({
+        method:'post',
+        url:'http://localhost:8080'+_url,
+        params:params
+    })
+}
+export const post2Request=(_url)=>{
+    return axios({
+        method:'post',
+        url:'http://localhost:8080'+_url,
+        headers: {
+            'Content-Type': 'application/json'
+          },
+    })
+}
+export const getRequest=(_url)=>{
+    return axios({
+        method:'get',
+        url:'http://localhost:8080'+_url,
     })
 }
 

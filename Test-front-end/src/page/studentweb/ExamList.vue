@@ -118,6 +118,7 @@
 <script>
 import axios from "axios";
 import * as jQuery from "xe-utils";
+import {post1Request} from "../utils/request";
 export default {
   name: '',
   data() {
@@ -174,17 +175,10 @@ export default {
     getTest() {
       const _this = this;
       // console.log(this.phoneNumber,this.passWord)
-      axios({
-        url: `http://localhost:8080/test/getStudenttest/${1}/${6}` ,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params:{
-          phone: localStorage.getItem('ms_username')
-
-        }
-      }).then(function (res) {
+      const data={
+        phone: localStorage.getItem('ms_username')
+      }
+      post1Request(`/test/getStudenttest/${1}/${6}`,data).then(function (res) {
 
             console.log(res);
             _this.pagination = res.data.data;
@@ -217,6 +211,49 @@ export default {
             console.log(err);
             alert("服务器错误!稍后重试");
           })
+      // axios({
+      //   url: `http://localhost:8080/test/getStudenttest/${1}/${6}` ,
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   params:{
+      //     phone: localStorage.getItem('ms_username')
+
+      //   }
+      // }).then(function (res) {
+
+      //       console.log(res);
+      //       _this.pagination = res.data.data;
+      //       console.log(_this.pagination.records[0].teststatus)
+      //       console.log(_this.student)
+      //       _this.pagination.total = _this.pagination.records.length
+      //       for(let i=0;i<_this.pagination.records.length;i++){
+      //         // _this.student.push("teststatus:")
+      //         if(_this.pagination.records[i].teststatus == 1){
+      //           _this.pagination.records[i].status = '未开始'
+      //         }
+      //         else if(_this.pagination.records[i].teststatus == 2){
+      //           _this.pagination.records[i].status = '已开始'
+      //         }
+      //         else if(_this.pagination.records[i].teststatus == 3){
+      //           _this.pagination.records[i].status = '已结束'
+      //         }
+      //         else if(_this.pagination.records[i].teststatus == 4){
+      //           _this.pagination.records[i].status = '已出成绩'
+      //         }
+      //       }
+            
+      //       console.log('aaaa')
+            
+      //       console.log(_this.pagination.records)
+
+
+      //     },
+      //     function (err) {
+      //       console.log(err);
+      //       alert("服务器错误!稍后重试");
+      //     })
      
     },
 

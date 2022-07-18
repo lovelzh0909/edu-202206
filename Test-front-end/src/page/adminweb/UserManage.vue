@@ -120,6 +120,10 @@
 </template>
 
 <script>
+import {postRequest} from "../utils/request";
+import {post1Request} from "../utils/request";
+import {post2Request} from "../utils/request";
+import {getRequest} from "../utils/request";
   export default {
     data() {
       return {
@@ -170,14 +174,7 @@
         //获取所有用户信息
         getInfo(){
             const _this = this
-            this.$axios({
-        url: 'http://localhost:8080/user/all' ,
-        method: 'get',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        
-      }).then(function (res) {
+            getRequest('/user/all').then(function (res) {
 
             _this.tableData = res.data.data
             
@@ -193,6 +190,29 @@
             console.log(err);
             alert("服务器错误!稍后重试");
           })
+        //     this.$axios({
+        // url: 'http://localhost:8080/user/all' ,
+        // method: 'get',
+        // headers: {
+        //   'Content-Type': 'application/json'
+        // },
+        
+      // }).then(function (res) {
+
+      //       _this.tableData = res.data.data
+            
+      //       console.log('aaaa')
+            
+      //       console.log(_this.tableData)
+      //       if(res.data.msg !='success'){
+      //           alert('服务器错误，请稍后重试')
+      //       }
+
+      //     },
+      //     function (err) {
+      //       console.log(err);
+      //       alert("服务器错误!稍后重试");
+      //     })
         },
         
       //编辑信息
@@ -207,11 +227,10 @@
       // let form = this.form  
       const _this = this
       this.dialogVisible = false
-      this.$axios({
-        url: 'http://localhost:8080/user/update',
-        method: 'post',
-        data: {...this.form}
-      }).then(res => {
+      const data={
+        ...this.form,
+      }
+      postRequest('/user/update',data).then(res => {
         if (res.data.code === 200) {
           this.$message({ //成功修改提示
             message: '更新成功',
@@ -220,6 +239,19 @@
         }
         this.getInfo()
       })
+      // this.$axios({
+      //   url: 'http://localhost:8080/user/update',
+      //   method: 'post',
+      //   data: {...this.form}
+      // }).then(res => {
+      //   if (res.data.code === 200) {
+      //     this.$message({ //成功修改提示
+      //       message: '更新成功',
+      //       type: 'success'
+      //     })
+      //   }
+      //   this.getInfo()
+      // })
     },
         //删除该条信息
     deleteRecord(phone) {
@@ -228,16 +260,25 @@
         cancelButtonText: '算了,留着',
         type: 'danger'
       }).then(() => { //确认删除
-        this.$axios({
-          url: 'http://localhost:8080/user/delete',
-          method: 'post',
-          data: {phone:phone},
-        }).then(res => {
+       const data={
+        phone:phone,
+      }
+      postRequest('/user/delete',data).then(res => {
           this.getInfo()
         })
       }).catch(() => {
 
       })
+      //   this.$axios({
+      //     url: 'http://localhost:8080/user/delete',
+      //     method: 'post',
+      //     data: {phone:phone},
+      //   }).then(res => {
+      //     this.getInfo()
+      //   })
+      // }).catch(() => {
+
+      // })
     },
       resetDateFilter() {
         this.$refs.filterTable.clearFilter('date');

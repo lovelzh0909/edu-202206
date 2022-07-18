@@ -66,7 +66,9 @@
 
 <script>
 import axios from "axios";
-
+import {postRequest} from "../utils/request";
+import {post1Request} from "../utils/request";
+import {post2Request} from "../utils/request";
 export default {
   // name: 'myExam'
   data() {
@@ -140,17 +142,11 @@ export default {
         cancelButtonText: '算了,留着',
 
       }).then(() => { //确认删除
-        this.$axios({
-          url: 'http://localhost:8080/question/remove/bycoursename',
-          method: 'post',
-
-          params: {
-
-            phone: localStorage.getItem('ms_username'),
+      const data={
+        phone: localStorage.getItem('ms_username'),
             coursename
-            },
-
-        }).then(res => {
+      }
+      post1Request('/question/remove/bycoursename',data).then(res => {
           console.log('coursename')
           console.log('phone')
           this.getCourseInfo()
@@ -158,6 +154,24 @@ export default {
       }).catch(() => {
 
       })
+      //   this.$axios({
+      //     url: 'http://localhost:8080/question/remove/bycoursename',
+      //     method: 'post',
+
+      //     params: {
+
+      //       phone: localStorage.getItem('ms_username'),
+      //       coursename
+      //       },
+
+      //   }).then(res => {
+      //     console.log('coursename')
+      //     console.log('phone')
+      //     this.getCourseInfo()
+      //   })
+      // }).catch(() => {
+
+      // })
     },
     //提交创建的题库
     onSubmit() {
@@ -170,14 +184,11 @@ export default {
       // this.form.examDate = examDate.substr(0,10)
       // this.$axios(`http://47.103.94.131:8089/examManagePaperId`).then(res => {
       //   this.form.paperId = res.data.data.paperId + 1 //实现paperId自增1
-        axios({
-          url: 'http://localhost:8080/question/coursename/save',
-          method: 'post',
-          params: {
-            ...this.form,
+       const data={
+         ...this.form,
             phone: localStorage.getItem('ms_username')
-          }
-        }).then(res => {
+      }
+      post1Request('/question/coursename/save',data).then(res => {
           if(res.data.msg != 'success'){
           alert(res.data.msg)
 
@@ -193,6 +204,29 @@ export default {
             // this.$router.push({path: '/test2/test2-1-3'})
           
         })
+        // axios({
+        //   url: 'http://localhost:8080/question/coursename/save',
+        //   method: 'post',
+        //   params: {
+        //     ...this.form,
+        //     phone: localStorage.getItem('ms_username')
+        //   }
+        // }).then(res => {
+        //   if(res.data.msg != 'success'){
+        //   alert(res.data.msg)
+
+        // }
+        // else{
+          
+        //     this.$message({
+        //       message: '数据添加成功',
+        //       type: 'success'
+        //     })
+        //     this.$router.go(0)
+        //     }
+        //     // this.$router.push({path: '/test2/test2-1-3'})
+          
+        // })
       // })
     },
     cancel() { //取消按钮
@@ -202,22 +236,32 @@ export default {
     getCourseInfo() { //分页查询所有试卷信息
       const _this = this;
       // this.$axios(`http://localhost:8080/papers/getteacherallpaper/${this.pagination.current}/${this.pagination.size}`).then(res => {
-      axios({
-        url: `http://localhost:8080/question/getCoursename/`,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params: {
-          phone: localStorage.getItem('ms_username')
-        }
-      }).then(function(res) {
+      const data={
+         phone: localStorage.getItem('ms_username')
+      }
+      post1Request('/question/getCoursename/',data).then(function(res) {
         
             console.log(res);
             _this.form = res.data.data
             _this.total = res.data.data.length
         
           },)
+      // axios({
+      //   url: `http://localhost:8080/question/getCoursename/`,
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   params: {
+      //     phone: localStorage.getItem('ms_username')
+      //   }
+      // }).then(function(res) {
+        
+      //       console.log(res);
+      //       _this.form = res.data.data
+      //       _this.total = res.data.data.length
+        
+      //     },)
     },
     // getCourseInfo() {
     //   this.$axios(`http://47.103.94.131:8089/exams/}`).then(res => {

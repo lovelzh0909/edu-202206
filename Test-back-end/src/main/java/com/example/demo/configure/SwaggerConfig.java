@@ -34,7 +34,8 @@ public class SwaggerConfig {
                 .useDefaultResponseMessages(true)
                 .forCodeGeneration(false)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.demo.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.demo"))
+//                .apis(RequestHandlerSelectors.basePackage("com.example.demo.PaperManage.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
