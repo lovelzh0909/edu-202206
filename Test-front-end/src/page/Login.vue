@@ -55,7 +55,6 @@ import axios from "axios";
 import {postRequest} from "../utils/request";
 import  {loginTosystem}  from "../api/login.js";
 
-import { postRequest } from "../utils/request";
 
 export default {
   name: "Login",
