@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 写对应接口全类名 -->
-<mapper namespace="com.example.demo.mapper.UserMapper">
-    <select id="findUser" parameterType="String" resultType="com.example.demo.entity.User">
+<mapper namespace="com.example.demo.UserManage.mapper.UserMapper">
+    <select id="findUser" parameterType="String" resultType="com.example.demo.UserManage.entity.User">
         select * from User where id = #{id}
     </select>
     <!-- <insert id="save" parameterType="com.southwind.entity.Account">

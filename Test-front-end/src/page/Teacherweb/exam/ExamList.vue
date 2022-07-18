@@ -109,6 +109,8 @@
 
 <script>
 import axios from "axios";
+import {postRequest} from "../utils/request";
+import {post1Request} from "../utils/request";
 
 export default {
   data() {
@@ -146,28 +148,33 @@ export default {
         cancelButtonText: '算了,留着',
         type: 'danger'
       }).then(() => { //确认删除
-        this.$axios({
-          url: 'http://localhost:8080/test/remove',
-          method: 'post',
-          params: {id:testId},
-        }).then(res => {
+      const data={
+        id:testId,
+      }
+      post1Request('/test/remove',data).then(res => {
           this.getTestlist()
         })
       }).catch(() => {
 
       })
+      //   this.$axios({
+      //     url: 'http://localhost:8080/test/remove',
+      //     method: 'post',
+      //     params: {id:testId},
+      //   }).then(res => {
+      //     this.getTestlist()
+      //   })
+      // }).catch(() => {
+
+      // })
     },
     getTestlist() {
       const _this = this;
       // console.log(this.phoneNumber,this.passWord)
-      axios
-          .post(`http://localhost:8080/test/getTeachertest/distribute/${1}/${6}`, {
-            //.post("https://10.135.242.126:8080/user/logon", {
-            //user: JSON.stringify({
-            teacherphone: localStorage.getItem('ms_username')
-            //}),
-          }) //具体phoneNumber和passWord对象跟后端对接口时改
-          .then(
+      const data={
+        teacherphone: localStorage.getItem('ms_username')
+      }
+      postRequest('/test/getTeachertest/distribute/${1}/${6}',data).then(
               function (res) {
                 console.log(res);
                 _this.pagination = res.data.data;
@@ -200,6 +207,46 @@ export default {
                 alert("服务器错误!稍后重试");
               }
           );
+      // axios
+      //     .post(`http://localhost:8080/test/getTeachertest/distribute/${1}/${6}`, {
+      //       //.post("https://10.135.242.126:8080/user/logon", {
+      //       //user: JSON.stringify({
+      //       teacherphone: localStorage.getItem('ms_username')
+      //       //}),
+      //     }) //具体phoneNumber和passWord对象跟后端对接口时改
+      //     .then(
+      //         function (res) {
+      //           console.log(res);
+      //           _this.pagination = res.data.data;
+      //           console.log(_this.pagination);
+      //           for(let i=0;i<_this.pagination.records.length;i++){
+      //         if(_this.pagination.records[i].note ==null)
+      //         _this.pagination.records[i].note = '无'
+      //         if(_this.pagination.records[i].teststatus == 1){
+      //           _this.pagination.records[i].status1 = '未开始'
+      //           _this.pagination.records[i].status2 = '考试未结束'
+      //         }
+      //         else if(_this.pagination.records[i].teststatus == 2){
+      //           _this.pagination.records[i].status1 = '考试中'
+      //           _this.pagination.records[i].status2 = '考试未结束'
+      //         }
+      //         else if(_this.pagination.records[i].teststatus == 3){
+      //           _this.pagination.records[i].status1 = '已结束'
+      //           _this.pagination.records[i].status2 = '待批阅'
+      //         }
+      //         else if(_this.pagination.records[i].teststatus == 4){
+      //           _this.pagination.records[i].status1 = '已结束'
+      //           _this.pagination.records[i].status2 = '已批阅完成'
+      //         }
+               
+      //       }
+      //       console.log(_this.pagination.records);
+      //         },
+      //         function (err) {
+      //           console.log(err);
+      //           alert("服务器错误!稍后重试");
+      //         }
+      //     );
     },
 
     // //合并行或者列的方法，返回数组[rowspan，colsapn]

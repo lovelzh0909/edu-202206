@@ -85,6 +85,7 @@
 
 import axios from "axios"
 import {registerApi as PopupManager} from "element-ui/src/utils/popup";
+import {postRequest} from "../utils/request";
 
 export default {
   name: 'Home',
@@ -127,8 +128,16 @@ export default {
     handleRegister () {
       let _this=this;
       // console.log('submit!');
-      axios.post("http://localhost:8080/user/register", {phone: this.loginForm.phone, classroom: this.loginForm.classroom, password: this.loginForm.password,studentId:this.loginForm.id,name:this.loginForm.name,school:this.loginForm.school,role:this.loginForm.type})//具体phoneNumber和passWord对象跟后端对接口时改
-          .then(
+      const data={
+        phone: this.loginForm.phone,
+        classroom: this.loginForm.classroom, 
+        password: this.loginForm.password,
+        studentId:this.loginForm.id,
+        name:this.loginForm.name,
+        school:this.loginForm.school,
+        role:this.loginForm.type
+      }
+      postRequest('/user/logon',data).then(
               function (response) {
                 console.log(response);
                 _this.$refs.loginForm.validate((valid) => {
@@ -148,6 +157,27 @@ export default {
                 alert('服务器错误!稍后重试')
               }
           );
+      // axios.post("http://localhost:8080/user/register", {phone: this.loginForm.phone, classroom: this.loginForm.classroom, password: this.loginForm.password,studentId:this.loginForm.id,name:this.loginForm.name,school:this.loginForm.school,role:this.loginForm.type})//具体phoneNumber和passWord对象跟后端对接口时改
+      //     .then(
+      //         function (response) {
+      //           console.log(response);
+      //           _this.$refs.loginForm.validate((valid) => {
+      //             if (valid) {
+
+      //               alert('注册成功');
+      //               // _this.$router.push({path:'/Login1'});
+      //               _this.$router.go(-1)
+      //             } else {
+      //               console.log('注册失败');
+      //               return false;
+      //             }
+      //           })
+      //         },
+      //         function (err) {
+      //           // console.log(err);
+      //           alert('服务器错误!稍后重试')
+      //         }
+      //     );
     },
   },
   mounted(){

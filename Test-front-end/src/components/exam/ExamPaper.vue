@@ -142,10 +142,10 @@
         <button style="left:00px;" @click="stopNavigator()">关闭摄像头</button> -->
         <p class="fail_tips" style="margin-left:85%;">考试途中会有随机抓拍，请考生尽量正脸面向摄像头</p>
         <!-- 给外面盒子设置宽高，可以限制拍照图片的大小位置范围 -->
-        <!-- <div class="result_img" style="margin-left:85%;">
+        <div class="result_img" style="margin-left:85%;">
           <img :src="imgSrc" alt class="tx_img" width="100%" />
         </div>
-        <p class="res_tips" style="margin-left:1500px;">抓拍效果展示</p> -->
+        <p class="res_tips" style="margin-left:1500px;">抓拍效果展示</p>
       </div> -->
       <!--    防切屏提示的弹窗-->
       <el-dialog title="提示" :visible.sync="tipsFlag" width="480px" class="commonDialog multi clickLight" center :close-on-click-modal="false" :close-on-press-escape= false>

@@ -46,6 +46,27 @@ export default new Router({
                 title: '添加题目到题库页面'
             }
         },
+        {
+            path: '/yuejuan-paper',
+            component:() => import('../components/readpaper/ReadPaper.vue'),
+            meta: {
+                title: '阅卷页面'
+            }
+        },
+        {
+            path: '/look-paper',
+            component:() => import('../components/lookpaper/LookPaper.vue'),
+            meta: {
+                title: '预览试卷页面'
+            }
+        },
+        {
+            path: '/test22-2-2-1',
+            component:()=>import('../components/invigilate/InvigilateMsg.vue'),
+            meta: {
+                title:'监考状况'
+            }
+        },
 
 
         
@@ -63,14 +84,14 @@ export default new Router({
             children: [
                 {
                     path: '/dashboard1',
-                    component: () => import('../page/dashboard/DashboardStu.vue'),
+                    component: () => import('../page/dashboard/StudentHome.vue'),
                     meta: {
                         title: '首页'
                     },
                     redirect:'/Home1',     // 该配置是若点击选择父目录时，默认选中该父目录下的子路径页面
                         children: [{
                             path: '/Home1',
-                            component: () => import('../page/dashboard/DashboardStu.vue'),
+                            component: () => import('../page/dashboard/StudentHome.vue'),
                             meta: {
                                 title: '首页'
                             },
@@ -94,6 +115,20 @@ export default new Router({
                                 component: () => import('../page/studentweb/ExamList.vue'),
                                 meta: {
                                     title: '考试列表'
+                                },
+                            },
+                            {
+                                path: 'test11-2',
+                                component: () => import('../page/studentweb/ExamReport.vue'),
+                                meta: {
+                                    title: '考试通知'
+                                },
+                            },
+                            {
+                                path: 'test11-3',
+                                component: () => import('../page/studentweb/SelfInfo.vue'),
+                                meta: {
+                                    title: '个人信息'
                                 },
                             },
                             
@@ -139,14 +174,14 @@ export default new Router({
             children: [
                 {
                     path: '/dashboard2',
-                    component: () => import('../page/dashboard/DashboardTea.vue'),
+                    component: () => import('../page/dashboard/TeacherHome.vue'),
                     meta: {
                         title: '首页'
                     },
                     redirect:'/Home2',     // 该配置是若点击选择父目录时，默认选中该父目录下的子路径页面
                         children: [{
                             path: '/Home2',
-                            component: () => import('../page/dashboard/DashboardTea.vue'),
+                            component: () => import('../page/dashboard/TeacherHome.vue'),
                             meta: {
                                 title: '首页'
                             },
@@ -204,6 +239,14 @@ export default new Router({
                                     title: '监考场次'
                                 }
                              },
+
+                             {
+                                path: 'test22-3-1',
+                                component: () => import('../page/teacherweb/_setting/SelfInfo.vue'),
+                                meta: {
+                                    title: '个人信息'
+                                }
+                             },
                              
                              
                          ]
@@ -245,14 +288,14 @@ export default new Router({
             children: [
                 {
                     path: '/dashboard3',
-                    component: () => import('../page/dashboard/DashboardAdm.vue'),
+                    component: () => import('../page/dashboard/AdminHome.vue'),
                     meta: {
                         title: '首页'
                     },
                     redirect:'/Home3',     // 该配置是若点击选择父目录时，默认选中该父目录下的子路径页面
                         children: [{
                             path: '/Home3',
-                            component: () => import('../page/dashboard/DashboardAdm.vue'),
+                            component: () => import('../page/dashboard/AdminHome.vue'),
                             meta: {
                                 title: '首页'
                             },

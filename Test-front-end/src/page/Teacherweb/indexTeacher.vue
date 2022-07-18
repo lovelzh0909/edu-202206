@@ -40,10 +40,10 @@ export default {
                             index: 'test22-1-4',
                             title: '试卷库'
                         },
-                        {
-                            index: 'test22-1-5',
-                            title: '成绩管理'
-                        },
+                        // {
+                        //     index: 'test22-1-5',
+                        //     title: '成绩管理'
+                        // },
                     ]
                 },
                 {
@@ -51,7 +51,7 @@ export default {
                     title: '我的监考',
                     nextItems: [
                         {
-                            index: 'test22-2-1',
+                            index: 'test22-2-2',
                             title: '监考场次'
                         },
                         
@@ -65,10 +65,10 @@ export default {
                             index: 'test22-3-1',
                             title: '个人信息'
                         },
-                        {
-                            index: 'test22-3-2',
-                            title: '修改密码'
-                        },
+                        // {
+                        //     index: 'test22-3-2',
+                        //     title: '修改密码'
+                        // },
                     ]                    
                 },
                 

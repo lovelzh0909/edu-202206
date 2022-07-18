@@ -47,22 +47,17 @@
           <el-table-column prop="paperId" sortable align="center" label="试卷id" width="90"></el-table-column>
           <el-table-column prop="source" label="试卷名称" align="center" width="150"></el-table-column>
           <el-table-column prop="description" label="试卷介绍" align="center" width="150"></el-table-column>
-          <!-- <el-table-column prop="institute" label="所属学院" width="120"></el-table-column>
-          <el-table-column prop="major" label="所属专业" width="120"></el-table-column>
-          <el-table-column prop="grade" label="年级" width="100"></el-table-column> -->
-          <!-- <el-table-column prop="examDate" label="考试日期" width="120"></el-table-column> -->
           <el-table-column prop="totalTime" label="持续时间(min)" align="center" width="120"></el-table-column>
           <el-table-column prop="createTime" sortable label="创建时间" align="center" width="160"></el-table-column>
           <el-table-column prop="totalScore" label="总分" align="center" width="120"></el-table-column>
-          <!-- <el-table-column prop="type" label="试卷类型" width="120"></el-table-column> -->
-          <el-table-column prop="note" label="备注" align="center" width="180"></el-table-column>
-          <el-table-column fixed="right" label="操作"  width="360" align="center">
+          <el-table-column prop="note" label="备注" align="center" width="360"></el-table-column>
+          <el-table-column fixed="right" label="操作"  width="180" align="center">
             <template slot-scope="scope">
               <el-button @click="toPathtestpaper(scope.row.paperId,scope.row.totalScore)" type="primary" size="small" circle>组卷</el-button>
-              <el-button @click="edit(scope.row.paperId)" type="success" size="small" circle>修改</el-button>
-              <el-button @click="copy(scope.row.paperId)" type="info" size="small" circle>复制</el-button>
               <el-button @click="toLook(scope.row.paperId)" type="warning" size="small" circle>预览</el-button>
               <el-button @click="deleteRecord(scope.row.paperId)" type="danger" size="small" circle>删除</el-button>
+         <!-- <el-button @click="edit(scope.row.paperId)" type="success" size="small" circle>修改</el-button>
+              <el-button @click="copy(scope.row.paperId)" type="info" size="small" circle>复制</el-button> -->
             </template>
           </el-table-column>
         </el-table>
@@ -139,7 +134,8 @@
 <script>
 
 import axios from "axios";
-
+import {postRequest} from "../utils/request";
+import {post1Request} from "../utils/request";
 export default {
   data() {
     return {
@@ -234,24 +230,40 @@ export default {
       // this.$axios(`http://47.103.94.131:8089/examManagePaperId`).then(res => {
       //   this.form.paperId = res.data.data.paperId + 1 //实现paperId自增1
         const _this = this
-        this.$axios({
-          url: 'http://localhost:8080/papers/save',
-          method: 'post',
-          data: {
-            ..._this.form,
+         const data={
+         ..._this.form,
             phone: localStorage.getItem('ms_username')
-          }
-        }).then(res => {
+      }
+      postRequest('/papers/save',data).then(res => {
           if (res.data.msg === 'success') {
             this.$message({
               message: '数据添加成功',
               type: 'success'
             })
             this.form = res.data.data
-            this.$router.go(0),
+            this.getExamInfo()
+            
             this.$router.push({path: '/test2/test2-1-4'})
           }
         })
+        // this.$axios({
+        //   url: 'http://localhost:8080/papers/save',
+        //   method: 'post',
+        //   data: {
+        //     ..._this.form,
+        //     phone: localStorage.getItem('ms_username')
+        //   }
+        // }).then(res => {
+        //   if (res.data.msg === 'success') {
+        //     this.$message({
+        //       message: '数据添加成功',
+        //       type: 'success'
+        //     })
+        //     this.form = res.data.data
+        //     this.$router.go(0),
+        //     this.$router.push({path: '/test2/test2-1-4'})
+        //   }
+        // })
 
      },
     cancel() { //取消按钮
@@ -260,17 +272,27 @@ export default {
 
     //复制试卷
     copy(paperId){
-       this.$axios({
-        url: 'http://localhost:8080/papers/copy',
-        method: 'post',
-        params:{paperId:paperId}
-      }).then(res => {
+       const data={
+         paperId:paperId
+      }
+      post1Request('/papers/copy',data).then(res => {
         if (res.data.msg === 'success') {
           alert('复制成功，即将刷新页面')
           this.$router.go(0)
         }
         
       })
+      //  this.$axios({
+      //   url: 'http://localhost:8080/papers/copy',
+      //   method: 'post',
+      //   params:{paperId:paperId}
+      // }).then(res => {
+      //   if (res.data.msg === 'success') {
+      //     alert('复制成功，即将刷新页面')
+      //     this.$router.go(0)
+      //   }
+        
+      // })
     },
     edit(paperId) { //编辑试卷
       this.dialogVisible = true
@@ -304,15 +326,11 @@ export default {
     submit() { //提交修改后的试卷信息
 
       this.dialogVisible = false
-      this.$axios({
-        url: `http://localhost:8080/papers/update/${localStorage.getItem('paperId')}`,
-        method: 'post',
-        data: {
+      const data={
           phone: localStorage.getItem('ms_username'),
           ...this.form,
-
-        }
-      }).then(res => {
+      }
+      postRequest(`/papers/update/${localStorage.getItem('paperId')}`,data).then(res => {
         if (res.data.code === 200) {
           this.$message({ //成功修改提示
             message: '更新成功',
@@ -321,6 +339,23 @@ export default {
         }
         this.getExamInfo()
       })
+      // this.$axios({
+      //   url: `http://localhost:8080/papers/update/${localStorage.getItem('paperId')}`,
+      //   method: 'post',
+      //   data: {
+      //     phone: localStorage.getItem('ms_username'),
+      //     ...this.form,
+
+      //   }
+      // }).then(res => {
+      //   if (res.data.code === 200) {
+      //     this.$message({ //成功修改提示
+      //       message: '更新成功',
+      //       type: 'success'
+      //     })
+      //   }
+      //   this.getExamInfo()
+      // })
     },
     deleteRecord(paperId) {
       this.$confirm("确定删除该记录吗,该操作不可逆！！！", "删除提示", {
@@ -328,30 +363,33 @@ export default {
         cancelButtonText: '算了,留着',
         type: 'danger'
       }).then(() => { //确认删除
-        this.$axios({
-          url: 'http://localhost:8080/papers/remove',
-          method: 'post',
-          params: {paperId},
-        }).then(res => {
+      const data={
+          paperId
+      }
+      post1Request('/papers/remove',data).then(res => {
           this.getExamInfo()
         })
       }).catch(() => {
 
       })
+      //   this.$axios({
+      //     url: 'http://localhost:8080/papers/remove',
+      //     method: 'post',
+      //     params: {paperId},
+      //   }).then(res => {
+      //     this.getExamInfo()
+      //   })
+      // }).catch(() => {
+
+      // })
     },
     getExamInfo() { //分页查询所有试卷信息
       const _this = this;
       // this.$axios(`http://localhost:8080/papers/getteacherallpaper/${this.pagination.current}/${this.pagination.size}`).then(res => {
-      axios({
-        url: `http://localhost:8080/papers/getteacherallpaper/${this.pagination.current}/${this.pagination.size}`,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params: {
+       const data={
           phone: localStorage.getItem('ms_username')
-        }
-      }).then(function(res) {
+      }
+      post1Request(`/papers/getteacherallpaper/${this.pagination.current}/${this.pagination.size}`,data).then(function(res) {
             console.log(res);
             _this.pagination = res.data.data
             console.log(_this.pagination.records);
@@ -361,6 +399,25 @@ export default {
             console.log(err);
             alert("服务器错误!稍后重试");
           })
+      // axios({
+      //   url: `http://localhost:8080/papers/getteacherallpaper/${this.pagination.current}/${this.pagination.size}`,
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   params: {
+      //     phone: localStorage.getItem('ms_username')
+      //   }
+      // }).then(function(res) {
+      //       console.log(res);
+      //       _this.pagination = res.data.data
+      //       console.log(_this.pagination.records);
+      //       _this.pagination.total = _this.pagination.records.length
+      //     },
+      //     function (err) {
+      //       console.log(err);
+      //       alert("服务器错误!稍后重试");
+      //     })
     },
     
 

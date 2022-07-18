@@ -124,6 +124,8 @@
 </template>
 
 <script>
+import {postRequest} from "../utils/request";
+import {post2Request} from "../utils/request";
   export default {
     data() {
       return {
@@ -203,14 +205,10 @@
       // this.$axios(`http://47.103.94.131:8089/examManagePaperId`).then(res => {
       //   this.form.paperId = res.data.data.paperId + 1 //实现paperId自增1
         const _this = this
-        this.$axios({
-          url: 'http://localhost:8080/school/save',
-          method: 'post',
-          data: {
-            ..._this.form1,
-           
-          }
-        }).then(res => {
+        const data={
+        ..._this.form1,
+      }
+      postRequest('/school/save',data).then(res => {
           if (res.data.msg === 'success') {
             this.$message({
               message: '数据添加成功',
@@ -221,6 +219,24 @@
             
           }
         })
+        // this.$axios({
+        //   url: 'http://localhost:8080/school/save',
+        //   method: 'post',
+        //   data: {
+        //     ..._this.form1,
+           
+        //   }
+        // }).then(res => {
+        //   if (res.data.msg === 'success') {
+        //     this.$message({
+        //       message: '数据添加成功',
+        //       type: 'success'
+        //     })
+        //     // this.form = res.data.data
+        //     this.$router.go(0)
+            
+        //   }
+        // })
 
      },
       //重置按钮
@@ -230,14 +246,7 @@
         //获取所有用户信息
         getInfo(){
             const _this = this
-            this.$axios({
-        url: 'http://localhost:8080/school/list' ,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        
-      }).then(function (res) {
+      post2Request('/school/list').then(function (res) {
 
             _this.tableData = res.data.data
             
@@ -253,6 +262,29 @@
             console.log(err);
             alert("服务器错误!稍后重试");
           })
+      //       this.$axios({
+      //   url: 'http://localhost:8080/school/list' ,
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+        
+      // }).then(function (res) {
+
+      //       _this.tableData = res.data.data
+            
+      //       console.log('aaaa')
+            
+      //       console.log(_this.tableData)
+      //       if(res.data.msg !='success'){
+      //           alert('服务器错误，请稍后重试')
+      //       }
+
+      //     },
+      //     function (err) {
+      //       console.log(err);
+      //       alert("服务器错误!稍后重试");
+      //     })
         },
         
       //编辑信息
@@ -267,11 +299,10 @@
       // let form = this.form  
       const _this = this
       this.dialogVisible = false
-      this.$axios({
-        url: 'http://localhost:8080/user/update',
-        method: 'post',
-        data: {...this.form}
-      }).then(res => {
+       const data={
+        ..._this.form1,
+      }
+      postRequest('/user/update',data).then(res => {
         if (res.data.code === 200) {
           this.$message({ //成功修改提示
             message: '更新成功',
@@ -280,6 +311,19 @@
         }
         this.getInfo()
       })
+      // this.$axios({
+      //   url: 'http://localhost:8080/user/update',
+      //   method: 'post',
+      //   data: {...this.form}
+      // }).then(res => {
+      //   if (res.data.code === 200) {
+      //     this.$message({ //成功修改提示
+      //       message: '更新成功',
+      //       type: 'success'
+      //     })
+      //   }
+      //   this.getInfo()
+      // })
     },
         //删除该条信息
     deleteRecord(school) {
@@ -288,16 +332,25 @@
         cancelButtonText: '算了,留着',
         type: 'danger'
       }).then(() => { //确认删除
-        this.$axios({
-          url: 'http://localhost:8080/school/delete',
-          method: 'post',
-          data: {school:school},
-        }).then(res => {
+      const data={
+        school:school
+      }
+      postRequest('/school/delete',data).then(res => {
           this.getInfo()
         })
       }).catch(() => {
 
       })
+      //   this.$axios({
+      //     url: 'http://localhost:8080/school/delete',
+      //     method: 'post',
+      //     data: {school:school},
+      //   }).then(res => {
+      //     this.getInfo()
+      //   })
+      // }).catch(() => {
+
+      // })
     },
       resetDateFilter() {
         this.$refs.filterTable.clearFilter('date');
