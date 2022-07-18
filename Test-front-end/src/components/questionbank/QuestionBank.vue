@@ -7,7 +7,7 @@
     </div>
     <div class="wrapper">
       <ul class="top">
-        <li class="example">{{ examData.coursename}}</li>
+        <li class="example" style="margin-left:0px;margin-width:200px">{{ examData.coursename}}</li>
         <!-- <li><i class="iconfont icon-pen-"></i></li> -->
         <!-- <li><i class="iconfont icon-share"></i></li> -->
         <!-- <li class="right">
@@ -621,7 +621,8 @@ export default {
 .wrapper .top .example {
   color: #333;
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 1000;
+  
 }
 .wrapper .top li i {
   margin-left: 20px;

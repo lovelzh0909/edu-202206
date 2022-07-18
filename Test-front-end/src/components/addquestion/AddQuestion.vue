@@ -234,7 +234,12 @@ export default {
         })
         console.log(dataq)
          const data = dataq
-      post1Request('question/saveall',data).then(res =>{
+        this.$axios({
+          method: 'post',
+          url:'http://localhost:8080/question/saveall',
+          data:dataq,
+          // params:params,
+        }).then(res =>{
           alert('提交成功')
           this.loading=false
           for (let i = 0; i < form.questions.length; i++) {
@@ -245,14 +250,7 @@ export default {
           alert('提交失败')
           this.loading =false
         })
-
-      })
-      //   this.$axios({
-      //     method: 'post',
-      //     url:`http://localhost:8080/question/saveall`,
-      //     data:dataq,
-      //     // params:params,
-      //   }).then(res =>{
+      // post1Request('question/saveall',data).then(res =>{
       //     alert('提交成功')
       //     this.loading=false
       //     for (let i = 0; i < form.questions.length; i++) {
@@ -264,7 +262,10 @@ export default {
       //     this.loading =false
       //   })
 
-      // })
+      })
+        
+
+      
     },
     //返回题库列表
     returnback(){
