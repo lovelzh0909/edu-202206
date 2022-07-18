@@ -85,7 +85,7 @@
 
 import axios from "axios"
 import {registerApi as PopupManager} from "element-ui/src/utils/popup";
-import {postRequest} from "../utils/request";
+import {postRequest} from "@/utils/request";
 
 export default {
   name: 'Home',
@@ -137,7 +137,7 @@ export default {
         school:this.loginForm.school,
         role:this.loginForm.type
       }
-      postRequest('/user/logon',data).then(
+      postRequest('user/register',data).then(
               function (response) {
                 console.log(response);
                 _this.$refs.loginForm.validate((valid) => {

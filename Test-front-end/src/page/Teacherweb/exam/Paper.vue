@@ -134,8 +134,8 @@
 <script>
 
 import axios from "axios";
-import {postRequest} from "../utils/request";
-import {post1Request} from "../utils/request";
+import {postRequest} from "@/utils/request";
+import {post1Request} from "@/utils/request";
 export default {
   data() {
     return {
@@ -234,7 +234,7 @@ export default {
          ..._this.form,
             phone: localStorage.getItem('ms_username')
       }
-      postRequest('/papers/save',data).then(res => {
+      postRequest('papers/save',data).then(res => {
           if (res.data.msg === 'success') {
             this.$message({
               message: '数据添加成功',
@@ -275,7 +275,7 @@ export default {
        const data={
          paperId:paperId
       }
-      post1Request('/papers/copy',data).then(res => {
+      post1Request('papers/copy',data).then(res => {
         if (res.data.msg === 'success') {
           alert('复制成功，即将刷新页面')
           this.$router.go(0)
@@ -366,7 +366,7 @@ export default {
       const data={
           paperId
       }
-      post1Request('/papers/remove',data).then(res => {
+      post1Request('papers/remove',data).then(res => {
           this.getExamInfo()
         })
       }).catch(() => {
@@ -389,7 +389,7 @@ export default {
        const data={
           phone: localStorage.getItem('ms_username')
       }
-      post1Request(`/papers/getteacherallpaper/${this.pagination.current}/${this.pagination.size}`,data).then(function(res) {
+      post1Request(`papers/getteacherallpaper/${this.pagination.current}/${this.pagination.size}`,data).then(function(res) {
             console.log(res);
             _this.pagination = res.data.data
             console.log(_this.pagination.records);

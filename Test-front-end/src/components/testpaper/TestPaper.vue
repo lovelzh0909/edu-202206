@@ -419,6 +419,8 @@
 <script>
 import Axios from 'axios'
 import VXETable from 'vxe-table'
+import {postRequest} from "@/utils/request";
+import {post1Request} from "@/utils/request";
   export default {
     name: 'AddExam',
     data () {
@@ -586,15 +588,8 @@ import VXETable from 'vxe-table'
           this.$router.go(0)
         }
         else{
-        this.$axios({
-          url: 'http://localhost:8080/MakePaper/autoProblem',
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data: _this.form,
-          
-        }).then(function(res) {
+          const data =  _this.form
+      postRequest('MakePaper/autoProblem',data).then(function(res) {
           const dataa = res.data.data
         
         // quesInfo.push(this.questionInfo)
@@ -603,18 +598,8 @@ import VXETable from 'vxe-table'
           }
         
         else{
-        _this.$axios({
-          url: `http://localhost:8080/MakePaper/paperProblem/save/byListQuestion/${paperId}`,
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data: 
-          dataa
-            // questionInfoa: this.questionInfo
-          //   paperId:paperId
-          
-        }).then(res => {
+          const data1 =  dataa
+          postRequest(`MakePaper/paperProblem/save/byListQuestion/${paperId}`,data1).then(res => {
           if(res.data.msg === 'success') {
             alert('已完成智能组卷，请稍后预览')  
             _this.$router.go(0)
@@ -624,6 +609,44 @@ import VXETable from 'vxe-table'
         })
         }
         })
+        // this.$axios({
+        //   url: 'http://localhost:8080/MakePaper/autoProblem',
+        //   method: 'post',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   data: _this.form,
+          
+        // }).then(function(res) {
+        //   const dataa = res.data.data
+        
+        // // quesInfo.push(this.questionInfo)
+        //   if(res.data.msg != 'success'){
+        //     alert(res.data.msg)
+        //   }
+        
+        // else{
+        // _this.$axios({
+        //   url: `http://localhost:8080/MakePaper/paperProblem/save/byListQuestion/${paperId}`,
+        //   method: 'post',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   data: 
+        //   dataa
+        //     // questionInfoa: this.questionInfo
+        //   //   paperId:paperId
+          
+        // }).then(res => {
+        //   if(res.data.msg === 'success') {
+        //     alert('已完成智能组卷，请稍后预览')  
+        //     _this.$router.go(0)
+        //     _this.$router.go(-1)
+        //     // this.$router.push({path: '/test2/test2-1-3'})
+        //   }
+        // })
+        // }
+        // })
         
         }
       },
@@ -680,15 +703,8 @@ import VXETable from 'vxe-table'
           alert('请检查组卷总分是否和试卷总分一样')
         }
         else{
-        this.$axios({
-          url: 'http://localhost:8080/MakePaper/autoProblem',
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data: _this.form,
-          
-        }).then(function(res) {
+          const data =  _this.form
+          postRequest('MakePaper/autoProblem',data).then(function(res) {
 
         const dataa = res.data.data
         
@@ -697,18 +713,8 @@ import VXETable from 'vxe-table'
             alert(res.data.msg)
           }
         else{
-        _this.$axios({
-          url: `http://localhost:8080/MakePaper/paperProblem/save/byListQuestion/${paperId}`,
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data: 
-          dataa
-            // questionInfoa: this.questionInfo
-          //   paperId:paperId
-          
-        }).then(res => {
+          const data1 =  dataa
+          postRequest(`MakePaper/paperProblem/save/byListQuestion/${paperId}`,data1).then(res => {
           if(res.data.msg === 'success') {
             alert('已完成随机组卷，请稍后预览')  
             _this.$router.go(0)
@@ -718,22 +724,54 @@ import VXETable from 'vxe-table'
         })
         }
         })
+        // this.$axios({
+        //   url: 'http://localhost:8080/MakePaper/autoProblem',
+        //   method: 'post',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   data: _this.form,
+          
+        // }).then(function(res) {
+
+        // const dataa = res.data.data
+        
+        // // quesInfo.push(this.questionInfo)
+        // if(res.data.msg != 'success'){
+        //     alert(res.data.msg)
+        //   }
+        // else{
+        // _this.$axios({
+        //   url: `http://localhost:8080/MakePaper/paperProblem/save/byListQuestion/${paperId}`,
+        //   method: 'post',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   data: 
+        //   dataa
+        //     // questionInfoa: this.questionInfo
+        //   //   paperId:paperId
+          
+        // }).then(res => {
+        //   if(res.data.msg === 'success') {
+        //     alert('已完成随机组卷，请稍后预览')  
+        //     _this.$router.go(0)
+        //     _this.$router.go(-1)
+        //     // this.$router.push({path: '/test2/test2-1-3'})
+        //   }
+        // })
+        // }
+        // })
       }
       },
       //获取所有的题库信息
       getBankInfo () {
         const _this = this;
         // this.$axios(`http://localhost:8080/papers/getteacherallpaper/${this.pagination.current}/${this.pagination.size}`).then(res => {
-        this.$axios({
-          url: `http://localhost:8080/question/getCoursename/`,
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          params: {
-            phone: localStorage.getItem('ms_username')
-          }
-        }).then(function(res) {
+        const data =  {
+          phone: localStorage.getItem('ms_username')
+        }
+          post1Request(`question/getCoursename/`,data).then(function(res) {
               console.log(res);
               _this.allBank = res.data.data
               console.log(_this.allBank)
@@ -744,6 +782,26 @@ import VXETable from 'vxe-table'
               console.log(err);
               // alert("服务器错误!稍后重试");
             })
+        // this.$axios({
+        //   url: `http://localhost:8080/question/getCoursename/`,
+        //   method: 'post',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   params: {
+        //     phone: localStorage.getItem('ms_username')
+        //   }
+        // }).then(function(res) {
+        //       console.log(res);
+        //       _this.allBank = res.data.data
+        //       console.log(_this.allBank)
+
+
+        //     },
+        //     function (err) {
+        //       console.log(err);
+        //       // alert("服务器错误!稍后重试");
+        //     })
       },
       
       //自由组卷时添加试题
@@ -776,18 +834,11 @@ import VXETable from 'vxe-table'
         console.log('asd asd66666')
         const _this = this;
         //分页查询所有题目信息
-        this.$axios({
-          url: `http://localhost:8080/question/get/bycourse/${quesTypeId}/${1}/${1}`,
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          params: {
-            phone: localStorage.getItem('ms_username'),
+        const data =  {
+          phone: localStorage.getItem('ms_username'),
             coursename
-            
-          }
-        }).then(function(res) {
+        }
+          post1Request(`question/get/bycourse/${quesTypeId}/${1}/${1}`,data).then(function(res) {
               console.log(res);
               _this.questionInfo =res.data.data.records
                console.log('666666')
@@ -797,6 +848,27 @@ import VXETable from 'vxe-table'
             },
             
             )
+        // this.$axios({
+        //   url: `http://localhost:8080/question/get/bycourse/${quesTypeId}/${1}/${1}`,
+        //   method: 'post',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   params: {
+        //     phone: localStorage.getItem('ms_username'),
+        //     coursename
+            
+        //   }
+        // }).then(function(res) {
+        //       console.log(res);
+        //       _this.questionInfo =res.data.data.records
+        //        console.log('666666')
+        //       console.log(_this.questionInfo)
+              
+              
+        //     },
+            
+        //     )
         
       },
 
@@ -811,19 +883,9 @@ import VXETable from 'vxe-table'
         if(this.sumTotalScore != totalScore){
           alert('请检查组卷总分是否和试卷总分一样')
         }
-        else
-        this.$axios({
-          url: `http://localhost:8080/MakePaper/paperProblem/save/byListQuestion/${paperId}`,
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data: 
-          dataa
-            // questionInfoa: this.questionInfo
-          //   paperId:paperId
-          
-        }).then(res => {
+        else{
+        const data = dataa
+          postRequest(`MakePaper/paperProblem/save/byListQuestion/${paperId}`,data).then(res => {
           if(res.data.msg === 'success') {
             this.$message({
               message: '组卷数据添加成功',
@@ -834,6 +896,29 @@ import VXETable from 'vxe-table'
             // this.$router.push({path: '/test2/test2-1-3'})
           }
         })
+        }
+        // this.$axios({
+        //   url: `http://localhost:8080/MakePaper/paperProblem/save/byListQuestion/${paperId}`,
+        //   method: 'post',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   data: 
+        //   dataa
+        //     // questionInfoa: this.questionInfo
+        //   //   paperId:paperId
+          
+        // }).then(res => {
+        //   if(res.data.msg === 'success') {
+        //     this.$message({
+        //       message: '组卷数据添加成功',
+        //       type: 'success'
+        //     })
+        //     this.$router.go(0)
+        //     this.$router.go(-1)
+        //     // this.$router.push({path: '/test2/test2-1-3'})
+        //   }
+        // })
       },
       //处理表格被选中
       handleTableSectionChange (val) {

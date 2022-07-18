@@ -32,7 +32,7 @@
         <!-- <div id="building"></div> -->
         <div class="banner" style="width:96%;height:650px;margin-top:25px;margin-left:25px">
             <img class="photo" src="@/assets/img/背景图.jpg" style="width:100%;height:100%">
-            <div class="banner-text">欢迎来到管理员-系统管理模块</div>
+            <div class="banner-text">欢迎来到踏星考试系统</div>
             <div class="banner-button">
                 <el-button type="primary" class="button1" @click="gotomodel">组织机构</el-button>
                 <el-button type="info" class="button2">角色权限</el-button>

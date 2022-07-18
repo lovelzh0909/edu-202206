@@ -120,10 +120,10 @@
 </template>
 
 <script>
-import {postRequest} from "../utils/request";
-import {post1Request} from "../utils/request";
-import {post2Request} from "../utils/request";
-import {getRequest} from "../utils/request";
+import {postRequest} from "@/utils/request";
+import {post1Request} from "@/utils/request";
+import {post2Request} from "@/utils/request";
+import {getRequest} from "@/utils/request";
   export default {
     data() {
       return {
@@ -174,7 +174,7 @@ import {getRequest} from "../utils/request";
         //获取所有用户信息
         getInfo(){
             const _this = this
-            getRequest('/user/all').then(function (res) {
+            getRequest('user/all').then(function (res) {
 
             _this.tableData = res.data.data
             
@@ -230,7 +230,7 @@ import {getRequest} from "../utils/request";
       const data={
         ...this.form,
       }
-      postRequest('/user/update',data).then(res => {
+      postRequest('user/update',data).then(res => {
         if (res.data.code === 200) {
           this.$message({ //成功修改提示
             message: '更新成功',
@@ -263,7 +263,7 @@ import {getRequest} from "../utils/request";
        const data={
         phone:phone,
       }
-      postRequest('/user/delete',data).then(res => {
+      postRequest('user/delete',data).then(res => {
           this.getInfo()
         })
       }).catch(() => {

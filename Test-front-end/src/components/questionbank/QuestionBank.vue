@@ -7,7 +7,7 @@
     </div>
     <div class="wrapper">
       <ul class="top">
-        <li class="example">{{ examData.coursename}}</li>
+        <li class="example" style="margin-left:0px;margin-width:200px">{{ examData.coursename}}</li>
         <!-- <li><i class="iconfont icon-pen-"></i></li> -->
         <!-- <li><i class="iconfont icon-share"></i></li> -->
         <!-- <li class="right">
@@ -186,6 +186,8 @@
 </template>
 
 <script>
+import {postRequest} from "@/utils/request";
+import {post1Request} from "@/utils/request";
 export default {
   data() {
     return {
@@ -294,17 +296,11 @@ export default {
       console.log('asd asd ')
       const _this = this;
       //分页查询所有试卷信息
-      this.$axios({
-        url: `http://localhost:8080/question/get/bycourse/${this.pagination1.quesTypeId}/${this.pagination1.current}/${this.pagination1.size}`,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params: {
-          phone: localStorage.getItem('ms_username'),
+      const data = {
+         phone: localStorage.getItem('ms_username'),
           coursename
-        }
-      }).then(function(res) {
+      }
+      post1Request(`question/get/bycourse/${this.pagination1.quesTypeId}/${this.pagination1.current}/${this.pagination1.size}`,data).then(function(res) {
             console.log(res);
             _this.tableData1 = res.data.data.records
           },
@@ -312,23 +308,35 @@ export default {
             console.log(err);
             alert("服务器错误!稍后重试");
           })
+      // this.$axios({
+      //   url: `http://localhost:8080/question/get/bycourse/${this.pagination1.quesTypeId}/${this.pagination1.current}/${this.pagination1.size}`,
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   params: {
+      //     phone: localStorage.getItem('ms_username'),
+      //     coursename
+      //   }
+      // }).then(function(res) {
+      //       console.log(res);
+      //       _this.tableData1 = res.data.data.records
+      //     },
+      //     function (err) {
+      //       console.log(err);
+      //       alert("服务器错误!稍后重试");
+      //     })
     },
     getQuestionInfo2() {
       let coursename = this.$route.query.coursename //获取路由传递过来的试卷编号
       console.log('asd asd ')
       const _this = this;
       //分页查询所有试卷信息
-      this.$axios({
-        url: `http://localhost:8080/question/get/bycourse/${this.pagination2.quesTypeId}/${this.pagination2.current}/${this.pagination2.size}`,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params: {
-          phone: localStorage.getItem('ms_username'),
+      const data = {
+         phone: localStorage.getItem('ms_username'),
           coursename
-        }
-      }).then(function(res) {
+      }
+      post1Request(`question/get/bycourse/${this.pagination2.quesTypeId}/${this.pagination2.current}/${this.pagination2.size}`,data).then(function(res) {
             console.log(res);
             _this.tableData2 = res.data.data.records
           },
@@ -336,23 +344,35 @@ export default {
             console.log(err);
             alert("服务器错误!稍后重试");
           })
+      // this.$axios({
+      //   url: `http://localhost:8080/question/get/bycourse/${this.pagination2.quesTypeId}/${this.pagination2.current}/${this.pagination2.size}`,
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   params: {
+      //     phone: localStorage.getItem('ms_username'),
+      //     coursename
+      //   }
+      // }).then(function(res) {
+      //       console.log(res);
+      //       _this.tableData2 = res.data.data.records
+      //     },
+      //     function (err) {
+      //       console.log(err);
+      //       alert("服务器错误!稍后重试");
+      //     })
     },
     getQuestionInfo3() {
       let coursename = this.$route.query.coursename //获取路由传递过来的试卷编号
       console.log('asd asd ')
       const _this = this;
       //分页查询所有试卷信息
-      this.$axios({
-        url: `http://localhost:8080/question/get/bycourse/${this.pagination3.quesTypeId}/${this.pagination3.current}/${this.pagination3.size}`,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params: {
-          phone: localStorage.getItem('ms_username'),
+      const data = {
+         phone: localStorage.getItem('ms_username'),
           coursename
-        }
-      }).then(function(res) {
+      }
+      post1Request(`question/get/bycourse/${this.pagination3.quesTypeId}/${this.pagination3.current}/${this.pagination3.size}`,data).then(function(res) {
             console.log(res);
             _this.tableData3 = res.data.data.records
           },
@@ -360,23 +380,35 @@ export default {
             console.log(err);
             alert("服务器错误!稍后重试");
           })
+      // this.$axios({
+      //   url: `http://localhost:8080/question/get/bycourse/${this.pagination3.quesTypeId}/${this.pagination3.current}/${this.pagination3.size}`,
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   params: {
+      //     phone: localStorage.getItem('ms_username'),
+      //     coursename
+      //   }
+      // }).then(function(res) {
+      //       console.log(res);
+      //       _this.tableData3 = res.data.data.records
+      //     },
+      //     function (err) {
+      //       console.log(err);
+      //       alert("服务器错误!稍后重试");
+      //     })
     },
     getQuestionInfo4() {
       let coursename = this.$route.query.coursename //获取路由传递过来的试卷编号
       console.log('asd asd ')
       const _this = this;
       //分页查询所有试卷信息
-      this.$axios({
-        url: `http://localhost:8080/question/get/bycourse/${this.pagination4.quesTypeId}/${this.pagination4.current}/${this.pagination4.size}`,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params: {
-          phone: localStorage.getItem('ms_username'),
+      const data = {
+         phone: localStorage.getItem('ms_username'),
           coursename
-        }
-      }).then(function(res) {
+      }
+      post1Request(`question/get/bycourse/${this.pagination4.quesTypeId}/${this.pagination4.current}/${this.pagination4.size}`,data).then(function(res) {
             console.log(res);
             _this.tableData4 = res.data.data.records
           },
@@ -384,23 +416,35 @@ export default {
             console.log(err);
             alert("服务器错误!稍后重试");
           })
+      // this.$axios({
+      //   url: `http://localhost:8080/question/get/bycourse/${this.pagination4.quesTypeId}/${this.pagination4.current}/${this.pagination4.size}`,
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   params: {
+      //     phone: localStorage.getItem('ms_username'),
+      //     coursename
+      //   }
+      // }).then(function(res) {
+      //       console.log(res);
+      //       _this.tableData4 = res.data.data.records
+      //     },
+      //     function (err) {
+      //       console.log(err);
+      //       alert("服务器错误!稍后重试");
+      //     })
     },
     getQuestionInfo5() {
       let coursename = this.$route.query.coursename //获取路由传递过来的试卷编号
       console.log('asd asd ')
       const _this = this;
       //分页查询所有试卷信息
-      this.$axios({
-        url: `http://localhost:8080/question/get/bycourse/${this.pagination5.quesTypeId}/${this.pagination5.current}/${this.pagination5.size}`,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params: {
-          phone: localStorage.getItem('ms_username'),
+       const data = {
+         phone: localStorage.getItem('ms_username'),
           coursename
-        }
-      }).then(function(res) {
+      }
+      post1Request(`question/get/bycourse/${this.pagination5.quesTypeId}/${this.pagination5.current}/${this.pagination5.size}`,data).then(function(res) {
             console.log(res);
             _this.tableData5 = res.data.data.records
           },
@@ -408,6 +452,24 @@ export default {
             console.log(err);
             alert("服务器错误!稍后重试");
           })
+      // this.$axios({
+      //   url: `http://localhost:8080/question/get/bycourse/${this.pagination5.quesTypeId}/${this.pagination5.current}/${this.pagination5.size}`,
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   params: {
+      //     phone: localStorage.getItem('ms_username'),
+      //     coursename
+      //   }
+      // }).then(function(res) {
+      //       console.log(res);
+      //       _this.tableData5 = res.data.data.records
+      //     },
+      //     function (err) {
+      //       console.log(err);
+      //       alert("服务器错误!稍后重试");
+      //     })
     },
     //改变当前记录条数
     handleSizeChange(val) {
@@ -559,7 +621,8 @@ export default {
 .wrapper .top .example {
   color: #333;
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 1000;
+  
 }
 .wrapper .top li i {
   margin-left: 20px;
