@@ -137,70 +137,7 @@ export default {
       student:[
         {teststatus:'未开始'},
       ],
-      tableData: [
-        {
-          date: '2016-05-03',
-          corsename: '离散数学',
-          time: '2022.03.05',
-          kaochanghao:'001',
-          examtea:'张三',
-          note:'无',
-          status:'未开始',
-        },
-        {
-          date: '2016-05-03',
-          corsename: '离散数学',
-          time: '2022.03.05',
-          kaochanghao:'001',
-          examtea:'张三',
-          beizhu:'无',
-          status:'未开始',
-        },
-        {
-          date: '2016-05-03',
-          corsename: '离散数学',
-          time: '2022.03.05',
-          kaochanghao:'001',
-          examtea:'张三',
-          beizhu:'无',
-          status:'未开始',
-        },
-        {
-          date: '2016-05-03',
-          corsename: '离散数学',
-          time: '2022.03.05',
-          kaochanghao:'001',
-          examtea:'张三',
-          beizhu:'无',
-          status:'未开始',
-        },
-        {
-          date: '2016-05-03',
-          corsename: '离散数学',
-          time: '2022.03.05',
-          kaochanghao:'001',
-          examtea:'张三',
-          beizhu:'无',
-          status:'未开始',
-        },
-        {
-          date: '2016-05-03',
-          corsename: '离散数学',
-          time: '2022.03.05',
-          kaochanghao:'001',
-          examtea:'张三',
-          beizhu:'无',
-          status:'未开始',
-        },
-        {
-          date: '2016-05-03',
-          corsename: '离散数学',
-          time: '2022.03.05',
-          kaochanghao:'001',
-          examtea:'张三',
-          beizhu:'无',
-          status:'未开始',
-        }]
+      
     }
   },
   methods: {

@@ -29,8 +29,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
-    QuestionService questionService;
-    QuestionrelscoreService questionrelscoreService;
+    private final QuestionService questionService;
+    private final QuestionrelscoreService questionrelscoreService;
 
     @Autowired
     public QuestionController(QuestionService questionService, QuestionrelscoreService questionrelscoreService) {
@@ -104,7 +104,7 @@ public class QuestionController {
     }
         //查询该题库的题目
         @PostMapping ("/get/bycourse/{quesTypeId}/{page}/{size}")
-        public CommonReturnType getCourseandtypeQuesion(@RequestParam String phone,String coursename,@PathVariable int quesTypeId ,int page,int size){
+        public CommonReturnType getCourseandtypeQuesion(@RequestParam String phone,String coursename,@PathVariable Integer quesTypeId ,@PathVariable Integer page,@PathVariable Integer size){
             log.info("获取题库题目数据");
             log.info("前端发送:"+phone+":"+coursename+":"+quesTypeId);
         Page <Question> p = new Page<>(page, size);

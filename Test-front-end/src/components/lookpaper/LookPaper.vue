@@ -275,17 +275,18 @@
           params: {paperId:paperId}
           
         }).then(res=>{
-              console.log(res);
+              if(res.data.msg !== 'success')
+              alert(res.data.msg)
+              else{
               this.dataSource.list = res.data.data
-              console.log('aaaaaa');
-              console.log(_this.dataSource);
-              console.log(_this.dataSource.list);
+              
             this.convertData();
               this.studentphone = res.data.data2.studentphone
-              console.log(this.studentphone)
+              console.log(this.studentphone)}
 
             },
             function (err) {
+              
               console.log(err);
               alert("服务器错误!稍后重试");
             })

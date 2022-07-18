@@ -10,17 +10,14 @@ import com.example.demo.GA.GA;
 import com.example.demo.GA.Global;
 import com.example.demo.GA.Paper;
 import com.example.demo.GA.Population;
-import com.example.demo.PaperManage.entity.Papers;
-import com.example.demo.PaperManage.entity.Rule;
-import com.example.demo.PaperManage.entity.Ruleqnum;
+import com.example.demo.PaperManage.entity.*;
+import com.example.demo.PaperManage.service.PapersService;
 import com.example.demo.QuestionManage.entity.Question;
 import com.example.demo.QuestionManage.entity.Questionrelscore;
-import com.example.demo.Response.CommonReturnType;
-import com.example.demo.PaperManage.service.PapersService;
 import com.example.demo.QuestionManage.service.QuestionService;
-
-
 import com.example.demo.QuestionManage.service.QuestionrelscoreService;
+import com.example.demo.Response.CommonReturnType;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +27,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/MakePaper")
 public class MakePaperController {
     //    RuleService ruleService;
-    QuestionService questionService;
-    PapersService papersService;
-    QuestionrelscoreService questionrelscoreService;
+    private final QuestionService questionService;
+    private final PapersService papersService;
+    private final QuestionrelscoreService questionrelscoreService;
 
     @Autowired
     public MakePaperController(QuestionService questionService, PapersService papersService, QuestionrelscoreService questionrelscoreService) {

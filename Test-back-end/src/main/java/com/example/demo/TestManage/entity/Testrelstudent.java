@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@TableName("testrelstudent")
+@TableName("test_rel_student")
 @ApiModel(value = "Testrelstudent对象", description = "")
 public class Testrelstudent implements Serializable {
 

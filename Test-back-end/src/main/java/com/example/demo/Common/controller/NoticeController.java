@@ -39,10 +39,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/notice")
 public class NoticeController {
-    NoticeService noticeService;
-    TestService testService;
-    TestrelstudentService testrelstudentService;
-    UserService userService;
+    private final NoticeService noticeService;
+    private final TestService testService;
+    private final TestrelstudentService testrelstudentService;
+    private final UserService userService;
 
     @Autowired
     public NoticeController(NoticeService noticeService, TestService testService, TestrelstudentService testrelstudentService, UserService userService) {

@@ -35,8 +35,11 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/papers")
 public class PapersController {
+    private final PapersService papersService;
     @Autowired
-    PapersService papersService;
+    public  PapersController(PapersService papersService){
+        this.papersService=papersService;
+    }
 
     @PostMapping("/save")
     public CommonReturnType saveQuestion(@RequestBody Papers p){
