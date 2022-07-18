@@ -34,10 +34,10 @@ import java.util.Random;
 @RestController
 @RequestMapping("/test")
 public class TestController {
-    TestService testService;
-    TestrelstudentService testrelstudentService;
-    UserService userService;
-    PapersService papersService;
+    private final TestService testService;
+    private final TestrelstudentService testrelstudentService;
+    private final UserService userService;
+    private final PapersService papersService;
 
     @Autowired
     public TestController(TestService testService, TestrelstudentService testrelstudentService, UserService userService, PapersService papersService) {

@@ -19,9 +19,9 @@ import java.util.Objects;
 @Slf4j
 @RequestMapping("/user")
 public class userController {
-    UserService userService;
-    SchoolService schoolService;
-    TeacherrelclassService teacherrelclassService;
+    private final UserService userService;
+    private final SchoolService schoolService;
+    private final TeacherrelclassService teacherrelclassService;
 
     @Autowired
     public userController(UserService userService, SchoolService schoolService, TeacherrelclassService teacherrelclassService) {

@@ -24,9 +24,11 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @RequestMapping("/testrelstudent")
 public class TestrelstudentController {
 
-
+    private final TestrelstudentService testrelstudentService;
     @Autowired
-    TestrelstudentService testrelstudentService;
+    public TestrelstudentController (TestrelstudentService testrelstudentService){
+        this.testrelstudentService=testrelstudentService;
+    }
     /**
      * 通过测试id，获取参与该测试学生
      * @param t 测试id

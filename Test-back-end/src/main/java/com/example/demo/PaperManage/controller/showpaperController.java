@@ -40,13 +40,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/showpaper")
 @Slf4j
 public class showpaperController {
-    PapersService papersService;
-    QuestionService questionService;
-    TestService testService;
-    PaperJustifyService paperJustifyService;
-    TestrelstudentService testrelstudentService;
-    ScoreService scoreService;
-    QuestionrelscoreService questionrelscoreService;
+    private final PapersService papersService;
+    private final QuestionService questionService;
+    private final TestService testService;
+    private final PaperJustifyService paperJustifyService;
+    private final TestrelstudentService testrelstudentService;
+    private final ScoreService scoreService;
+    private final QuestionrelscoreService questionrelscoreService;
 
     @Autowired
     public showpaperController(PapersService papersService, QuestionService questionService, TestService testService, PaperJustifyService paperJustifyService,
@@ -138,6 +138,9 @@ public class showpaperController {
     @PostMapping("/getQuestion/bypaperId")
     public CommonReturnType getQuestion(@RequestParam Integer paperId) {
         Papers p = papersService.getById(paperId);
+        if(p.getPapercontext()==null){
+            return CommonReturnType.create(null,"该试卷没有添加题目");
+        }
         List<String> qs = stringToList(p.getPapercontext());
         List<Question> q = new ArrayList<>();
         for (String s : qs) {

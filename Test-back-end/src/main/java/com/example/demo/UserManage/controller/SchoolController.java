@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/school")
 public class SchoolController {
-    SchoolService schoolService;
-    UserService userService;
+    private final SchoolService schoolService;
+    private final UserService userService;
 
     @Autowired
     public SchoolController(SchoolService schoolService, UserService userService) {

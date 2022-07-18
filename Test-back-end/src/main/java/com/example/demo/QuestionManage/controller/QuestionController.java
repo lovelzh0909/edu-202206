@@ -29,8 +29,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
-    QuestionService questionService;
-    QuestionrelscoreService questionrelscoreService;
+    private final QuestionService questionService;
+    private final QuestionrelscoreService questionrelscoreService;
 
     @Autowired
     public QuestionController(QuestionService questionService, QuestionrelscoreService questionrelscoreService) {
