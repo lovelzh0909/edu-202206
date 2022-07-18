@@ -178,6 +178,8 @@
 
 <script>
 import Axios from 'axios';
+import {postRequest} from "@/utils/request";
+import {post1Request} from "@/utils/request";
 
 export default {
 
@@ -454,15 +456,8 @@ export default {
       const _this = this;
       let testId = this.$route.query.testId;//获取路由传递过来的考试编号 
       let phone = localStorage.getItem('ms_username')
-      this.$axios({
-        url: 'http://localhost:8080/showpaper/getpaper/bytestId',
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params: {testId:testId}
-        
-      }).then(res=>{
+       const data = {testId:testId}
+      post1Request('showpaper/getpaper/bytestId',data).then(res=>{
             console.log(res);
       _this.papername = res.data.data.description
       _this.studentId = phone
@@ -486,21 +481,46 @@ export default {
             console.log(err);
             alert("服务器错误!稍后重试");
           })
+    //   this.$axios({
+    //     url: 'http://localhost:8080/showpaper/getpaper/bytestId',
+    //     method: 'post',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     params: {testId:testId}
+        
+    //   }).then(res=>{
+    //         console.log(res);
+    //   _this.papername = res.data.data.description
+    //   _this.studentId = phone
+    //   _this.lasttime = res.data.data.totalTime
+    //   _this.totalscore = res.data.data.totalScore
+    //       if(_this.type===1)
+    // {
+    //   let remainTime=_this.lasttime*60;
+    //   console.log('111')
+    //   console.log(_this.lasttime)
+    //   if (remainTime> 0) {
+    //     _this.hour = Math.floor((remainTime / 3600) % 24)
+    //     _this.minute = Math.floor((remainTime / 60) % 60)
+    //     _this.second = Math.floor(remainTime % 60)
+    //     _this.countDowm()
+    //   }
+    // }
+
+    //       },
+    //       function (err) {
+    //         console.log(err);
+    //         alert("服务器错误!稍后重试");
+    //       })
     },
     //试卷获取
     getTest(){
       const _this = this;
       let testId = this.$route.query.testId;//获取路由传递过来的考试编号 
       console.log(testId)
-      this.$axios({
-        url: 'http://localhost:8080/showpaper/getQuestion/bytestId',
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params: {testId:testId}
-        
-      }).then(res=>{
+      const data = {testId:testId}
+      post1Request('showpaper/getQuestion/bytestId',data).then(res=>{
             console.log(res);
             // this.dataSource = 
             this.dataSource.list = res.data.data
@@ -539,6 +559,53 @@ export default {
             console.log(err);
             alert("服务器错误!稍后重试");
           })
+      // this.$axios({
+      //   url: 'http://localhost:8080/showpaper/getQuestion/bytestId',
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   params: {testId:testId}
+        
+      // }).then(res=>{
+      //       console.log(res);
+      //       // this.dataSource = 
+      //       this.dataSource.list = res.data.data
+            
+      //       // console.log(this.abcdlist[i].choice)
+      //       console.log('aaaaaa');
+            
+            
+      //       console.log(this.dataSource.list);
+      //       console.log(this.dataSource.list[1].content);
+      //       for(let i=0; i<this.dataSource.list.length; i++){
+      //       this.dataSource.list[i].content = this.dataSource.list[i].content.split(',') //字符串按逗号分隔成数组
+      //       let j = []
+      //       this.answer1.push(j)
+      //       // this.Manswer[i].answer[i] = this.dataSource.list[i].content
+      //       }
+      //       // for(let i=0; i<this.dataSource.list.length; i++){
+              
+      //       //   // this.abcdlist[i].choice = this.dataSource.list[i].choiceE.split(',') //字符串按逗号分隔成数组
+      //       //   let tempData = []
+      //       //   tempData.push(this.dataSource.list[i].choiceA)
+      //       //   tempData.push(this.dataSource.list[i].choiceB)
+      //       //   tempData.push(this.dataSource.list[i].choiceC)
+      //       //   tempData.push(this.dataSource.list[i].choiceD)
+      //       //   this.abcdlist[i].choice = tempData
+      //       // }
+      //       // console.log('000')
+      //       // for(let i=0;i<_this.dataSource.list.length;i++){
+      //       //   this.Manswer[i].answer = _this.dataSource.list[i].answer.split(',')
+      //       // }
+      //       //   console.log('000')
+      //       //   console.log(this.Manswer)
+      //       this.convertData();
+      //     },
+      //     function (err) {
+      //       console.log(err);
+      //       alert("服务器错误!稍后重试");
+      //     })
     },
 
     
@@ -717,14 +784,8 @@ postImg(){
           }
           console.log(this.dataa)
           let dataq = this.dataa
-          this.$axios({
-            // url: 'http://192.168.3.48:8080/paperJustify/saveall',
-            url:`http://localhost:8080/paperJustify/saveall/${phone}/${testId}`,
-            method: 'post',
-            data: dataq
-              
-
-          }).then(res => {
+          const data = dataq
+      post1Request(`paperJustify/saveall/${phone}/${testId}`,data).then(res => {
             if(res.data.msg = 'success') {
               
               alert('交卷成功')
@@ -735,6 +796,22 @@ postImg(){
               this.$router.go(-1)
             }
           })
+          // this.$axios({
+          //   // url: 'http://192.168.3.48:8080/paperJustify/saveall',
+          //   url:`http://localhost:8080/paperJustify/saveall/${phone}/${testId}`,
+          //   method: 'post',
+          //   data: dataq
+          // }).then(res => {
+          //   if(res.data.msg = 'success') {
+              
+          //     alert('交卷成功')
+          //     this.isStop = true;
+          //     this.tipsFlag = false;
+          //     this.summit = true;
+          //     this.backStatu = true;
+          //     this.$router.go(-1)
+          //   }
+          // })
           // if(this.code === "0"){
           //   this.isStop = true;
           //   this.tipsFlag = false;
