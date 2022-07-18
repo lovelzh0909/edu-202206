@@ -46,6 +46,27 @@ export default new Router({
                 title: '添加题目到题库页面'
             }
         },
+        {
+            path: '/yuejuan-paper',
+            component:() => import('../components/readpaper/ReadPaper.vue'),
+            meta: {
+                title: '阅卷页面'
+            }
+        },
+        {
+            path: '/look-paper',
+            component:() => import('../components/lookpaper/LookPaper.vue'),
+            meta: {
+                title: '预览试卷页面'
+            }
+        },
+        {
+            path: '/test22-2-2-1',
+            component:()=>import('../components/invigilate/InvigilateMsg.vue'),
+            meta: {
+                title:'监考状况'
+            }
+        },
 
 
         
@@ -94,6 +115,20 @@ export default new Router({
                                 component: () => import('../page/studentweb/ExamList.vue'),
                                 meta: {
                                     title: '考试列表'
+                                },
+                            },
+                            {
+                                path: 'test11-2',
+                                component: () => import('../page/studentweb/ExamReport.vue'),
+                                meta: {
+                                    title: '考试通知'
+                                },
+                            },
+                            {
+                                path: 'test11-3',
+                                component: () => import('../page/studentweb/SelfInfo.vue'),
+                                meta: {
+                                    title: '个人信息'
                                 },
                             },
                             
@@ -202,6 +237,14 @@ export default new Router({
                                 component: () => import('../page/teacherweb/invigilate/InvigilateList.vue'),
                                 meta: {
                                     title: '监考场次'
+                                }
+                             },
+
+                             {
+                                path: 'test22-3-1',
+                                component: () => import('../page/teacherweb/_setting/SelfInfo.vue'),
+                                meta: {
+                                    title: '个人信息'
                                 }
                              },
                              

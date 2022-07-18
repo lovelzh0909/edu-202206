@@ -123,9 +123,128 @@
         <el-button @click="returnback()" type="primary" size="small" style="margin-top:30px">返回</el-button>
         <el-button style="float:right;margin-top: 10px" v-show="curStep === 1" type="primary" @click=" submitQuestion()">提交</el-button>
         </div> 
-        <!-- 随机组卷 -->
-        
-        <!-- 智能组卷 -->
+                <!-- 随机组卷 -->
+        <div v-show="makeModel === 1">
+          <el-card class="box-card" >
+          <div slot="header" class="clearfix">
+            <span>随机组卷规则选择</span>
+            
+          </div>
+         <el-form ref="form" :model="form" label-width="250px">
+            
+            <el-form-item label="选择题库:">
+             <el-select @change="bankChange" clearable v-model="queryInfo.questionBank" placeholder="请选择题库"
+                   style="margin-left: 5px">
+                    <el-option
+                      v-for="item in allBank"
+                      :key="item.coursename"
+                      :label="item.coursename"
+                      :value="item.coursename">
+                    </el-option>
+                  </el-select>
+            </el-form-item>
+            <el-form-item label="选择章节：">
+              <el-select v-model="pointIds" multiple placeholder="请选择">
+                <el-option
+                  v-for="item in options2"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <!-- <el-form-item label="难度值（期望的难度平均值(1-5))：">
+              <el-input v-model="form.difficulty" style="width:32%"></el-input>
+            </el-form-item> -->
+            <el-form-item label="单选题个数及分数：" >
+              <el-input v-model="form.type1num" style="width:32%" placeholder="输入个数"></el-input>
+              <el-input v-model="form.type1sco" style="width:32%;margin-left:20px" placeholder="输入每一道题的分数"></el-input>
+            </el-form-item>
+            
+            <el-form-item label="多选题个数及分数：">
+              <el-input v-model="form.type2num" style="width:32%" placeholder="输入个数"></el-input>
+              <el-input v-model="form.type2sco" style="width:32%;margin-left:20px" placeholder="输入每一道题的分数"></el-input>
+            </el-form-item>
+            <el-form-item label="判断题个数及分数：">
+              <el-input v-model="form.type3num" style="width:32%" placeholder="输入个数"></el-input>
+              <el-input v-model="form.type3sco" style="width:32%;margin-left:20px" placeholder="输入每一道题的分数"></el-input>
+            </el-form-item>
+            <el-form-item label="填空题个数及分数：">
+              <el-input v-model="form.type4num" style="width:32%" placeholder="输入个数"></el-input>
+              <el-input v-model="form.type4sco" style="width:32%;margin-left:20px" placeholder="输入每一道题的分数"></el-input>
+            </el-form-item>
+            <el-form-item label="简答题个数及分数：">
+              <el-input v-model="form.type5num" style="width:32%" placeholder="输入个数"></el-input>
+              <el-input v-model="form.type5sco" style="width:32%;margin-left:20px" placeholder="输入每一道题的分数"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="onSubmit()">一键组卷</el-button>
+              <el-button type="primary" @click="returnback()">返回</el-button>
+            </el-form-item>
+          </el-form>
+        </el-card>
+        </div>
+         <!-- 智能组卷 -->
+        <div v-show="makeModel === 3">
+          <el-card class="box-card" >
+          <div slot="header" class="clearfix">
+            <span>智能组卷规则选择</span>
+            
+          </div>
+         <el-form ref="form" :model="form" label-width="250px">
+            
+            <el-form-item label="选择题库:">
+             <el-select @change="bankChange" clearable v-model="queryInfo.questionBank" placeholder="请选择题库"
+                   style="margin-left: 5px">
+                    <el-option
+                      v-for="item in allBank"
+                      :key="item.coursename"
+                      :label="item.coursename"
+                      :value="item.coursename">
+                    </el-option>
+                  </el-select>
+            </el-form-item>
+            <el-form-item label="选择章节：">
+              <el-select v-model="pointIds" multiple placeholder="请选择">
+                <el-option
+                  v-for="item in options2"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="难度值（期望的难度平均值(1-5))：">
+              <el-input v-model="form.difficulty" style="width:32%"></el-input>
+            </el-form-item>
+            <el-form-item label="单选题个数及分数：" >
+              <el-input v-model="form.type1num" style="width:32%" placeholder="输入个数"></el-input>
+              <el-input v-model="form.type1sco" style="width:32%;margin-left:20px" placeholder="输入每一道题的分数"></el-input>
+            </el-form-item>
+            
+            <el-form-item label="多选题个数及分数：">
+              <el-input v-model="form.type2num" style="width:32%" placeholder="输入个数"></el-input>
+              <el-input v-model="form.type2sco" style="width:32%;margin-left:20px" placeholder="输入每一道题的分数"></el-input>
+            </el-form-item>
+            <el-form-item label="判断题个数及分数：">
+              <el-input v-model="form.type3num" style="width:32%" placeholder="输入个数"></el-input>
+              <el-input v-model="form.type3sco" style="width:32%;margin-left:20px" placeholder="输入每一道题的分数"></el-input>
+            </el-form-item>
+            <el-form-item label="填空题个数及分数：">
+              <el-input v-model="form.type4num" style="width:32%" placeholder="输入个数"></el-input>
+              <el-input v-model="form.type4sco" style="width:32%;margin-left:20px" placeholder="输入每一道题的分数"></el-input>
+            </el-form-item>
+            <el-form-item label="简答题个数及分数：">
+              <el-input v-model="form.type5num" style="width:32%" placeholder="输入个数"></el-input>
+              <el-input v-model="form.type5sco" style="width:32%;margin-left:20px" placeholder="输入每一道题的分数"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="onSubmitIN()">一键组卷</el-button>
+              <el-button type="primary" @click="returnback()">返回</el-button>
+            </el-form-item>
+          </el-form>
+        </el-card>
+        </div>
         
       </el-card>
 

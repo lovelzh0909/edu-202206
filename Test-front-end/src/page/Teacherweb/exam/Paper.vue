@@ -47,22 +47,17 @@
           <el-table-column prop="paperId" sortable align="center" label="试卷id" width="90"></el-table-column>
           <el-table-column prop="source" label="试卷名称" align="center" width="150"></el-table-column>
           <el-table-column prop="description" label="试卷介绍" align="center" width="150"></el-table-column>
-          <!-- <el-table-column prop="institute" label="所属学院" width="120"></el-table-column>
-          <el-table-column prop="major" label="所属专业" width="120"></el-table-column>
-          <el-table-column prop="grade" label="年级" width="100"></el-table-column> -->
-          <!-- <el-table-column prop="examDate" label="考试日期" width="120"></el-table-column> -->
           <el-table-column prop="totalTime" label="持续时间(min)" align="center" width="120"></el-table-column>
           <el-table-column prop="createTime" sortable label="创建时间" align="center" width="160"></el-table-column>
           <el-table-column prop="totalScore" label="总分" align="center" width="120"></el-table-column>
-          <!-- <el-table-column prop="type" label="试卷类型" width="120"></el-table-column> -->
           <el-table-column prop="note" label="备注" align="center" width="360"></el-table-column>
           <el-table-column fixed="right" label="操作"  width="180" align="center">
             <template slot-scope="scope">
               <el-button @click="toPathtestpaper(scope.row.paperId,scope.row.totalScore)" type="primary" size="small" circle>组卷</el-button>
-              <!-- <el-button @click="edit(scope.row.paperId)" type="success" size="small" circle>修改</el-button>
-              <el-button @click="copy(scope.row.paperId)" type="info" size="small" circle>复制</el-button>
-              <el-button @click="toLook(scope.row.paperId)" type="warning" size="small" circle>预览</el-button> -->
+              <el-button @click="toLook(scope.row.paperId)" type="warning" size="small" circle>预览</el-button>
               <el-button @click="deleteRecord(scope.row.paperId)" type="danger" size="small" circle>删除</el-button>
+         <!-- <el-button @click="edit(scope.row.paperId)" type="success" size="small" circle>修改</el-button>
+              <el-button @click="copy(scope.row.paperId)" type="info" size="small" circle>复制</el-button> -->
             </template>
           </el-table-column>
         </el-table>

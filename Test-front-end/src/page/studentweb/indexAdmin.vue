@@ -29,14 +29,14 @@ export default {
                 index: 'test1-1',
                 title: '考试列表'
             },
-            // {
-            //     index: 'test1-2',
-            //     title: '考试通知'
-            // },
-            // {
-            //     index: 'test1-3',
-            //     title: '个人信息'
-            // },
+            {
+                index: 'test1-2',
+                title: '考试通知'
+            },
+            {
+                index: 'test1-3',
+                title: '个人信息'
+            },
             // {
             //     index: 'test1-4',
             //     title: '错题集'
