@@ -93,7 +93,8 @@
 </template>
 
 <script>
-
+import {postRequest} from "@/utils/request";
+import {post1Request} from "@/utils/request";
   export default {
     
     name: 'examinationPaper',
@@ -228,15 +229,10 @@
       const _this = this;
       let paperId = this.$route.query.paperId;//获取路由传递过来的考试编号 
       let phone = localStorage.getItem('ms_username')
-      this.$axios({
-        url: 'http://localhost:8080/showpaper/getpaper/bypaperId',
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params: {paperId:paperId}
-        
-      }).then(res=>{
+      const data = {
+        paperId:paperId
+      }
+      post1Request('showpaper/getpaper/bypaperId',data).then(res=>{
             console.log(res);
       _this.papername = res.data.data.description
       _this.studentId = phone
@@ -260,21 +256,48 @@
             console.log(err);
             alert("服务器错误!稍后重试");
           })
+    //   this.$axios({
+    //     url: 'http://localhost:8080/showpaper/getpaper/bypaperId',
+    //     method: 'post',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     params: {paperId:paperId}
+        
+    //   }).then(res=>{
+    //         console.log(res);
+    //   _this.papername = res.data.data.description
+    //   _this.studentId = phone
+    //   _this.lasttime = res.data.data.totalTime
+    //   _this.totalscore = res.data.data.totalScore
+    //       if(_this.type===1)
+    // {
+    //   let remainTime=_this.lasttime*60;
+    //   console.log('111')
+    //   console.log(_this.lasttime)
+    //   if (remainTime> 0) {
+    //     _this.hour = Math.floor((remainTime / 3600) % 24)
+    //     _this.minute = Math.floor((remainTime / 60) % 60)
+    //     _this.second = Math.floor(remainTime % 60)
+    //     _this.countDowm()
+    //   }
+    // }
+
+    //       },
+    //       function (err) {
+    //         console.log(err);
+    //         alert("服务器错误!稍后重试");
+    //       })
     },
       //获得考试试卷信息
       getTests(){
         const _this = this;
         let paperId = this.$route.query.paperId;//获取路由传递过来的考试编号 
         // console.log(testId)
-        this.$axios({
-          url: 'http://localhost:8080/showpaper/getQuestion/bypaperId',
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'  
-          },
-          params: {paperId:paperId}
-          
-        }).then(res=>{
+        const data = {
+        paperId:paperId
+      }
+      post1Request('showpaper/getQuestion/bypaperId',data).then(res=>{
               if(res.data.msg !== 'success')
               alert(res.data.msg)
               else{
@@ -290,6 +313,30 @@
               console.log(err);
               alert("服务器错误!稍后重试");
             })
+        // this.$axios({
+        //   url: 'http://localhost:8080/showpaper/getQuestion/bypaperId',
+        //   method: 'post',
+        //   headers: {
+        //     'Content-Type': 'application/json'  
+        //   },
+        //   params: {paperId:paperId}
+          
+        // }).then(res=>{
+        //       if(res.data.msg !== 'success')
+        //       alert(res.data.msg)
+        //       else{
+        //       this.dataSource.list = res.data.data
+              
+        //     this.convertData();
+        //       this.studentphone = res.data.data2.studentphone
+        //       console.log(this.studentphone)}
+
+        //     },
+        //     function (err) {
+              
+        //       console.log(err);
+        //       alert("服务器错误!稍后重试");
+        //     })
       },
       /**
        * 按钮点击事件

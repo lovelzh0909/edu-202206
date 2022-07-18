@@ -260,6 +260,8 @@
 
 <script>
 import axios from "axios";
+import {postRequest} from "@/utils/request";
+import {post1Request} from "@/utils/request";
 
 export default {
 
@@ -361,16 +363,11 @@ export default {
       let studentID = this.testData.studentId
       let testid = 1
       const _this = this
-      axios({
-        url:'http://localhost:8080/CompareFace/compareFaces',
-        method:'post',
-        headers:{ 'Content-Type': 'application/json'},
-        params :{
-          studentID,
+      const data = {
+        studentID,
         testid
-        }
-      
-      }).then(function(res){
+      }
+      post1Request('CompareFace/compareFaces',data).then(function(res){
 
         if(res.data.msg !='success'){
           alert(res.data.msg)
@@ -381,6 +378,26 @@ export default {
         console.log(_this.similar)
         console.log('bbb')
       }})
+      // axios({
+      //   url:'http://localhost:8080/CompareFace/compareFaces',
+      //   method:'post',
+      //   headers:{ 'Content-Type': 'application/json'},
+      //   params :{
+      //     studentID,
+      //   testid
+      //   }
+      
+      // }).then(function(res){
+
+      //   if(res.data.msg !='success'){
+      //     alert(res.data.msg)
+      //   }
+      //   else{
+      //   _this.similar = Number(res.data.data*100).toFixed(2);
+      //   _this.similar += "%"
+      //   console.log(_this.similar)
+      //   console.log('bbb')
+      // }})
     },
 
     base64ImgtoFile(dataurl, filename = 'file') {
@@ -418,31 +435,37 @@ export default {
     gettestheader(){
       let testId = this.$route.query.testId;//获取路由传递过来的考试编号 
       const _this = this
-      axios({
-        url:'http://localhost:8080/showpaper/getpaper/bytestId',
-        method:'post',
-        headers:{ 'Content-Type': 'application/json'},
-        params :{testId: testId}
-      
-      }).then(function(res){
+      const data = {
+        testId: testId
+      }
+      post1Request('showpaper/getpaper/bytestId',data).then(function(res){
         console.log(res);
         console.log('aaa')
         // console.log(_this.url)
         _this.tempDataSource = res.data.data
         console.log(_this.tempDataSource)
       })
+      // axios({
+      //   url:'http://localhost:8080/showpaper/getpaper/bytestId',
+      //   method:'post',
+      //   headers:{ 'Content-Type': 'application/json'},
+      //   params :{testId: testId}
+      
+      // }).then(function(res){
+      //   console.log(res);
+      //   console.log('aaa')
+      //   // console.log(_this.url)
+      //   _this.tempDataSource = res.data.data
+      //   console.log(_this.tempDataSource)
+      // })
     },
     getTestvideolist() {
       const _this = this
       let testId = this.$route.query.testId;//获取路由传递过来的考试编号 
-       axios({
-        url: `http://localhost:8080/studentvideo/invigilate` ,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params :{testId: testId}
-      }).then(function (res) {
+      const data = {
+        testId: testId
+      }
+      post1Request('studentvideo/invigilate',data).then(function (res) {
 
             console.log(res);
             _this.testStudent = res.data.data;
@@ -478,7 +501,50 @@ export default {
             console.log(err);
             alert("服务器错误!稍后重试");
           })
-      // const _this = this;
+      //  axios({
+      //   url: `http://localhost:8080/studentvideo/invigilate` ,
+      //   method: 'post',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   params :{testId: testId}
+      // }).then(function (res) {
+
+      //       console.log(res);
+      //       _this.testStudent = res.data.data;
+      //       console.log(_this.testStudent)
+      //       for(let i=0;i<_this.testStudent.length;i++){
+      //         // _this.student.push("teststatus:")
+      //         if(_this.testStudent[i].status == 1){
+      //           _this.testStudent[i].teststatus = '未进入考试'
+      //         }
+      //         else if(_this.testStudent[i].status == 2){
+      //           _this.testStudent[i].teststatus = '正在考试'
+      //         }
+      //         else _this.testStudent[i].teststatus = '已交卷'
+      //       }
+            
+      //       // // base64编码的图片
+      //       // for(let i =0;i<res.data.data.length;i++){
+      //       //   _this.url = res.data.data[0].video
+      //       //   _this.urllist[i] = res.data.data[i].video
+      //       // }
+            
+      //       // console.log(base64Img)
+      //       //转换图片文件
+      //       // var imgFile = _this.base64ImgtoFile(base64Img);
+      //       // console.log(imgFile)
+      //       // // _this.urllist.push(res.data.data.video)
+      //       // _this.url = imgFile
+            
+            
+
+      //     },
+      //     function (err) {
+      //       console.log(err);
+      //       alert("服务器错误!稍后重试");
+      //     })
+      // // const _this = this;
       // // let phone = localStorage.getItem('ms_username')
       // // console.log(this.phoneNumber,this.passWord)
       // axios.post("http://localhost:8080/studentvideo/get", {

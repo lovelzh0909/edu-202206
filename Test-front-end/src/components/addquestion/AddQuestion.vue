@@ -60,6 +60,8 @@
 import question from '@/components/addquestion/Question'
 import axios from "axios";
 // import crudList from '@/api/exam/list'
+import {postRequest} from "@/utils/request";
+import {post1Request} from "@/utils/request";
 export default {
   // name: 'Create',
   components: {
@@ -231,12 +233,8 @@ export default {
           dataq.push(question)
         })
         console.log(dataq)
-        this.$axios({
-          method: 'post',
-          url:`http://localhost:8080/question/saveall`,
-          data:dataq,
-          // params:params,
-        }).then(res =>{
+         const data = dataq
+      post1Request('question/saveall',data).then(res =>{
           alert('提交成功')
           this.loading=false
           for (let i = 0; i < form.questions.length; i++) {
@@ -249,6 +247,24 @@ export default {
         })
 
       })
+      //   this.$axios({
+      //     method: 'post',
+      //     url:`http://localhost:8080/question/saveall`,
+      //     data:dataq,
+      //     // params:params,
+      //   }).then(res =>{
+      //     alert('提交成功')
+      //     this.loading=false
+      //     for (let i = 0; i < form.questions.length; i++) {
+      //       this.removeQuestion(i)
+      //     }
+      //     this.$router.go(-1) 
+      //   }).catch(err=>{
+      //     alert('提交失败')
+      //     this.loading =false
+      //   })
+
+      // })
     },
     //返回题库列表
     returnback(){
