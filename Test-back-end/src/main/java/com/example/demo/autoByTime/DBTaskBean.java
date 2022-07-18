@@ -1,7 +1,7 @@
 package com.example.demo.autoByTime;
 
-import com.example.demo.Common.entity.Notice;
-import com.example.demo.Common.service.NoticeService;
+import com.example.demo.PaperManage.Common.entity.Notice;
+import com.example.demo.PaperManage.Common.service.NoticeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

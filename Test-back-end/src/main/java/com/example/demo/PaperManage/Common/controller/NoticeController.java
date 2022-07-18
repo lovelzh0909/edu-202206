@@ -1,4 +1,4 @@
-package com.example.demo.Common.controller;
+package com.example.demo.PaperManage.Common.controller;
 
 
 import java.text.ParseException;
@@ -10,12 +10,12 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.Response.CommonReturnType;
-import com.example.demo.Common.entity.Notice;
+import com.example.demo.PaperManage.Common.entity.Notice;
 import com.example.demo.TestManage.entity.Test;
 import com.example.demo.TestManage.entity.Testrelstudent;
 import com.example.demo.UserManage.entity.User;
 import com.example.demo.TestManage.entity.vo.StudentTestNoticeVO;
-import com.example.demo.Common.service.NoticeService;
+import com.example.demo.PaperManage.Common.service.NoticeService;
 import com.example.demo.TestManage.service.TestService;
 
 import com.example.demo.TestManage.service.TestrelstudentService;

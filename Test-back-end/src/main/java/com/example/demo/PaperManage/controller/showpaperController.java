@@ -99,7 +99,7 @@ public class showpaperController {
         List<Testrelstudent> testrelstudent = testrelstudentService.list(new QueryWrapper<Testrelstudent>()
                 .eq("test_id", testId).eq("status", 3));
         if (testrelstudent.size() == 0 || testrelstudent == null) {
-            testService.update(new UpdateWrapper<Test>().set("teststatus", 4).eq("test_id", testId));
+            testService.update(new UpdateWrapper<Test>().set("test_status", 4).eq("test_id", testId));
             return CommonReturnType.create(null, "没有待批阅学生");
         }
         for (String s : qs) {
@@ -183,7 +183,9 @@ public class showpaperController {
                 return CommonReturnType.create("没找到该学生某题目答案");
             }
             sum += paperJustify.setScore(q.getGetScore()).getScore();
+            paperJustifyService.saveOrUpdate(paperJustify);
         }
+
 //        Testrelstudent stu = testrelstudentService.getOne(new QueryWrapper<Testrelstudent>().eq("student_phone", studentphone).eq("test_id", testId));
 //        stu.setStatus(3);
         testrelstudentService.update(new UpdateWrapper<Testrelstudent>().set("status", 4).eq("student_phone", studentphone).eq("test_id", testId));
@@ -200,6 +202,7 @@ public class showpaperController {
         score.setSubject(t.getCoursename());
         score.setStudentId(studentphone);
         scoreService.save(score);
+        log.info("批阅完成");
         return CommonReturnType.create(score);
     }
 

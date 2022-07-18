@@ -23,10 +23,11 @@ import java.util.Map;
  * </p>
  *
  * @author 作者
- * @since 2022-03-12
+ * @since 2022-07-17
  */
 @Slf4j
 @RestController
+@CrossOrigin
 @RequestMapping("/question")
 public class QuestionController {
     private final QuestionService questionService;
