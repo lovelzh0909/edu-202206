@@ -23,17 +23,21 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @RestController
 @RequestMapping("/testrelstudent")
 public class TestrelstudentController {
-
+    private final TestrelstudentService testrelstudentService;
 
     @Autowired
-    TestrelstudentService testrelstudentService;
+    public TestrelstudentController(TestrelstudentService testrelstudentService) {
+        this.testrelstudentService = testrelstudentService;
+    }
+
     /**
      * 通过测试id，获取参与该测试学生
+     *
      * @param t 测试id
      * @return 获取参与该测试学生list
      */
     @PostMapping("/selectbytestid")
-    public CommonReturnType showTest(@RequestBody String t ){
+    public CommonReturnType showTest(@RequestBody String t) {
         // if(q.getStem()==null||q.getAnswer()==null||q.getCoursename()==null||q.getType()==null)
         // return CommonReturnType.create(null,"信息不全");
         // if(q.getId()==null){

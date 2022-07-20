@@ -30,9 +30,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/MakePaper")
 public class MakePaperController {
     //    RuleService ruleService;
-    QuestionService questionService;
-    PapersService papersService;
-    QuestionrelscoreService questionrelscoreService;
+    private final QuestionService questionService;
+    private final PapersService papersService;
+    private final QuestionrelscoreService questionrelscoreService;
 
     @Autowired
     public MakePaperController(QuestionService questionService, PapersService papersService, QuestionrelscoreService questionrelscoreService) {
