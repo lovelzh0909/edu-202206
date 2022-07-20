@@ -82,6 +82,7 @@
     <div class="paper-footer">
       <!-- <el-button v-if="type===1" type="primary" @click.native="btnClick('handPaper')">交卷</el-button> -->
       <el-button v-if="type===2" type="primary" @click.native="btnClick('readPaper')">已阅</el-button>
+      <el-button type="primary" @click="returnback()">返回</el-button>
       <!-- <el-button v-if="type===2" type="primary" @click.native="btnClick('readPaperUpper')">上一个</el-button> -->
       <el-button v-if="type===2" type="primary" @click.native="btnClick('readPaperNext')">下一个</el-button>
     </div>
@@ -259,7 +260,10 @@ import {post1Request} from "@/utils/request";
 
     },
     methods: {
-      
+      //返回
+      returnback(){
+        this.$router.go(-1)
+      },
       //获得考试试卷信息
       getTests(){
         const _this = this;
@@ -269,6 +273,12 @@ import {post1Request} from "@/utils/request";
          testId:testId
       }
       post1Request('showpaper/getQuestion/bytestId/grant',data).then(res=>{
+              if(res.data.msg !=='success'){
+                this.$message({
+                  message: '暂无待批阅学生',
+                  type: 'error'
+                })
+              }
               console.log(res);
               this.dataSource.list = res.data.data
               console.log('aaaaaa');

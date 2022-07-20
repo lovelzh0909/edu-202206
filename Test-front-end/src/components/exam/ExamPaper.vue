@@ -139,7 +139,7 @@
         <canvas style="display:none;margin-left:85%;" id="canvasCamera" :width="videoWidth" :height="videoHeight"></canvas>
 
        
-        <p class="fail_tips" style="margin-left:85%;">考试途中会有随机抓拍，请考生尽量正脸面向摄像头</p>
+        <!-- <p class="fail_tips" style="margin-left:85%;">考试途中会有随机抓拍，请考生尽量正脸面向摄像头</p> -->
         <!-- 给外面盒子设置宽高，可以限制拍照图片的大小位置范围 -->
         <!-- <div class="result_img" style="margin-left:85%;">
           <img :src="imgSrc" alt class="tx_img" width="100%" />
