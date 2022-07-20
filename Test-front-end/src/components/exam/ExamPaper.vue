@@ -134,18 +134,17 @@
         <el-button v-if="type===2" type="success" @click.native="btnClick('readPaperUpper')">上一个</el-button>
         <el-button v-if="type===2" type="success" @click.native="btnClick('readPaperNext')">下一个</el-button>
       </div>
-      <!-- <div>
+      <div>
         <video style="margin-left:85%;"id="videoCamera" :width="videoWidth" :height="videoHeight"  autoplay></video>
         <canvas style="display:none;margin-left:85%;" id="canvasCamera" :width="videoWidth" :height="videoHeight"></canvas>
 
-        <!-- <button plain  @click="setImage()" style="margin-left:85%;">手动拍照</button>
-        <button style="left:00px;" @click="stopNavigator()">关闭摄像头</button> -->
+       
         <p class="fail_tips" style="margin-left:85%;">考试途中会有随机抓拍，请考生尽量正脸面向摄像头</p>
         <!-- 给外面盒子设置宽高，可以限制拍照图片的大小位置范围 -->
-        <div class="result_img" style="margin-left:85%;">
+        <!-- <div class="result_img" style="margin-left:85%;">
           <img :src="imgSrc" alt class="tx_img" width="100%" />
         </div>
-        <p class="res_tips" style="margin-left:1500px;">抓拍效果展示</p>
+        <p class="res_tips" style="margin-left:1500px;">抓拍效果展示</p> -->
       </div> -->
       <!--    防切屏提示的弹窗-->
       <el-dialog title="提示" :visible.sync="tipsFlag" width="480px" class="commonDialog multi clickLight" center :close-on-click-modal="false" :close-on-press-escape= false>
@@ -537,22 +536,7 @@ export default {
             this.answer1.push(j)
             // this.Manswer[i].answer[i] = this.dataSource.list[i].content
             }
-            // for(let i=0; i<this.dataSource.list.length; i++){
-              
-            //   // this.abcdlist[i].choice = this.dataSource.list[i].choiceE.split(',') //字符串按逗号分隔成数组
-            //   let tempData = []
-            //   tempData.push(this.dataSource.list[i].choiceA)
-            //   tempData.push(this.dataSource.list[i].choiceB)
-            //   tempData.push(this.dataSource.list[i].choiceC)
-            //   tempData.push(this.dataSource.list[i].choiceD)
-            //   this.abcdlist[i].choice = tempData
-            // }
-            // console.log('000')
-            // for(let i=0;i<_this.dataSource.list.length;i++){
-            //   this.Manswer[i].answer = _this.dataSource.list[i].answer.split(',')
-            // }
-            //   console.log('000')
-            //   console.log(this.Manswer)
+            
             this.convertData();
           },
           function (err) {
@@ -584,22 +568,6 @@ export default {
       //       this.answer1.push(j)
       //       // this.Manswer[i].answer[i] = this.dataSource.list[i].content
       //       }
-      //       // for(let i=0; i<this.dataSource.list.length; i++){
-              
-      //       //   // this.abcdlist[i].choice = this.dataSource.list[i].choiceE.split(',') //字符串按逗号分隔成数组
-      //       //   let tempData = []
-      //       //   tempData.push(this.dataSource.list[i].choiceA)
-      //       //   tempData.push(this.dataSource.list[i].choiceB)
-      //       //   tempData.push(this.dataSource.list[i].choiceC)
-      //       //   tempData.push(this.dataSource.list[i].choiceD)
-      //       //   this.abcdlist[i].choice = tempData
-      //       // }
-      //       // console.log('000')
-      //       // for(let i=0;i<_this.dataSource.list.length;i++){
-      //       //   this.Manswer[i].answer = _this.dataSource.list[i].answer.split(',')
-      //       // }
-      //       //   console.log('000')
-      //       //   console.log(this.Manswer)
       //       this.convertData();
       //     },
       //     function (err) {
@@ -785,7 +753,13 @@ postImg(){
           console.log(this.dataa)
           let dataq = this.dataa
           const data = dataq
-      post1Request(`paperJustify/saveall/${phone}/${testId}`,data).then(res => {
+     
+          this.$axios({
+            // url: 'http://192.168.3.48:8080/paperJustify/saveall',
+            url:`http://localhost:8080/paperJustify/saveall/${phone}/${testId}`,
+            method: 'post',
+            data: dataq
+          }).then(res => {
             if(res.data.msg = 'success') {
               
               alert('交卷成功')
@@ -796,34 +770,18 @@ postImg(){
               this.$router.go(-1)
             }
           })
-          // this.$axios({
-          //   // url: 'http://192.168.3.48:8080/paperJustify/saveall',
-          //   url:`http://localhost:8080/paperJustify/saveall/${phone}/${testId}`,
-          //   method: 'post',
-          //   data: dataq
-          // }).then(res => {
-          //   if(res.data.msg = 'success') {
-              
-          //     alert('交卷成功')
-          //     this.isStop = true;
-          //     this.tipsFlag = false;
-          //     this.summit = true;
-          //     this.backStatu = true;
-          //     this.$router.go(-1)
-          //   }
-          // })
-          // if(this.code === "0"){
-          //   this.isStop = true;
-          //   this.tipsFlag = false;
-          //   this.summit = true;
-          //   this.backStatu = true;
+          if(this.code === "0"){
+            this.isStop = true;
+            this.tipsFlag = false;
+            this.summit = true;
+            this.backStatu = true;
 
-          //   alert('交卷成功')
-          //   // window.location.href = "http://localhost:8080/#/test11-1";
+            alert('交卷成功')
+            // window.location.href = "http://localhost:8080/#/test11-1";
             
-          //     
+              
             
-          // }
+          }
           break
           //阅卷
         case 'readPaper':

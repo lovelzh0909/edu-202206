@@ -337,6 +337,7 @@ import {post1Request} from "@/utils/request";
                   message: '提交成功',
                   type: 'success'
                 })
+                this.getTests()
                 // this.$router.go(0)
                 // this.$router.go(-1)
                 // this.$router.push({path: '/test2/test2-1-3'})

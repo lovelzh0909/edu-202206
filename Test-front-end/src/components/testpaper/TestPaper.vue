@@ -10,7 +10,7 @@
           
           <el-radio :label="2" border>手动组卷</el-radio>
           <el-radio :label="1" border>随机组卷</el-radio>
-          <el-radio :label="3" border>智能组卷</el-radio>
+          <!-- <el-radio :label="3" border>智能组卷</el-radio> -->
         </el-radio-group>
 
         <span style="float: right;color: red;font-weight: bold" v-if="makeModel ===2">

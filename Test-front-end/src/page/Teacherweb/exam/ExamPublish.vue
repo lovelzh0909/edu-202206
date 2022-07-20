@@ -591,7 +591,7 @@ import VXETable from 'vxe-table'
         // console.log(data1)
         console.log('aaa')
         const data=dataa
-        postRequest('teacherrelclass/getStudent/byclass',data).then(res => {
+        postRequest('test/saveall',data).then(res => {
           if(res.data.msg !== 'success') {
             alert(res.data.msg)
             }
