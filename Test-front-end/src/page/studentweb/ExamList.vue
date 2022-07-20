@@ -118,7 +118,7 @@
 <script>
 import axios from "axios";
 import * as jQuery from "xe-utils";
-import {post1Request} from "../utils/request";
+import {post1Request} from "@/utils/request";
 export default {
   name: '',
   data() {
@@ -137,70 +137,7 @@ export default {
       student:[
         {teststatus:'未开始'},
       ],
-      tableData: [
-        {
-          date: '2016-05-03',
-          corsename: '离散数学',
-          time: '2022.03.05',
-          kaochanghao:'001',
-          examtea:'张三',
-          note:'无',
-          status:'未开始',
-        },
-        {
-          date: '2016-05-03',
-          corsename: '离散数学',
-          time: '2022.03.05',
-          kaochanghao:'001',
-          examtea:'张三',
-          beizhu:'无',
-          status:'未开始',
-        },
-        {
-          date: '2016-05-03',
-          corsename: '离散数学',
-          time: '2022.03.05',
-          kaochanghao:'001',
-          examtea:'张三',
-          beizhu:'无',
-          status:'未开始',
-        },
-        {
-          date: '2016-05-03',
-          corsename: '离散数学',
-          time: '2022.03.05',
-          kaochanghao:'001',
-          examtea:'张三',
-          beizhu:'无',
-          status:'未开始',
-        },
-        {
-          date: '2016-05-03',
-          corsename: '离散数学',
-          time: '2022.03.05',
-          kaochanghao:'001',
-          examtea:'张三',
-          beizhu:'无',
-          status:'未开始',
-        },
-        {
-          date: '2016-05-03',
-          corsename: '离散数学',
-          time: '2022.03.05',
-          kaochanghao:'001',
-          examtea:'张三',
-          beizhu:'无',
-          status:'未开始',
-        },
-        {
-          date: '2016-05-03',
-          corsename: '离散数学',
-          time: '2022.03.05',
-          kaochanghao:'001',
-          examtea:'张三',
-          beizhu:'无',
-          status:'未开始',
-        }]
+      
     }
   },
   methods: {
@@ -241,7 +178,7 @@ export default {
       const data={
         phone: localStorage.getItem('ms_username')
       }
-      post1Request(`/test/getStudenttest/${1}/${6}`,data).then(function (res) {
+      post1Request(`test/getStudenttest/${1}/${6}`,data).then(function (res) {
 
             console.log(res);
             _this.pagination = res.data.data;

@@ -124,8 +124,8 @@
 </template>
 
 <script>
-import {postRequest} from "../utils/request";
-import {post2Request} from "../utils/request";
+import {postRequest} from "@/utils/request";
+import {post2Request} from "@/utils/request";
   export default {
     data() {
       return {
@@ -208,7 +208,7 @@ import {post2Request} from "../utils/request";
         const data={
         ..._this.form1,
       }
-      postRequest('/school/save',data).then(res => {
+      postRequest('school/save',data).then(res => {
           if (res.data.msg === 'success') {
             this.$message({
               message: '数据添加成功',
@@ -246,7 +246,7 @@ import {post2Request} from "../utils/request";
         //获取所有用户信息
         getInfo(){
             const _this = this
-      post2Request('/school/list').then(function (res) {
+      post2Request('school/list').then(function (res) {
 
             _this.tableData = res.data.data
             
@@ -302,7 +302,7 @@ import {post2Request} from "../utils/request";
        const data={
         ..._this.form1,
       }
-      postRequest('/user/update',data).then(res => {
+      postRequest('user/update',data).then(res => {
         if (res.data.code === 200) {
           this.$message({ //成功修改提示
             message: '更新成功',
@@ -335,7 +335,7 @@ import {post2Request} from "../utils/request";
       const data={
         school:school
       }
-      postRequest('/school/delete',data).then(res => {
+      postRequest('school/delete',data).then(res => {
           this.getInfo()
         })
       }).catch(() => {

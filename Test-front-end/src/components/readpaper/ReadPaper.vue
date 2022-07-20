@@ -82,6 +82,7 @@
     <div class="paper-footer">
       <!-- <el-button v-if="type===1" type="primary" @click.native="btnClick('handPaper')">交卷</el-button> -->
       <el-button v-if="type===2" type="primary" @click.native="btnClick('readPaper')">已阅</el-button>
+      <el-button type="primary" @click="returnback()">返回</el-button>
       <!-- <el-button v-if="type===2" type="primary" @click.native="btnClick('readPaperUpper')">上一个</el-button> -->
       <el-button v-if="type===2" type="primary" @click.native="btnClick('readPaperNext')">下一个</el-button>
     </div>
@@ -90,7 +91,8 @@
 </template>
 
 <script>
-
+import {postRequest} from "@/utils/request";
+import {post1Request} from "@/utils/request";
   export default {
     
     name: 'examinationPaper',
@@ -258,28 +260,32 @@
 
     },
     methods: {
-      
+      //返回
+      returnback(){
+        this.$router.go(-1)
+      },
       //获得考试试卷信息
       getTests(){
         const _this = this;
         let testId = this.$route.query.testId;//获取路由传递过来的考试编号 
         console.log(testId)
-        this.$axios({
-          url: 'http://localhost:8080/showpaper/getQuestion/bytestId/grant',
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          params: {testId:testId}
-          
-        }).then(res=>{
+        const data = {
+         testId:testId
+      }
+      post1Request('showpaper/getQuestion/bytestId/grant',data).then(res=>{
+              if(res.data.msg !=='success'){
+                this.$message({
+                  message: '暂无待批阅学生',
+                  type: 'error'
+                })
+              }
               console.log(res);
               this.dataSource.list = res.data.data
               console.log('aaaaaa');
               console.log(_this.dataSource);
               console.log(_this.dataSource.list);
             this.convertData();
-              this.studentphone = res.data.data2.studentphone
+              this.studentphone = res.data.data2.student_phone
               console.log(this.studentphone)
 
             },
@@ -287,6 +293,29 @@
               console.log(err);
               alert("服务器错误!稍后重试");
             })
+        // this.$axios({
+        //   url: 'http://localhost:8080/showpaper/getQuestion/bytestId/grant',
+        //   method: 'post',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   params: {testId:testId}
+          
+        // }).then(res=>{
+        //       console.log(res);
+        //       this.dataSource.list = res.data.data
+        //       console.log('aaaaaa');
+        //       console.log(_this.dataSource);
+        //       console.log(_this.dataSource.list);
+        //     this.convertData();
+        //       this.studentphone = res.data.data2.studentphone
+        //       console.log(this.studentphone)
+
+        //     },
+        //     function (err) {
+        //       console.log(err);
+        //       alert("服务器错误!稍后重试");
+        //     })
       },
       /**
        * 按钮点击事件
@@ -294,7 +323,7 @@
       btnClick(type){
         // console.log(this.tempDataSource);
         switch (type) {
-          //交卷
+          
           
           //提交该份考卷阅卷结果
           case 'readPaper':
@@ -306,33 +335,46 @@
 
             // }
             console.log('aaa')
-            console.log(this.dataSource.list)
+            console.log(studentphone)
             let dataa = this.dataSource.list
             console.log(this.studentphone)
             let teacherphone = localStorage.getItem('ms_username')
             const _this = this
-            this.$axios({
-            url: `http://localhost:8080/showpaper/marking/finish/${studentphone}/${teacherphone}/${testId}`,
-            method: 'post',
-            // headers: {
-            //   'Content-Type': 'application/json'
-            // },
-            // params: 
-            //   this.studentsphone
-            data: 
-              dataa
-               
-          }).then(res => {
+            const data = dataa
+      postRequest(`showpaper/marking/finish/${studentphone}/${teacherphone}/${testId}`,data).then(res => {
               if(res.data.msg === '200') {
                 this.$message({
                   message: '提交成功',
                   type: 'success'
                 })
+                this.getTests()
                 // this.$router.go(0)
                 // this.$router.go(-1)
                 // this.$router.push({path: '/test2/test2-1-3'})
               }
               })
+          //   this.$axios({
+          //   url: `http://localhost:8080/showpaper/marking/finish/${studentphone}/${teacherphone}/${testId}`,
+          //   method: 'post',
+          //   // headers: {
+          //   //   'Content-Type': 'application/json'
+          //   // },
+          //   // params: 
+          //   //   this.studentsphone
+          //   data: 
+          //     dataa
+               
+          // }).then(res => {
+          //     if(res.data.msg === '200') {
+          //       this.$message({
+          //         message: '提交成功',
+          //         type: 'success'
+          //       })
+          //       // this.$router.go(0)
+          //       // this.$router.go(-1)
+          //       // this.$router.push({path: '/test2/test2-1-3'})
+          //     }
+          //     })
               // function (err) {
               //   console.log(err);
               //   alert("服务器错误!稍后重试");

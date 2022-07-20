@@ -70,25 +70,24 @@ const http = {
 // let base="http://localhost:8080"
 
 const base="http://localhost:8080"
-export const postRequest=(_url,params)=>{
-    console.log(base,_url)
+export const postRequest=(_url,dataa)=>{
     return axios({
         method:'post',
         url: `${base}/${_url}`,
-        data:params
+        data:dataa
     })
 }
 export const post1Request=(_url,params)=>{
     return axios({
         method:'post',
-        url:'http://localhost:8080'+_url,
+        url:`${base}/${_url}`,
         params:params
     })
 }
 export const post2Request=(_url)=>{
     return axios({
         method:'post',
-        url:'http://localhost:8080'+_url,
+        url:`${base}/${_url}`,
         headers: {
             'Content-Type': 'application/json'
           },
@@ -97,7 +96,7 @@ export const post2Request=(_url)=>{
 export const getRequest=(_url)=>{
     return axios({
         method:'get',
-        url:'http://localhost:8080'+_url,
+        url:`${base}/${_url}`,
     })
 }
 

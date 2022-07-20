@@ -50,14 +50,14 @@
           <el-table-column prop="totalTime" label="持续时间(min)" align="center" width="120"></el-table-column>
           <el-table-column prop="createTime" sortable label="创建时间" align="center" width="160"></el-table-column>
           <el-table-column prop="totalScore" label="总分" align="center" width="120"></el-table-column>
-          <el-table-column prop="note" label="备注" align="center" width="360"></el-table-column>
-          <el-table-column fixed="right" label="操作"  width="180" align="center">
+          <el-table-column prop="note" label="备注" align="center" width="300"></el-table-column>
+          <el-table-column fixed="right" label="操作"  width="240" align="center">
             <template slot-scope="scope">
               <el-button @click="toPathtestpaper(scope.row.paperId,scope.row.totalScore)" type="primary" size="small" circle>组卷</el-button>
               <el-button @click="toLook(scope.row.paperId)" type="warning" size="small" circle>预览</el-button>
               <el-button @click="deleteRecord(scope.row.paperId)" type="danger" size="small" circle>删除</el-button>
-         <!-- <el-button @click="edit(scope.row.paperId)" type="success" size="small" circle>修改</el-button>
-              <el-button @click="copy(scope.row.paperId)" type="info" size="small" circle>复制</el-button> -->
+              <!-- <el-button @click="edit(scope.row.paperId)" type="success" size="small" circle>修改</el-button> -->
+            <!--  <el-button @click="copy(scope.row.paperId)" type="info" size="small" circle>复制</el-button> -->
             </template>
           </el-table-column>
         </el-table>
@@ -77,29 +77,14 @@
               <el-form-item label="试卷介绍">
                 <el-input v-model="form.description"></el-input>
               </el-form-item>
-              <!-- <el-form-item label="所属学院">
-                <el-input v-model="form.institute"></el-input>
-              </el-form-item>
-              <el-form-item label="所属专业">
-                <el-input v-model="form.major"></el-input>
-              </el-form-item>
-              <el-form-item label="年级">
-                <el-input v-model="form.grade"></el-input>
-              </el-form-item>
-              <el-form-item label="考试日期">
-                <el-col :span="11">
-                  <el-date-picker type="date" placeholder="选择日期" v-model="form.examDate" style="width: 100%;"></el-date-picker>
-                </el-col>
-              </el-form-item> -->
+          
               <el-form-item label="持续时间">
                 <el-input v-model="form.totalTime"></el-input>
               </el-form-item>
               <el-form-item label="总分">
                 <el-input v-model="form.totalScore"></el-input>
               </el-form-item>
-              <!-- <el-form-item label="试卷类型">
-                <el-input v-model="form.type"></el-input>
-              </el-form-item> -->
+              
               <el-form-item label="备注">
                 <el-input type="textarea" v-model="form.note"></el-input>
               </el-form-item>
@@ -134,8 +119,8 @@
 <script>
 
 import axios from "axios";
-import {postRequest} from "../utils/request";
-import {post1Request} from "../utils/request";
+import {postRequest} from "@/utils/request";
+import {post1Request} from "@/utils/request";
 export default {
   data() {
     return {
@@ -234,7 +219,7 @@ export default {
          ..._this.form,
             phone: localStorage.getItem('ms_username')
       }
-      postRequest('/papers/save',data).then(res => {
+      postRequest('papers/save',data).then(res => {
           if (res.data.msg === 'success') {
             this.$message({
               message: '数据添加成功',
@@ -275,7 +260,7 @@ export default {
        const data={
          paperId:paperId
       }
-      post1Request('/papers/copy',data).then(res => {
+      post1Request('papers/copy',data).then(res => {
         if (res.data.msg === 'success') {
           alert('复制成功，即将刷新页面')
           this.$router.go(0)
@@ -330,7 +315,7 @@ export default {
           phone: localStorage.getItem('ms_username'),
           ...this.form,
       }
-      postRequest(`/papers/update/${localStorage.getItem('paperId')}`,data).then(res => {
+      postRequest(`papers/update/${localStorage.getItem('paperId')}`,data).then(res => {
         if (res.data.code === 200) {
           this.$message({ //成功修改提示
             message: '更新成功',
@@ -366,7 +351,7 @@ export default {
       const data={
           paperId
       }
-      post1Request('/papers/remove',data).then(res => {
+      post1Request('papers/remove',data).then(res => {
           this.getExamInfo()
         })
       }).catch(() => {
@@ -389,7 +374,7 @@ export default {
        const data={
           phone: localStorage.getItem('ms_username')
       }
-      post1Request(`/papers/getteacherallpaper/${this.pagination.current}/${this.pagination.size}`,data).then(function(res) {
+      post1Request(`papers/getteacherallpaper/${this.pagination.current}/${this.pagination.size}`,data).then(function(res) {
             console.log(res);
             _this.pagination = res.data.data
             console.log(_this.pagination.records);

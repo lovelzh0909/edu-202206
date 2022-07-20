@@ -104,6 +104,8 @@
 
 <script>
 import axios from "axios";
+import {postRequest} from "@/utils/request";
+import {post1Request} from "@/utils/request";
 // import { mapMutations, mapState } from 'vuex'
 // import registerApi from '@/api/register'
 export default {
@@ -144,18 +146,10 @@ export default {
     //   });
     //   // this.notice_detail.push(result.data);
     // });
-    axios({
-          url: "http://localhost:8080/notice/closenotice",
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          params: {
-            phone: localStorage.getItem('ms_username')
-
-          }
-        }
-    ).then(res => {
+     const data={
+        phone: localStorage.getItem('ms_username')
+      }
+      post1Request('notice/closenotice',data).then(res => {
       if(res.data.msg !='success'){
             alert(res.data.msg)
           }
@@ -173,6 +167,35 @@ export default {
       });}
       // this.notice_detail.push(result.data);
     });
+    // axios({
+    //       url: "http://localhost:8080/notice/closenotice",
+    //       method: 'post',
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //       },
+    //       params: {
+    //         phone: localStorage.getItem('ms_username')
+
+    //       }
+    //     }
+    // ).then(res => {
+    //   if(res.data.msg !='success'){
+    //         alert(res.data.msg)
+    //       }
+    //       else{
+    //   console.log(res)
+    //   let count = 0;
+    //   this.list2= [];
+    //   const result = res.data;
+    //   result.data.forEach(item => {
+    //     this.test_course.push(item.coursename);
+    //     this.close_time.push(item.note);
+    //     this.date1.push(item.testtime);
+    //     count =count +1;
+    //     this.list2.push(count);
+    //   });}
+    //   // this.notice_detail.push(result.data);
+    // });
 
   //     axios({
   //             url: "http://localhost:8080/notice/getStudentNotice",

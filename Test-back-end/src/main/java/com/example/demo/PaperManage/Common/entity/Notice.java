@@ -1,4 +1,4 @@
-package com.example.demo.Common.entity;
+package com.example.demo.PaperManage.Common.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 

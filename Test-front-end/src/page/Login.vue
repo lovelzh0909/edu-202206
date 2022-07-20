@@ -52,8 +52,7 @@
 <script>
 import  cryptoJSObj  from  '../utils/asc.js'
 import axios from "axios";
-import {postRequest} from "../utils/request";
-import  {loginTosystem}  from "../api/login.js";
+import {postRequest} from "@/utils/request";
 
 
 export default {

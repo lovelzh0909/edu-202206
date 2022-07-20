@@ -45,6 +45,7 @@
 
 <script>
 import axios from "axios";
+import {post1Request} from "@/utils/request";
 
 export default {
     name: '',
@@ -67,19 +68,12 @@ export default {
     },
     methods: {
         async getMes() {
-          let res = await axios({
-            url: "http://localhost:8080/user/information",
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            params: {
-              phone: localStorage.getItem('ms_username')
-
-            }
-          });
-
-            if (res.status === 200) {
+             const data={
+        phone: localStorage.getItem('ms_username')
+      }
+      post1Request('user/information',data).then( 
+        function (res) {
+                if (res.status === 200) {
               let  role  = res.data.data.role;
                 switch (role) {
                     case 'student': {
@@ -97,7 +91,38 @@ export default {
                 }
               res.data.data.role = role;
               this.mes = res.data.data;
-            }
+                }})
+        //   let res = await axios({
+        //     url: "http://localhost:8080/user/information",
+        //     method: 'post',
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     },
+        //     params: {
+        //       phone: localStorage.getItem('ms_username')
+
+        //     }
+        //   });
+
+        //     if (res.status === 200) {
+        //       let  role  = res.data.data.role;
+        //         switch (role) {
+        //             case 'student': {
+        //                 role = '学生';
+        //                 break;
+        //             }
+        //             case 'teacher': {
+        //                 role = '老师';
+        //                 break;
+        //             }
+        //             case 'admin': {
+        //                 role = '管理员';
+        //                 break;
+        //             }
+        //         }
+        //       res.data.data.role = role;
+        //       this.mes = res.data.data;
+        //     }
         }
     },
 

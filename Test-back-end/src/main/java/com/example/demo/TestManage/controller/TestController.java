@@ -168,7 +168,7 @@ public class TestController {
      * @return
      */
     @PostMapping("/getStudenttest/{page}/{size}")
-    public CommonReturnType listOne(@RequestParam Integer phone, @PathVariable("page") Integer page, @PathVariable("size") Integer size) {
+    public CommonReturnType listOne(@RequestParam String phone, @PathVariable("page") Integer page, @PathVariable("size") Integer size) {
         log.info("获取考试列表（学生）");
         log.info("前端发送："+phone);
         Page<Test> page2 = new Page<>(page, size);
