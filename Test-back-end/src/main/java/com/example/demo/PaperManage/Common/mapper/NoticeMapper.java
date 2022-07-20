@@ -1,10 +1,10 @@
-package com.example.demo.Common.mapper;
+package com.example.demo.PaperManage.Common.mapper;
 
 
 import java.util.List;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.demo.Common.entity.Notice;
+import com.example.demo.PaperManage.Common.entity.Notice;
 import com.example.demo.TestManage.entity.vo.StudentTestNoticeVO;
 
 import org.apache.ibatis.annotations.Mapper;
