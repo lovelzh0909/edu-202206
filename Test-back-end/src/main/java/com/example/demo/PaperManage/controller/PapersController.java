@@ -62,15 +62,18 @@ public class PapersController {
     }
 
     @PostMapping("/update/{paperId}")
-    public CommonReturnType updatePaper(@RequestBody Papers p,@PathVariable("paper_id") Integer paperId){
+    public CommonReturnType updatePaper(@RequestBody Papers p,@PathVariable("paperId") Integer paperId){
         log.info("更新试卷数据");
         log.info("前端发送:"+paperId+":"+p);
         p.setPaperId(paperId);
+//        p.setVersion(null);
         if(p.getPapernum()==null){
             p.setPapernum(0);
         }
-        log.info("后端发送: success");
+        log.info("后端发送: success"+p);
         boolean b = papersService.updateById(p);
+
+//        boolean b =papersService.saveOrUpdate(p);
         if(!b)
         return CommonReturnType.create(null,"修改试卷失败");
         return CommonReturnType.create(null);
