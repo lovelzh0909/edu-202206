@@ -5,6 +5,7 @@
       <div class="test-div">
         <el-table
             :data="pagination.records.slice((pagination.current-1)*pagination.size,pagination.current*pagination.size)"
+            :default-sort = "{prop: 'testtime', order: 'descending'}"
             :span-method="objectSpanMethod"
             height="400"
             border

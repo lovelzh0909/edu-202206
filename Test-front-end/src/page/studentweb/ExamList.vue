@@ -7,6 +7,7 @@
         <el-table
 
             :data="pagination.records.slice((pagination.current-1)*pagination.size,pagination.current*pagination.size)"
+            :default-sort = "{prop: 'createdate', order: 'descending'}"
             height="500"
             border
             header-row-class-name="tableHeader"
